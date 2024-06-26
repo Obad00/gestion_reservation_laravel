@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('nom');
             $table->string('description');
             $table->string('localite');
-            $table->string('date_evenement');
-            $table->string('date_limite_inscription');
+            $table->date('date_evenement');
+            $table->date('date_limite_inscription');
             $table->string('nombre_place');
+            $table->string('image');
             $table->foreign('association_id')->references('id')->on('associations')->onDelete('cascade');
             $table->unsignedBigInteger('association_id');
             $table->timestamps();

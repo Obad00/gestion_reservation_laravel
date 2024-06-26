@@ -9,6 +9,15 @@ class Evenement extends Model
 {
     use HasFactory;
 
+  protected $fillable = [
+        'nom',
+        'description',
+        'localité',
+        'date_evenement',
+        'date_limite_inscription',
+        'nombre_place',
+        'etat',
+    ];
 
     public function association()
     {
