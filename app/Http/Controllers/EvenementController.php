@@ -14,26 +14,33 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        //
+        //evenements.index
     }
     public function affichageevenement(){
-        $evenement=Evenement::all();
-        return view ('/evenement/index',compact('evenement'));
+        $evenements=Evenement::all();
+        return view ('/evenements/index',compact('evenements'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $associations = Association::all();
-        return view('evenements.ajoutEvenement',compact('associations'));
+        $associations = auth()->user()->associations;
+        return view('evenements.ajoutEvenement', compact('associations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEvenementRequest $request)
     {
+        // $request->validate([
+        //     'nom' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'localite' => 'required|string',
+        //     'date_evenement' => 'required|date',
+        //     'date_limite_inscription' => 'required|date|before:date_evenement',
+        //     'nombre_place' => 'required|integer',
+        //     'image' => 'required|string',
+        //     'association_id' => 'required|exists:associations,id',
+        // ]);
         $evenement = new Evenement();
         $evenement->nom = $request->nom;
         $evenement->description = $request->description;
@@ -44,9 +51,14 @@ class EvenementController extends Controller
         $evenement->image = $request->image;
         $evenement->association_id = $request->association_id;
         $evenement->save();
-        // Redirection vers une route nommée 'index/Evenement' après la création
-        return redirect()->route('evenements.index');    }
 
+        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
+        $association = auth()->user()->associations()->findOrFail($request->association_id);
+
+        $association->evenements()->create($request->all());
+
+        return redirect()->route('evenements.index')->with('success', 'Événement créé avec succès.');
+    }
     /**
      * Display the specified resource.
      */

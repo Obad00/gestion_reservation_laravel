@@ -3,7 +3,6 @@
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EvenementController;
 
 Route::get('/', function () {
@@ -31,5 +30,5 @@ Route::post('/associations/register', [AssociationController::class, 'register']
 Route::controller(EvenementController::class)->group(function (){
     Route::get('create/Evenement', 'create');
     Route::post('create/Evenement/traitement', 'store');
-    Route::get('index/Evenement', 'index')->name('evenements.index');
+    Route::get('index/Evenement', 'affichageevenement')->name('evenements.index');
    });

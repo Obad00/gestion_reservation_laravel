@@ -28,14 +28,14 @@
         <label for="image">Image:</label>
         <input type="text" id="image" name="image" required>
     </div>
-    <div>
+    {{-- <div>
         <label for="association_id">Association:</label>
         <select id="association_id" name="association_id" required>
             @foreach($associations as $association)
                 <option value="{{ $association->id }}">{{ $association->nom }}</option>
             @endforeach
         </select>
-    </div> 
+    </div>  --}}
     <div>
         <button type="submit">Submit</button>
     </div>
