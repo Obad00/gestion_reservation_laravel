@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EvenementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::controller(EvenementController::class)->group(function (){
+    Route::get('create/Evenement', 'create');
+    Route::post('create/Evenement/traitement', 'store');
+    Route::get('index/Evenement/', 'index');
+   });
