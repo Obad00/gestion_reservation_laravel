@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         ])->assignRole('super_admin');
 
         User::create([
-            'nom' => 'Aabo',
+            'nom' => 'Dabo',
             'prenom' => 'Adama',
             'telephone' => '770000000',
             'etat' => 1,
