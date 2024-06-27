@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+use Illuminate\Http\Request;
 
 class EvenementController extends Controller
 {
@@ -21,15 +22,34 @@ class EvenementController extends Controller
      */
     public function create()
     {
-        //
+        // Vérifier si l'utilisateur a déjà une association
+        if (auth()->user()->association) {
+            return redirect()->route('associations.index')->with('error', 'Vous avez déjà créé une association.');
+        }
+
+        return view('associations.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEvenementRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Vérifier si l'utilisateur a déjà une association
+        if (auth()->user()->association) {
+            return redirect()->route('associations.index')->with('error', 'Vous avez déjà créé une association.');
+        }
+
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'logo' => 'required|string',
+            'adresse' => 'required|string',
+            'contact' => 'required|integer',
+            'secteur' => 'required|string',
+            'ninea' => 'required|string',
+        ]);
+
+        auth()->user()->association()->create($request->all());
+
+        return redirect()->route('associations.index')->with('success', 'Association créée avec succès.');
     }
 
     /**

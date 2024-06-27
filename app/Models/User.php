@@ -49,11 +49,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
     public function association()
     {
-        return $this->belongsTo(Association::class);
+        return $this->hasOne(Association::class);
     }
+    // public function association()
+    // {
+    //     return $this->belongsTo(Association::class);
+    // }
 
     public function reservations()
     {
