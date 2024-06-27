@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EvenementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,3 +26,16 @@ require __DIR__.'/auth.php';
 // Route pour l'inscription de l'association
 Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
 Route::post('/associations/register', [AssociationController::class, 'register']);
+
+
+Route::get('/events', [EvenementController::class, 'index'])->name('events.index');
+
+Route::get('/events/{event}', [EvenementController::class, 'show'])->name('events.show');
+
+Route::get('/events/{event}/reservations', [EvenementController::class, 'showReservations'])->name('events.reservations');
+
+
+use App\Http\Controllers\ReservationController;
+
+Route::post('/reservations/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
+Route::post('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');

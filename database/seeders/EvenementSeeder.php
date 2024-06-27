@@ -9,7 +9,7 @@ class EvenementSeeder extends Seeder
 {
     public function run()
     {
-        Evenement::truncate();
+        // Evenement::truncate();
 
         Evenement::create([
 

@@ -3,16 +3,25 @@
 
 namespace Database\Seeders;
 
-// database/seeders/RoleSeeder.php
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
     public function run()
     {
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Delete all records from the roles and permissions tables
         Role::truncate();
+        Permission::truncate();
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Create roles
         $roleUser = Role::create(['name' => 'user']);
         $roleAdmin = Role::create(['name' => 'admin']);
@@ -20,8 +29,6 @@ class RoleSeeder extends Seeder
         $roleAssociation = Role::create(['name' => 'association']);
 
         // Create permissions
-        Permission::truncate();
-
         Permission::create(['name' => 'manage associations']);
         Permission::create(['name' => 'manage events']);
         Permission::create(['name' => 'view events']);

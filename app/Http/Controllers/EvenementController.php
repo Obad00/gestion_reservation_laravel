@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\Reservation;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
 
@@ -14,6 +15,11 @@ class EvenementController extends Controller
     public function index()
     {
         //
+        $events = Evenement::all(); // Récupérer tous les événements depuis la base de données
+
+    return view('events.index', [
+        'events' => $events,
+    ]);
     }
 
     /**
@@ -35,9 +41,12 @@ class EvenementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Evenement $evenement)
+    public function show(Evenement $event)
     {
         //
+        return view('events.show', [
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -63,4 +72,17 @@ class EvenementController extends Controller
     {
         //
     }
+
+    public function showReservations(Evenement $event)
+{
+    // Récupérer les réservations pour cet événement spécifique
+    $reservations = Reservation::where('evenement_id', $event->id)->get();
+
+    // Passer les données à la vue
+    return view('events.reservations', [
+        'event' => $event,
+        'reservations' => $reservations,
+    ]);
+}
+
 }
