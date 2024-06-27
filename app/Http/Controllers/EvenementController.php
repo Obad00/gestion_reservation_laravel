@@ -86,8 +86,10 @@ class EvenementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evenement $evenement)
+    public function destroy(Evenement $evenement,$id)
     {
-        //
+        $evenement=Evenement::find($id);
+        $evenement->delete();
+        return back();
     }
 }
