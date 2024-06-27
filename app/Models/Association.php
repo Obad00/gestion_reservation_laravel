@@ -19,6 +19,7 @@ class Association extends Model
         'ninea',
         'date_creation_association',
         'etat',
+        'user_id',
     ];
 
     public function evenements()

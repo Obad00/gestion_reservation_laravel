@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('contact');
             $table->string('secteur');
             $table->string('ninea');
+            $table->date('date_creation_association');
             $table->boolean('etat')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Association;
 use App\Http\Requests\StoreAssociationRequest;
 use App\Http\Requests\UpdateAssociationRequest;
+use App\Models\User;
+use App\Http\Requests\RegisterAssociationRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AssociationController extends Controller
 {
@@ -21,7 +25,7 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.association-register');
     }
 
     /**
@@ -63,4 +67,39 @@ class AssociationController extends Controller
     {
         //
     }
+
+    public function register(RegisterAssociationRequest $request)
+    {
+        // Créer l'utilisateur
+        $user = User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+    
+        // Créer l'association associée à l'utilisateur
+        $association = new Association([
+            'nom' => $request->association_nom,
+            'description' => $request->description,
+            'logo' => $request->logo, 
+            'adresse' => $request->adresse,
+            'contact' => $request->contact,
+            'secteur' => $request->secteur,
+            'ninea' => $request->ninea,
+            'date_creation_association' => $request->date_creation_association,
+            'etat' => $request->etat,
+        ]);
+    
+        // Sauvegarder l'association liée à l'utilisateur
+        $user->association()->save($association);
+    
+        // Connecter l'utilisateur
+        Auth::login($user);
+    
+        // Rediriger vers la page d'accueil ou une autre page appropriée
+        return redirect()->route('home');
+    }
+
 }

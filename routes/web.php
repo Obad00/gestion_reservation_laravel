@@ -20,5 +20,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::resources('associations','AssociationController');
+//Route pour permettre la gestion des associations
+// Route::resource('associations', AssociationController::class);
+// Route pour l'inscription de l'association
+Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
+Route::post('/associations/register', [AssociationController::class, 'register']);
