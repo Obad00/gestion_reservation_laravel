@@ -17,6 +17,7 @@ class Evenement extends Model
         'date_limite_inscription',
         'nombre_place',
         'etat',
+        'image',
     ];
 
     public function association()

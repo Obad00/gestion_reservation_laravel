@@ -24,5 +24,5 @@ require __DIR__.'/auth.php';
 Route::controller(EvenementController::class)->group(function (){
     Route::get('create/Evenement', 'create');
     Route::post('create/Evenement/traitement', 'store');
-    Route::get('index/Evenement/', 'index');
+    Route::get('index/Evenement', 'index')->name('evenements.index');
    });
