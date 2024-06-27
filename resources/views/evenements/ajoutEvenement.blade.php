@@ -35,7 +35,7 @@
                 <option value="{{ $association->id }}">{{ $association->nom }}</option>
             @endforeach
         </select>
-    </div>
+    </div> 
     <div>
         <button type="submit">Submit</button>
     </div>

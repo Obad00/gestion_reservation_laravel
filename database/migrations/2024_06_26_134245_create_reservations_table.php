@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('association_id')->references('id')->on('associations')->onDelete('cascade');
-            $table->unsignedBigInteger('association_id');
+            $table->foreign('evenement_id')->references('id')->on('evenements')->onDelete('cascade');
+            $table->unsignedBigInteger('evenement_id');
             $table->enum('statut', ['acceptee', 'declinee']);
             $table->timestamps();
         });

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Association extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'nom',
         'description',
@@ -19,6 +19,7 @@ class Association extends Model
         'ninea',
         'date_creation_association',
         'etat',
+        'user_id',
     ];
 
     public function evenements()
@@ -31,5 +32,11 @@ class Association extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
 }
