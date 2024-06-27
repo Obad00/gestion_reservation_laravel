@@ -99,7 +99,7 @@ class AssociationController extends Controller
         Auth::login($user);
     
         // Rediriger vers la page d'accueil ou une autre page appropriée
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 
 }
