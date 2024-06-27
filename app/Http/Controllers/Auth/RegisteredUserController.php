@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Association;
+use App\Models\Evenement;
+use App\Models\Notification;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\str;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +24,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+
+      
         return view('auth.register');
+
     }
 
     /**

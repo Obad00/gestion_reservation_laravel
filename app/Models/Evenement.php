@@ -12,11 +12,15 @@ class Evenement extends Model
   protected $fillable = [
         'nom',
         'description',
-        'localité',
+        'localite',
         'date_evenement',
         'date_limite_inscription',
         'nombre_place',
+        'image',
+
         'etat',
+        'user_id',
+        'association_id'
     ];
 
     public function association()
