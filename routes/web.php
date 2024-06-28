@@ -22,14 +22,13 @@ Route::middleware('auth')->group(function () {
 
 Route::get('dashboard/a', [DashboardController::class, 'index'])->name('dashboard.index');
 
+Route::middleware(['auth','role:super_admin'])->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
 
+    Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions');
+    Route::put('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.permissions.store');
 
-
-
-
-Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
-Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
-Route::post('permissions/store', [PermissionController::class, 'store'])->name('permissions.store');
-
+});
 
 require __DIR__.'/auth.php';

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'prenom' => 'Souleymane',
             'telephone' => '766657278',
             'etat' => 1,
-            'email' => 'soleymane@gmail.com',
+            'email' => 'souleymane9700@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('super_admin');
 
