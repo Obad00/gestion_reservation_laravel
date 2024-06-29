@@ -237,7 +237,15 @@
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="container mx-auto px-6 py-8">
                         {{ $slot }}
+                        <div class=" mt-14 pl-7
+                        border-t-[150px] border-t-transparent
+                        border-r-[1060px] border-[#3C2A4D]
+                        ">
+                      </div>
                     </div>
+
+
+
                 </main>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -20,7 +20,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <a href="{{ route('permissions.index') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Permissions</a>
-                  
+
                     <form action="{{ route('roles.store') }}" method="POST">
                         @csrf
                         <div class="mb-4 flex">
@@ -57,4 +57,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>
