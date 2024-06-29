@@ -13,7 +13,7 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        $associations = Association::all();
+        $associations = Association::withCount('evenements')->get();
         return view('admins.associations.index',compact('associations'));
     }
 
