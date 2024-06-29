@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Models\Association;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
 
@@ -14,26 +15,33 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        //
+        //evenements.index
     }
     public function affichageevenement(){
-        $evenement=Evenement::all();
-        return view ('/evenement/index',compact('evenement'));
+        $evenements=Evenement::all();
+        return view ('/evenements/index',compact('evenements'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $associations = Association::all();
-        return view('evenements.ajoutEvenement',compact('associations'));
+        $associations = auth()->user()->associations;
+        return view('evenements.ajoutEvenement', compact('associations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEvenementRequest $request)
+    public function store(Request $request)
     {
+        // $request->validate([
+        //     'nom' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'localite' => 'required|string',
+        //     'date_evenement' => 'required|date',
+        //     'date_limite_inscription' => 'required|date|before:date_evenement',
+        //     'nombre_place' => 'required|integer',
+        //     'image' => 'required|string',
+        //     'association_id' => 'required|exists:associations,id',
+        // ]);
         $evenement = new Evenement();
         $evenement->nom = $request->nom;
         $evenement->description = $request->description;
@@ -44,9 +52,14 @@ class EvenementController extends Controller
         $evenement->image = $request->image;
         $evenement->association_id = $request->association_id;
         $evenement->save();
-        // Redirection vers une route nommée 'index/Evenement' après la création
-        return redirect()->route('evenements.index');    }
 
+        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
+        $association = auth()->user()->associations()->findOrFail($request->association_id);
+
+        $association->evenements()->create($request->all());
+
+        return redirect()->route('evenements.index')->with('success', 'Événement créé avec succès.');
+    }
     /**
      * Display the specified resource.
      */
@@ -58,24 +71,41 @@ class EvenementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Evenement $evenement)
+    public function edit($id)
     {
-        //
+        $evenement = Evenement::find($id);
+        return view('evenements.mofifierEvenement', compact('evenement'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEvenementRequest $request, Evenement $evenement)
+    public function update(Request $request, $id)
     {
-        //
+        $evenement = Evenement::find($id);
+        $evenement->nom = $request->nom;
+        $evenement->description = $request->description;
+        $evenement->localite = $request->localite;
+        $evenement->date_evenement = $request->date_evenement;
+        $evenement->date_limite_inscription = $request->date_limite_inscription;
+        $evenement->nombre_place = $request->nombre_place;
+        $evenement->image = $request->image;
+        $evenement->association_id = $request->association_id;
+        $evenement->update();
+
+        $association = auth()->user()->associations()->findOrFail($request->association_id);
+
+        $association->evenements()->create($request->all());
+        return redirect('index/Evenement');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evenement $evenement)
+    public function destroy(Evenement $evenement,$id)
     {
-        //
+        $evenement=Evenement::find($id);
+        $evenement->delete();
+        return back();
     }
 }
