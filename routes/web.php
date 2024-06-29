@@ -32,5 +32,6 @@ Route::controller(EvenementController::class)->group(function (){
     Route::post('create/Evenement/traitement', 'store');
     Route::get('index/Evenement', 'affichageevenement')->name('evenements.index');
     Route::get('evenementSupprimer/{id}', 'destroy');
-  
+    Route::get('evenementModifier/{id}', 'edit');
+    Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('evenementmodifierTraitement');
    });

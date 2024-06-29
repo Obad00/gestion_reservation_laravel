@@ -73,6 +73,10 @@
             <a href="/evenementSupprimer/{{ $evenement->id }}" class="btn-icon">
                 <i class="fas fa-trash-alt"></i>
             </a>
+            <a href="/evenementModifier/{{ $evenement->id }}" class="btn-icon">
+                <i class="fas fa-edit"></i>
+                
+            </a>
             @endforeach
         </div>
     </div>

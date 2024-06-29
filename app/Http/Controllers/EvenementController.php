@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Models\Association;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
 
@@ -29,7 +30,7 @@ class EvenementController extends Controller
         return view('evenements.ajoutEvenement', compact('associations'));
     }
 
-    public function store(StoreEvenementRequest $request)
+    public function store(Request $request)
     {
         // $request->validate([
         //     'nom' => 'required|string|max:255',
@@ -70,17 +71,32 @@ class EvenementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Evenement $evenement)
+    public function edit($id)
     {
-        //
+        $evenement = Evenement::find($id);
+        return view('evenements.mofifierEvenement', compact('evenement'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEvenementRequest $request, Evenement $evenement)
+    public function update(Request $request, $id)
     {
-        //
+        $evenement = Evenement::find($id);
+        $evenement->nom = $request->nom;
+        $evenement->description = $request->description;
+        $evenement->localite = $request->localite;
+        $evenement->date_evenement = $request->date_evenement;
+        $evenement->date_limite_inscription = $request->date_limite_inscription;
+        $evenement->nombre_place = $request->nombre_place;
+        $evenement->image = $request->image;
+        $evenement->association_id = $request->association_id;
+        $evenement->update();
+
+        $association = auth()->user()->associations()->findOrFail($request->association_id);
+
+        $association->evenements()->create($request->all());
+        return redirect('index/Evenement');
     }
 
     /**
