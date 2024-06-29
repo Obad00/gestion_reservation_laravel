@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Association;
 use App\Models\Evenement;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,11 +16,12 @@ class DashboardController extends Controller
      */
     public function index(  )
     {
-         $associations= Association::All();
-         $evenements= Evenement::All();
+        $utilisateurs = User::latest()->take(5)->get();
+        $associations= Association::latest()->take(5)->get();
+         $evenements= Evenement::latest()->take(3)->get();
          $reservations= Reservation::All();
 
-        return view('admins.dashboard', compact('associations','evenements','reservations'));
+        return view('admins.dashboard', compact('associations','evenements','reservations','utilisateurs'));
 
 
     }

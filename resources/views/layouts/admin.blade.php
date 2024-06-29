@@ -16,19 +16,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <div class="flex h-screen bg-gray-100">
+<body class="font-sans container antialiased">
+    <div class=" container bg-gray-100">
+        <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
-            <div class="bg-[#3C2A4D] text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
+            <div class="bg-[#3C2A4D] text-white fixed w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
                 id="sidebar">
                 <div class="flex items-center justify-center h-16 bg-cyan-950-900">
                     <span class="text-[#E06F1F] font-bold uppercase">Onyx Events</span>
                 </div>
                 <div class="flex flex-col flex-1 overflow-y-auto">
                     <nav class="flex-1 px-2 py-12 bg-[#3C2A4D]">
-                        <a href="#" class="flex items-center px-4 py-5 gap-2 text-gray-100 hover:bg-gray-700">
+                        <a href="{{route('dashboard.admin')}}" class="flex items-center px-4 py-5 gap-2 text-gray-100 hover:bg-gray-700">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21.5 14H14.5V21H21.5V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M10.5 14H3.5V21H10.5V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -169,8 +169,8 @@
             </div>
 
             <!-- Page Content -->
-            <div class="flex-1 flex flex-col overflow-hidden">
-                <header class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
+            <div class="flex-1 flex flex-col ml-64 container w-96  overflow-hidden">
+                <header class="flex items-center container justify-between h-16 bg-white border-b border-gray-200">
                     <button class="text-black focus:outline-none" id="toggleSidebar">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -234,8 +234,8 @@
 
 
 
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                    <div class="container mx-auto px-6 py-8">
+                <main class="flex-1 container overflow-x-hidden overflow-y-auto bg-gray-100">
+                    <div class="  px-6 py-8">
                         {{ $slot }}
 
                     </div>
@@ -250,6 +250,7 @@
                   </div></footer>
             </div>
         </div>
+       
     </div>
 
     <script>
