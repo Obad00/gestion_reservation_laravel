@@ -35,7 +35,7 @@
             @endforeach
             <td class="px-6 gap-3 pt-6 whitespace-nowrap flex text-sm font-medium">
                 @foreach ($actions as $action)
-                    <a href="{{ $action['url']($item) }}" class="{{ $action['class'] }}">
+                    <a href="{{ $action['url']($item) }}"  onclick="{{ $action['onclick'] ?? '' }}" class="{{ $action['class'] }}">
                         {!! $action['icon'] !!}
                     </a>
                 @endforeach

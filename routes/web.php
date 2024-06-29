@@ -29,6 +29,11 @@ Route::middleware(['auth','role:super_admin'])->group(function () {
     Route::resource('associations', AssociationController::class);
     Route::get('evenements/liste', [DashboardController::class , 'listeEvenements'])->name('liste.evenements.admin');
 
+    Route::get('/association/bloquees/' , [AssociationController::class, 'listeBloquee'])->name('association.liste.bloque');
+
+    Route::put('associations/bloque/{association}' , [AssociationController::class, 'bloquee_un_associatiation'])->name('association.bloque');
+    Route::put('associations/debloque/{association}' , [AssociationController::class, 'debloquee_un_associatiation'])->name('association.debloque');
+
     Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions');
     Route::put('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.permissions.store');
 
