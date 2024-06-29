@@ -1,10 +1,14 @@
 <x-admin-layout>
-        <div class="flex justify-between mb-9">
-            <h1 class="text-3xl -mb-11 font-bold ">Les Associations bloquees</h1>
-        <a href="{{ route('associations.index') }}"><button
-                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
-                type="submit"> liste des associations</button></a>
+    <div class="flex justify-between mb-9">
+        <h1 class="text-3xl -mb-11 font-bold ">Les utilisateurs</h1>
+
+        <a href="{{ route('utilisateurs.index') }}"><button
+                class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
+                type="submit"> liste des utilisateur Bloquees</button></a>
+
     </div>
+
+
     @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
             {{ session('success') }}
@@ -18,12 +22,14 @@
     <table class="min-w-full divide-y  p-8 divide-gray-200 overflow-x-auto">
         <thead class="bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                
+                <th scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nom
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Adresse
+                    Status
                 </th>
 
                 <th scope="col"
@@ -32,12 +38,15 @@
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Nombre. evenements
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    Email
                 </th>
+                <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date
+            </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
@@ -47,7 +56,7 @@
         </thead>
         <tbody class="bg-white divide-y my-7 divide-gray-200">
 
-            @foreach ($associations as $association)
+            @foreach ($utilisateurs as $utilisateur)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
@@ -61,28 +70,41 @@
                             </div>
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
-                                    {{ $association->nom }}
+                                    {{ $utilisateur->prenom }}
+                                    {{ $utilisateur->nom }}
                                 </div>
 
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500"> {{ $association->adresse }}</div>
+                        @if (  $utilisateur->etat  == true)
+                        <span
+                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        Acceptee
+                    </span>
+                    @else
+                    <span
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    Bloquee
+                </span>
+                        @endif
                     </td>
 
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $association->contact }} </td>
+                        {{ $utilisateur->telephone }} </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $association->evenements->count() }} </td>
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            {{ $association->secteur }}
+                            {{ $utilisateur->email }}
                         </span>
                     </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $utilisateur->created_at }} </td>
                     <td class="px-6 gap-3 pt-6 whitespace-nowrap flex  text-sm font-medium">
-                        <a href="{{ route('associations.show', $association->id) }}"
+                        <a href="{{ route('utilisateurs.show', $utilisateur->id) }}"
                             class="text-indigo-600 hover:text-indigo-900"><svg width="22" height="15"
                                 viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -119,21 +141,21 @@
                         </div>
 
                         <div class="p-6 pt-0 text-center">
-                            <svg class="w-20 h-20 text-green-600 mx-auto" fill="none" stroke="currentColor"
+                            <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Êtes-vous sûr de vouloir debloquer cet Association ?</h3>
+                            <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Êtes-vous sûr de vouloir debloquer cet utilisateur ?</h3>
 
 
-                            <form action="{{ route('association.debloque', $association->id) }}" method="POST">
+                            <form action="{{ route('utilisateurs.debloque', $utilisateur->id) }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="etat" placeholder="nom role">
                                 <button
                                     class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
-                                    type="submit"> Deboloqué(e)</button>
+                                    type="submit"> Debloqué(e)</button>
                             </form> <a href="#" onclick="closeModal('modelConfirm')"
                                 class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
                                 data-modal-toggle="delete-user-modal">
