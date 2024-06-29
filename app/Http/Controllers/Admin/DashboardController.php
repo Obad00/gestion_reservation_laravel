@@ -26,6 +26,16 @@ class DashboardController extends Controller
 
     }
 
+    public function listeEvenements(  )
+    {
+       
+         $evenements= Evenement::all();
+
+        return view('admins.evenements.index', compact('evenements'));
+
+
+    }
+
     // voire liste des associations
 
 

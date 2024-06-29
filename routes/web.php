@@ -27,6 +27,7 @@ Route::middleware(['auth','role:super_admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('associations', AssociationController::class);
+    Route::get('evenements/liste', [DashboardController::class , 'listeEvenements'])->name('liste.evenements.admin');
 
     Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions');
     Route::put('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.permissions.store');

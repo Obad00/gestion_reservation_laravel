@@ -38,8 +38,14 @@ class AssociationController extends Controller
      */
     public function show(Association $association)
     {
-        //
+        
+        // Use the relationship to get the events associated with the specific association
+        $evenements = $association->evenements;
+        
+        // Return the view with the association and its related events
+        return view('admins.associations.show', compact('association', 'evenements'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
