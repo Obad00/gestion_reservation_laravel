@@ -9,6 +9,36 @@ use App\Http\Requests\UpdateEvenementRequest;
 
 class EvenementController extends Controller
 {
+
+//     public function voirNextEvent()
+// {
+//     // Récupérer l'événement le plus proche en fonction de la date
+//     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
+
+//     if (!$evenement) {
+//         return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
+//     }
+
+//     return redirect()->route('home')->with('evenement', $evenement);
+// }
+    
+public function tousevenements()
+{
+    $evenements = Evenement::all(); // Récupère tous les événements depuis la base de données
+
+    return view('evenements.index', compact('evenements'));
+}
+
+    public function accueil()
+    {
+        $evenements = Evenement::all();
+        return view('evenements.accueil', compact('evenements'));
+    }
+
+    public function detail(Evenement $evenement)
+    {
+        return view('evenements.detail', compact('evenement'));
+    }
     /**
      * Display a listing of the resource.
      */

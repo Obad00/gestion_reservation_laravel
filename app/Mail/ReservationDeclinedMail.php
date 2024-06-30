@@ -13,12 +13,16 @@ class ReservationDeclinedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $utilisateur;
+    public $reservation;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($utilisateur, $reservation)
     {
         //
+        $this->utilisateur = $utilisateur;
+        $this->reservation = $reservation;
     }
 
     /**
@@ -27,7 +31,7 @@ class ReservationDeclinedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reservation Declined Mail',
+            subject: 'Confirmation de réservation déclinée',
         );
     }
 
@@ -38,6 +42,11 @@ class ReservationDeclinedMail extends Mailable
     {
         return new Content(
             view: 'emails.reservation-declined',
+            with: [
+                'prenom' => $this->utilisateur->prenom,
+                'nom' => $this->utilisateur->nom,
+                'reservation' => $this->reservation,
+            ]
         );
     }
 

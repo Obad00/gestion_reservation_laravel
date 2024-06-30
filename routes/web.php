@@ -4,6 +4,17 @@ use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\ReservationController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AccueilController;
+
+
+
+
+// Route::get('/home', [AccueilController::class, 'index'])->name('home');
+
+// Route::get('/next-event', [EvenementController::class, 'voirNextEvent'])->name('events.next');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +34,7 @@ require __DIR__.'/auth.php';
 
 //Route pour permettre la gestion des associations
 // Route::resource('associations', AssociationController::class);
+
 // Route pour l'inscription de l'association
 Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
 Route::post('/associations/register', [AssociationController::class, 'register']);
@@ -35,7 +47,19 @@ Route::get('/events/{event}', [EvenementController::class, 'show'])->name('event
 Route::get('/events/{event}/reservations', [EvenementController::class, 'showReservations'])->name('events.reservations');
 
 
-use App\Http\Controllers\ReservationController;
+
 
 Route::post('/reservations/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
 Route::post('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+
+
+Route::get('/evenements', [EvenementController::class, 'accueil'])->name('evenements.accueil');
+Route::get('/pagesevenements', [EvenementController::class, 'tousevenements'])->name('evenements.index');
+Route::get('/evenements/{evenement}', [EvenementController::class, 'detail'])->name('evenements.detail');
+Route::post('/evenements/{evenement}/reserver', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+// Auth::routes();
+
+Route::get('/reservations/confirmation/{reservation}', [ReservationController::class, 'confirmation'])->name('associations.reservations.confirmation')->middleware('auth');
+Route::post('/reservations/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm')->middleware('auth');
+Route::post('/reservations/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel')->middleware('auth');
+

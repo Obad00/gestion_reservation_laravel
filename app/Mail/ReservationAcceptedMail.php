@@ -28,7 +28,9 @@ class ReservationAcceptedMail extends Mailable
 // Get the message envelope.
   public function envelope(): Envelope{
       return new Envelope(
-          subject: 'Confirmation de réservation acceptée',);}
+          subject: 'Confirmation de réservation acceptée',
+        );
+    }
 
     
      
