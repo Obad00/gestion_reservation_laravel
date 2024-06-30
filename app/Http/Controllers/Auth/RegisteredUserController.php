@@ -25,12 +25,12 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
 
-      
+
         return view('auth.register');
 
     }
 
-   
+
 
     /**
      * Handle an incoming registration request.
@@ -54,7 +54,7 @@ class RegisteredUserController extends Controller
             'etat' => 1,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole('user');
 
         event(new Registered($user));
 
@@ -67,7 +67,7 @@ class RegisteredUserController extends Controller
     public function createAdmin(): View
     {
 
-      
+
         return view('admins.auths.register');
 
     }
@@ -90,7 +90,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ])->assignRole('admin');
-       
+
 
         // event(new Registered($user));
 

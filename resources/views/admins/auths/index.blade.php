@@ -1,9 +1,12 @@
 <x-admin-layout>
-  
+
     <div class="flex justify-between mb-9">
         <h1 class="text-3xl -mb-11 font-bold ">Les utilisateurs</h1>
 
-        <a href="{{ route('admins.liste.bloque') }}"><button
+        <a href="{{ route('register.admin') }}"><button
+            class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
+            type="submit"> liste des Admin Bloquees</button></a>
+            <a href="{{ route('admins.liste.bloque') }}"><button
                 class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
                 type="submit"> liste des Admin Bloquees</button></a>
 
@@ -23,7 +26,7 @@
     <table class="min-w-full divide-y  p-8 divide-gray-200 overflow-x-auto">
         <thead class="bg-gray-50">
             <tr>
-                
+
                 <th scope="col"
                     class="pl-20  py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nom
@@ -37,7 +40,7 @@
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Telephone
                 </th>
-               
+
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Email
@@ -96,7 +99,7 @@
                         {{ $utilisateur->email }}
 
                     </td>
-                  
+
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{ $utilisateur->created_at }} </td>
                     <td class="px-6 gap-3 pt-6 whitespace-nowrap flex  text-sm font-medium">
