@@ -9,6 +9,11 @@
 <body>
     <div class="container">
         <h1>Créer une Association</h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
         <form action="{{ route('associations.store') }}" method="POST">
             @csrf
@@ -47,3 +52,4 @@
 
 </body>
 </html>
+

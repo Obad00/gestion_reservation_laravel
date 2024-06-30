@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Database\Seeders;
 
-// database/seeders/RoleSeeder.php
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -12,26 +11,80 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-        Role::truncate();
-        // Create roles
-        $roleUser = Role::create(['name' => 'user']);
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleSuperAdmin = Role::create(['name' => 'super_admin']);
-        $roleAssociation = Role::create(['name' => 'association']);
+        // Vider les tables
+        DB::table('role_has_permissions')->truncate();
+        DB::table('model_has_roles')->truncate();
+        DB::table('model_has_permissions')->truncate();
+        DB::table('roles')->truncate();
+        DB::table('permissions')->truncate();
 
-        // Create permissions
-        Permission::truncate();
+        // Créer les permissions
+        $permissions = [
+            'view evenements',
+            'edit evenements',
+            'delete evenements',
+            'create evenements',
+            'view user',
+            'edit user',
+            'delete user',
+            'create user',
+            'view associations',
+            'edit associations',
+            'delete associations',
+            'create associations',
+            'view roles',
+            'edit roles',
+            'delete roles',
+            'create roles',
+            'view permissions',
+            'edit permissions',
+            'delete permissions',
+            'create permissions',
+            'view reservations',
+            'edit reservations',
+            'delete reservations',
+            'create reservations',
+        ];
 
-        Permission::create(['name' => 'manage associations']);
-        Permission::create(['name' => 'manage events']);
-        Permission::create(['name' => 'view events']);
-        Permission::create(['name' => 'reserve events']);
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
 
-        // Assign permissions to roles
-        $roleAdmin->givePermissionTo('manage associations');
-        $roleSuperAdmin->givePermissionTo(['manage associations', 'manage events']);
-        $roleAssociation->givePermissionTo(['manage events', 'view events']);
-        $roleUser->givePermissionTo('view events');
-        $roleUser->givePermissionTo('reserve events');
+        // Créer les rôles
+        $superAdminRole = Role::create(['name' => 'super_admin']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $associationRole = Role::create(['name' => 'association']);
+        $userRole = Role::create(['name' => 'user']);
+
+        // Attribution des permissions aux rôles
+        $superAdminPermissions = [
+            'view evenements', 'edit evenements', 'delete evenements', 'create evenements',
+            'view user', 'edit user', 'delete user', 'create user',
+            'view associations', 'edit associations', 'delete associations', 'create associations',
+            'view roles', 'edit roles', 'delete roles', 'create roles',
+            'view reservations', 'edit reservations', 'delete reservations', 'create reservations',
+            'view permissions', 'edit permissions', 'delete permissions', 'create permissions',
+        ];
+
+        $adminPermissions = [
+            'view evenements', 'edit evenements', 'delete evenements', 'create evenements',
+            'view user', 'edit user', 'delete user', 'create user',
+            'view associations', 'edit associations', 'delete associations', 'create associations',
+            'view reservations', 'edit reservations', 'delete reservations', 'create reservations',
+        ];
+
+        $associationPermissions = [
+            'view evenements', 'edit evenements', 'create evenements',
+            'view reservations', 'edit reservations', 'create reservations',
+        ];
+
+        $userPermissions = [
+            'view evenements', 'view reservations', 'create reservations',
+        ];
+
+        $superAdminRole->syncPermissions($superAdminPermissions);
+        $adminRole->syncPermissions($adminPermissions);
+        $associationRole->syncPermissions($associationPermissions);
+        $userRole->syncPermissions($userPermissions);
     }
 }
