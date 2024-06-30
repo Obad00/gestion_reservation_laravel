@@ -15,7 +15,7 @@ class UserController extends Controller
         // $utilisateurs = User::all()->where('roles','role:super_admin');
         // $utilisateurs = User::all()->where('etat',true);
 
-     
+
         $utilisateurs = User::where('etat',true)->whereHas('roles', function($query) {
             $query->whereIn('name',[ 'association', 'user']  );
         })->get();
@@ -33,18 +33,18 @@ class UserController extends Controller
         $utilisateur->update([
             'etat' => false,
         ]);
-        return redirect()->back()->with('success','utilisateur est '.$utilisateur->nom.' bloquee');
+        return redirect()->back()->with('success','utilisateur '.$utilisateur->nom.' est  bloquee');
         }
-    
-    
+
+
         public function debloquee_un_user(User $utilisateur){
             $utilisateur->update([
                 'etat' => true,
             ]);
-            return redirect()->back()->with('success','utilisateur est '.$utilisateur->nom.' debloquee');
+            return redirect()->back()->with('success','utilisateur '.$utilisateur->nom.' est  debloquee');
             }
-        
-    
+
+
 
     /**
      * Show the form for creating a new resource.

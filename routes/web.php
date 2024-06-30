@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AssociationAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -27,25 +28,30 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('evenements', EvenementController::class);
 Route::resource('associations', AssociationController::class);
-Route::middleware(['auth','role:super_admin|admin'])->group(function () {
+
+
+
+Route::middleware(['auth','role:super_admin|admin'])->prefix('admins')->group(function () {
+
     Route::resource('roles', RoleController::class)->middleware( 'permission:view roles');
     Route::resource('permissions', PermissionController::class)->middleware( 'permission:view permissions');
-    Route::resource('associations', AssociationController::class)->middleware( 'permission:view permissions');
     Route::resource('utilisateurs', UserController::class)->middleware( 'permission:bloque utilisateurs');
-    Route::resource('admins', AdminController::class)->middleware( 'permission:bloque utilisateurs');
+    Route::get('liste/', [AdminController::class,'index'])->middleware( 'permission:bloque utilisateurs');
 
 
-    Route::get('dashboard/admin', [DashboardController::class, 'index'])->name('dashboard.admin')->middleware( 'permission:view permissions');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin')->middleware( 'permission:view permissions');
 
-    Route::get('evenements/liste', [DashboardController::class , 'listeEvenements'])->name('liste.evenements.admin')->middleware( 'permission:edit evenements');
+    Route::get('evenementsss/liste', [DashboardController::class , 'listeEvenements'])->name('liste.evenements.admin')->middleware( 'permission:edit evenements');
 
     // association
-    Route::get('/association/bloquees/' , [AssociationController::class, 'listeBloquee'])->name('association.liste.bloque')->middleware( 'permission:bloque evenements');
+    Route::get('/association/bloquees/' , [AssociationAdminController::class, 'listeBloquee'])->name('association.liste.bloque')->middleware( 'permission:bloque evenements');
 
-    Route::put('associations/bloque/{association}' , [AssociationController::class, 'bloquee_un_associatiation'])->name('association.bloque');
-    Route::put('associations/debloque/{association}' , [AssociationController::class, 'debloquee_un_associatiation'])->name('association.debloque');
+    Route::put('associations/bloque/{association}' , [AssociationAdminController::class, 'bloquee_un_associatiation'])->name('association.bloque');
+    Route::put('associations/debloque/{association}' , [AssociationAdminController::class, 'debloquee_un_associatiation'])->name('association.debloque');
 
 // User lamda
+    Route::get('liste/', [AdminController::class,'index'])->middleware( 'permission:bloque utilisateurs');
+
     Route::get('/utilisateur/bloquees/' , [UserController::class, 'listeUserBloquee'])->name('utilisateurs.liste.bloque')->middleware( 'permission:bloque utilisateurs');
 
     Route::put('utilisateurs/bloque/{utilisateur}' , [UserController::class, 'bloquee_un_user'])->name('utilisateurs.bloque')->middleware( 'permission:bloque utilisateurs');
@@ -54,6 +60,7 @@ Route::middleware(['auth','role:super_admin|admin'])->group(function () {
 
     // User admin
     Route::get('/admin/bloquees/' , [AdminController::class, 'listeAdminBloquee'])->name('admins.liste.bloque')->middleware( 'permission:bloque utilisateurs');
+    Route::get('liste/', [AdminController::class,'index'])->name('admins.index')->middleware( 'permission:bloque utilisateurs');
 
 
     Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions')->middleware( 'permission:view permissions');
@@ -66,5 +73,5 @@ require __DIR__.'/auth.php';
 //Route pour permettre la gestion des associations
 // Route::resource('associations', AssociationController::class);
 // Route pour l'inscription de l'association
-Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
-Route::post('/associations/register', [AssociationController::class, 'register']);
+Route::get('/associationsz/register', [AssociationController::class, 'created'])->name('association-register');
+Route::post('/associations/register', [AssociationController::class, 'register'])->name('association-register.store');

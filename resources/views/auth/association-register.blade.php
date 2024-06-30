@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('association-register') }}">
+<form method="POST" action="{{ route('association-register.store') }}">
     @csrf
 
     <!-- Champs pour l'utilisateur -->
