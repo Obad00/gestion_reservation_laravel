@@ -63,9 +63,10 @@ class EvenementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Evenement $evenement)
+    public function show(Evenement $evenement,$id)
     {
-        //
+        $evenement=Evenement::find($id);
+        return view('evenements/detailEvenement',compact('evenement'));
     }
 
     /**

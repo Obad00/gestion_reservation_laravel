@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\AssociationController;
+// use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvenementController;
@@ -70,4 +70,5 @@ Route::controller(EvenementController::class)->group(function (){
     Route::get('evenementSupprimer/{id}', 'destroy');
     Route::get('evenementModifier/{id}', 'edit');
     Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('evenementmodifierTraitement');
+    Route::get('detailEvenement/{id}' , 'show');
    });
