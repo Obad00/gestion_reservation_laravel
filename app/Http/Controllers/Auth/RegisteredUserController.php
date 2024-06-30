@@ -30,6 +30,8 @@ class RegisteredUserController extends Controller
 
     }
 
+   
+
     /**
      * Handle an incoming registration request.
      *
@@ -59,5 +61,41 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+
+    public function createAdmin(): View
+    {
+
+      
+        return view('admins.auths.register');
+
+    }
+
+    public function storeAdmin(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'nom' => ['required', 'string', 'max:50'],
+            'prenom' => ['required', 'string', 'max:50'],
+            'telephone' => ['required', 'string', 'max:14'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'telephone' => $request->telephone,
+            'etat' => 1,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ])->assignRole('admin');
+       
+
+        // event(new Registered($user));
+
+        // Auth::login($user);
+
+        return redirect(route('dashboard.admin'));
     }
 }

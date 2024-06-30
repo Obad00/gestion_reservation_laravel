@@ -38,15 +38,7 @@
 
                            <span> Dashbord</span>
                         </a>
-                        <a href="{{ route('associations.index') }}" class="flex gap-2 items-center px-4 py-5  text-gray-100 hover:bg-gray-700">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21.2104 15.8901C20.5742 17.3946 19.5792 18.7203 18.3123 19.7514C17.0454 20.7825 15.5452 21.4875 13.9428 21.8049C12.3405 22.1222 10.6848 22.0422 9.12055 21.5719C7.55627 21.1015 6.13103 20.2551 4.96942 19.1067C3.80782 17.9583 2.94522 16.5428 2.45704 14.984C1.96886 13.4252 1.86996 11.7706 2.169 10.1647C2.46804 8.55886 3.1559 7.05071 4.17245 5.77211C5.189 4.49351 6.50329 3.4834 8.0004 2.83008" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2V12H22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
 
-                            <span>Gestion Association</span>
-
-                        </a>
                         <a href="#" class="flex  gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -122,7 +114,6 @@
                                             utilisateurs declinee
                                         </a>
                                     </li>
-
                                 </ul>
 
                             </article>
@@ -139,7 +130,7 @@
                             <span>  Notifications</span>
                         </a>
 
-                        <a href="{{ route('roles.index') }}" class="flex gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
+                        <a href="{{ route('roles.index') }}" class="flex items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_93_6028)">
                                 <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#CFC1C1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -156,9 +147,7 @@
                         </a>
 
 
-
                     </nav>
-
                     {{-- <form action="http://127.0.0.1:8000/auth/logout" method="POST">
                         <input type="hidden" name="_token" value="ymEkCLBFpgkdaSbidUArRsdHbER5DkT6ByS3eJYb">
                         <button type="submit" class="text-red-500 text-sm px-2 py-1 hover:bg-red-200 rounded-md">
