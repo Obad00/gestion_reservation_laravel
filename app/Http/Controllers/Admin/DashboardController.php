@@ -16,7 +16,9 @@ class DashboardController extends Controller
      */
     public function index(  )
     {
-        $utilisateurs = User::latest()->take(5)->get();
+        $utilisateurs = User::whereHas('roles', function($query) {
+            $query->whereIn('name',[ 'association', 'user']  );
+        })->get();
         $associations= Association::latest()->take(5)->get();
          $evenements= Evenement::latest()->take(3)->get();
          $reservations= Reservation::All();

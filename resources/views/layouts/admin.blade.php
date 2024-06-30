@@ -33,7 +33,7 @@
 </style>
 
 <body class="font-sans container antialiased">
-    <div class=" container bg-gray-100">
+    <div class="  container bg-gray-100">
         <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
@@ -236,10 +236,10 @@
 
 
                                         <li
-                                            class="flex gap-2 @if (request()->routeIs('register.admin')) rounded-xl p-2 active @endif">
+                                            class="flex gap-2 @if (request()->routeIs('admins.index')) rounded-xl p-2 active @endif">
 
 
-                                            <a href="{{ route('register.admin') }}">
+                                            <a href="{{ route('admins.index') }}">
                                                 Gestion admins
                                             </a>
                                         </li>
@@ -264,7 +264,7 @@
             </div>
 
             <!-- Page Content -->
-            <div class="flex-1 flex flex-col ml-64 container w-96  overflow-hidden">
+            <div class="flex-1  flex flex-col ml-64 container w-96  overflow-hidden">
                 <header class="flex items-center container justify-between h-16 bg-white border-b border-gray-200">
                     <button class="text-black focus:outline-none" id="toggleSidebar">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -329,7 +329,7 @@
 
 
 
-                <main class="flex-1 container overflow-x-hidden overflow-y-auto bg-gray-100">
+                <main  class="flex-1  h-screen container overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="  px-6 py-8">
                         {{ $slot }}
 
@@ -338,7 +338,7 @@
 
 
                 </main>
-                <footer>
+                <footer class="">
                     <div
                         class=" mt-14 pl-7
                     border-t-[150px] border-t-transparent
