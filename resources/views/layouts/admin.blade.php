@@ -329,8 +329,11 @@
 
 
 
-                <main  class="flex-1  h-screen container overflow-x-hidden overflow-y-auto bg-gray-100">
+                <main class="flex-1  h-screen container overflow-x-hidden overflow-y-auto bg-gray-100">
                     <div class="  px-6 py-8">
+                        {{-- breadcrumbs --}}
+                        <x-breadcrumb />
+                        {{-- Fin breadcrumbs --}}
                         {{ $slot }}
 
                     </div>
