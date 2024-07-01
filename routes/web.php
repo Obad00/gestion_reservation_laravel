@@ -68,6 +68,16 @@ Route::middleware(['auth','role:super_admin|admin'])->prefix('admins')->group(fu
 
 });
 
+// User Lamda
+Route::prefix('user')->group(function ()
+ {
+
+    Route::get('inscrite',[UserController::class, 'inscrite'])->name('inscrite.user');
+
+
+
+
+});
 require __DIR__.'/auth.php';
 
 //Route pour permettre la gestion des associations

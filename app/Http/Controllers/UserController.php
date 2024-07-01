@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -65,9 +66,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function inscrite()
     {
-        //
+
+        $evenement= Evenement::find(1);
+        return view('utilisateurs.inscrite', compact('evenement'));
     }
 
     /**

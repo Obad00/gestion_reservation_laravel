@@ -1,7 +1,7 @@
-<x-admin-layout>
+<x-guest-layout>
 
     <!-- source:https://codepen.io/owaiswiz/pen/jOPvEPB -->
-<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+<div class="min-h-screen  text-gray-900 flex justify-center">
     <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
 
         <div class="flex-1 bg-[#3C2A4D] text-center  block lg:flex">
@@ -23,7 +23,7 @@
                     <!-- Name -->
                     <div>
                         <x-input-label for="nom" :value="__('Nom')" />
-                        <x-text-input id="nom" class="block mb-3 px-20 w-full" type="text" name="nom" :value="old('nom')" required autofocus autocomplete="name" />
+                        <x-text-input id="nom" class="block mb-3  w-full" type="text" name="nom" :value="old('nom')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                     </div>
 
@@ -85,4 +85,4 @@
     </div>
 </div>
 
-</x-admin-layout>
+</x-guest-layout>
