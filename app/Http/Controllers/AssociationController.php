@@ -17,13 +17,16 @@ class AssociationController extends Controller
      */
     public function index()
     {
-        //
+        $associations = Association::withCount('evenements')->where('etat',true)->get();
+        return view('admins.associations.index',compact('associations'));
     }
+
+    // asssociations bloquees
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function created()
     {
         return view('auth.association-register');
     }
@@ -39,10 +42,7 @@ class AssociationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Association $association)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -52,6 +52,10 @@ class AssociationController extends Controller
         //
     }
 
+    public function show(Association $association)
+    {
+        //
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -78,12 +82,12 @@ class AssociationController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-    
+
         // Créer l'association associée à l'utilisateur
         $association = new Association([
             'nom' => $request->association_nom,
             'description' => $request->description,
-            'logo' => $request->logo, 
+            'logo' => $request->logo,
             'adresse' => $request->adresse,
             'contact' => $request->contact,
             'secteur' => $request->secteur,
@@ -91,15 +95,18 @@ class AssociationController extends Controller
             'date_creation_association' => $request->date_creation_association,
             'etat' => $request->etat,
         ]);
-    
+
         // Sauvegarder l'association liée à l'utilisateur
         $user->association()->save($association);
-    
+
         // Connecter l'utilisateur
         Auth::login($user);
-    
+
         // Rediriger vers la page d'accueil ou une autre page appropriée
         return redirect()->route('dashboard');
+    }
+    public function inscription(){
+        return view('admins.associations.incription');
     }
 
 }

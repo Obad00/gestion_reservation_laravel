@@ -17,6 +17,8 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
+// Fin Admin routes register
+
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
@@ -56,4 +58,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+
+                
+// Admin routes register
+    Route::get('register/admin', [RegisteredUserController::class, 'createAdmin'])->name('register.admin');
+    Route::post('register/admin', [RegisteredUserController::class, 'storeAdmin'])->name('register.store.admin');
+
 });

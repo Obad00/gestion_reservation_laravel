@@ -63,4 +63,7 @@ class ReservationController extends Controller
     {
         //
     }
+    public function listeReservation(){
+        return view('admins.reservations.listeReservation');
+    }
 }
