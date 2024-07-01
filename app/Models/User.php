@@ -54,10 +54,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Association::class);
     }
-    // public function association()
-    // {
-    //     return $this->belongsTo(Association::class);
-    // }
+
 
     public function reservations()
     {

@@ -19,8 +19,11 @@ class Evenement extends Model
         'image',
 
         'etat',
+
+        'image',
         'user_id',
         'association_id'
+
     ];
 
     public function association()
