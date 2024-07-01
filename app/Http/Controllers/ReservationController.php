@@ -2,9 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\Reservation;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
+use App\Mail\ReservationAcceptedMail;
+use App\Mail\ReservationDeclinedMail;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ReservationController extends Controller
 {
@@ -27,10 +38,41 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReservationRequest $request)
+    public function store(StoreReservationRequest $request, Evenement $evenement)
     {
-        //
+        $reservation = new Reservation();
+        $reservation->user_id = Auth::id();
+        $reservation->evenement_id = $evenement->id;
+        $reservation->statut = 'acceptee';
+        $reservation->save();
+
+        return redirect()->route('associations.reservations.confirmation', $reservation);
     }
+
+    public function confirmation(Reservation $reservation)
+    {
+        return view('associations.reservations.confirmation', compact('reservation'));
+    }
+
+    public function confirm(Request $request, Reservation $reservation)
+    {
+        $reservation->update(['statut' => 'confirmee']);
+
+        Mail::to($reservation->user->email)->send(new ReservationAcceptedMail($reservation->user, $reservation->evenement));
+
+        return redirect('/')->with('success', 'Votre réservation a été confirmée.');
+    }
+
+    public function cancel(Request $request, Reservation $reservation)
+    {
+        $reservation->update(['statut' => 'annulee']);
+
+        // Vous pouvez également envoyer un email d'annulation si nécessaire
+
+        return redirect('/')->with('success', 'Votre réservation a été annulée.');
+    }
+
+    
 
     /**
      * Display the specified resource.
@@ -63,7 +105,62 @@ class ReservationController extends Controller
     {
         //
     }
+
     public function listeReservation(){
         return view('admins.reservations.listeReservation');
     }
+
+    public function accept(Reservation $reservation)
+    {
+        $reservation->update(['statut' => 'acceptee']);
+        // Récupérer les informations nécessaires pour l'email
+       // Récupérer l'utilisateur associé à la réservation
+       $utilisateur = $reservation->user;
+        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; // Assurez-vous que la formation existe
+
+        // Envoyer un email de confirmation au candidat
+        Mail::to($utilisateur->email)->send(new ReservationAcceptedMail($utilisateur, $evenement));
+          // Récupérer le contenu de la vue de l'email
+        //   $contenu = View::make('emails.reservation-accepted', [
+        //     'prenom' => $reservation->utilisateur->prenom,
+        //     'nom' => $reservation->utilisateur->nom,
+        //     'evenement' => $evenement
+        // ])->render();
+
+        // Créer une notification
+        // Notification::create([
+        //     'reservation_id' => $reservation->id,
+        //     'contenu' => $contenu,
+        //     'objet' => 'reservation Envoyé'
+        // ]);
+
+        return redirect('/')->with('success', 'Votre reservation a été soumise avec succès.');
+    }
+
+public function decline(Reservation $reservation)
+{
+    $reservation->update(['statut' => 'declinee']);
+        // Récupérer les informations nécessaires pour l'email
+       // Récupérer l'utilisateur associé à la réservation
+       $utilisateur = $reservation->user;
+        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; // Assurez-vous que la formation existe
+
+        // Envoyer un email de confirmation au candidat
+        Mail::to($utilisateur->email)->send(new ReservationDeclinedMail($utilisateur, $evenement));
+          // Récupérer le contenu de la vue de l'email
+        //   $contenu = View::make('emails.reservation-accepted', [
+        //     'prenom' => $reservation->utilisateur->prenom,
+        //     'nom' => $reservation->utilisateur->nom,
+        //     'evenement' => $evenement
+        // ])->render();
+
+        // Créer une notification
+        // Notification::create([
+        //     'reservation_id' => $reservation->id,
+        //     'contenu' => $contenu,
+        //     'objet' => 'reservation Envoyé'
+        // ]);
+
+        return redirect('/')->with('success', 'Votre reservation a été soumise avec succès.');
+}
 }

@@ -23,6 +23,9 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             //
+            'user_id',
+            'evenement_id',
+            'statut',
         ];
     }
 }

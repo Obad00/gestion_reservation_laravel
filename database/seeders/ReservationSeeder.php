@@ -9,7 +9,7 @@ class ReservationSeeder extends Seeder
 {
     public function run()
     {
-        Reservation::truncate();
+        // Reservation::truncate();
         Reservation::create([
             'user_id' => 5, // Assuming this is the ID of the first user
             'evenement_id' => 1, // Assuming this is the ID of the first evenement

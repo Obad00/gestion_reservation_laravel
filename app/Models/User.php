@@ -55,6 +55,7 @@ class User extends Authenticatable
         return $this->hasOne(Association::class);
     }
 
+
     public function associations()
     {
         return $this->hasOne(Association::class);

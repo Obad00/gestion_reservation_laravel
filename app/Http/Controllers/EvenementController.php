@@ -4,23 +4,73 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Evenement;
+
 use App\Models\Association;
 use Illuminate\Http\Request;
+
+use App\Models\Reservation;
+
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+// use Illuminate\Http\Request;
+
 
 class EvenementController extends Controller
 {
+
+//     public function voirNextEvent()
+// {
+//     // Récupérer l'événement le plus proche en fonction de la date
+//     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
+
+//     if (!$evenement) {
+//         return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
+//     }
+
+//     return redirect()->route('home')->with('evenement', $evenement);
+// }
+    
+public function tousevenements()
+{
+    $evenements = Evenement::all(); // Récupère tous les événements depuis la base de données
+
+    return view('evenements.index', compact('evenements'));
+}
+
+    public function accueil()
+    {
+        $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
+
+        if (!$evenement) {
+            return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
+        }
+        $evenements = Evenement::all();
+        return view('evenements.accueil', compact('evenements', 'evenement'));
+    }
+
+    public function detail(Evenement $evenement)
+    {
+        return view('evenements.detail', compact('evenement'));
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
 
-        $evenements=Evenement::all();
-        return view ('/evenements/index',compact('evenements'));
-        //evenements.index
+        //
+        $events = Evenement::all(); // Récupérer tous les événements depuis la base de données
+
+    return view('events.index', [
+        'events' => $events,
+    ]);
     }
+
+
+    //     $evenements=Evenement::all();
+    //     return view ('/evenements/index',compact('evenements'));
+    //     //evenements.index
+    // }
     public function affichageevenement(){
         $evenements=Evenement::all();
         return view ('/evenements/index',compact('evenements'));
@@ -31,10 +81,16 @@ class EvenementController extends Controller
     public function create()
     {
 
+
         $associations = auth()->user()->associations;
         return view('evenements.ajoutEvenement', compact('associations'));
     }
 
+    
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
 
@@ -69,10 +125,13 @@ class EvenementController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(Evenement $evenement,$id)
     {
         $evenement=Evenement::find($id);
         return view('evenements/detailEvenement',compact('evenement'));
+
+  
     }
 
     /**
@@ -116,6 +175,7 @@ class EvenementController extends Controller
         return back();
     }
 
+
     public function listeUserBloquee()
     {
         $utilisateurs = User::all()->where('etat',false);
@@ -125,5 +185,16 @@ class EvenementController extends Controller
 
 
 
+    public function showReservations(Evenement $event)
+{
+    // Récupérer les réservations pour cet événement spécifique
+    $reservations = Reservation::where('evenement_id', $event->id)->get();
+
+    // Passer les données à la vue
+    return view('events.reservations', [
+        'event' => $event,
+        'reservations' => $reservations,
+    ]);
+}
 
 }

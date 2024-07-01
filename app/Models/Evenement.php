@@ -17,7 +17,6 @@ class Evenement extends Model
         'date_limite_inscription',
         'nombre_place',
         'image',
-
         'etat',
 
         'image',

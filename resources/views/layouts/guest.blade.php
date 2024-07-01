@@ -13,11 +13,19 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
     </head>
+
     <body class="">
         <div class=">
 
             <div class=" px-6 py-4 shadow-md  sm:rounded-lg">
+    <body class="font-sans text-gray-900 antialiased">
+        <div class="">
+            
+
+            <div class="">
                 {{ $slot }}
             </div>
         </div>
