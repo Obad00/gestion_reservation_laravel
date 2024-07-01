@@ -6,6 +6,8 @@ use App\Models\Evenement;
 use App\Models\Reservation;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+use Illuminate\Http\Request;
+
 
 class EvenementController extends Controller
 {
@@ -58,14 +60,24 @@ public function tousevenements()
     public function create()
     {
         //
+        return view('evenements.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEvenementRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'date' => 'required|date',
+            'description' => 'required|string',
+            'image_url' => 'required|url'
+        ]);
+
+        Evenement::create($request->all());
+
+        return redirect()->route('evenements.index');
     }
 
     /**

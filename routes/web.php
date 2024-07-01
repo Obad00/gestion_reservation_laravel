@@ -6,14 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AccueilController;
 
 
 
 
-// Route::get('/home', [AccueilController::class, 'index'])->name('home');
-
-// Route::get('/next-event', [EvenementController::class, 'voirNextEvent'])->name('events.next');
 
 
 Route::get('/', function () {
@@ -63,3 +59,8 @@ Route::get('/reservations/confirmation/{reservation}', [ReservationController::c
 Route::post('/reservations/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm')->middleware('auth');
 Route::post('/reservations/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel')->middleware('auth');
 
+// Formulaire de création d'un événement
+Route::get('/evenements/create', [EvenementController::class, 'create'])->name('evenements.create');
+
+// Route pour enregistrer un nouvel événement (post)
+Route::post('/evenements', [EvenementController::class, 'store'])->name('evenements.store');
