@@ -1,11 +1,12 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-<div class="container justify-center mx-auto px-4 mt-8">
-    <h1>Événements à venir</h1>
+<div class="container justify-center ml-12 pl-6 mt-8">
+    <h1 class="text-left">Événements à venir</h1>
     <br>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid  justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
         @foreach($evenements as $evenement)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm"> <!-- Modifié max-w-lg à max-w-sm -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm">
+                {{-- <img src="{{ $evenement->image_url }}" alt="{{ $evenement->nom }}" class="w-full h-64 object-cover"> --}}
                 <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
                 <div class="p-8">
                     <div class="flex justify-start items-center space-x-4 mb-2">
@@ -19,18 +20,16 @@
                             </h2>
                         </div>
                     </div>
-                    
                     <div class="flex justify-between items-center">
                         <div class="flex items-center">
                             <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                <a href="{{ route('evenements.detail', $evenement) }}"> <!-- Ajoutez un lien <a> autour du <svg> -->
+                                <a href="{{ route('evenements.detail', $evenement) }}">
                                     <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </a>
                             </span>
-                            
                             <p class="text-gray-700 leading-tight mb-4">
                                 {{ $evenement->description }}
                             </p>
@@ -41,3 +40,4 @@
         @endforeach
     </div>
 </div>
+<x-footer/>

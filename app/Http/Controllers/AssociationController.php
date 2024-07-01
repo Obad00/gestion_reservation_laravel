@@ -77,7 +77,7 @@ class AssociationController extends Controller
             'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole('user');
     
         // Créer l'association associée à l'utilisateur
         $association = new Association([

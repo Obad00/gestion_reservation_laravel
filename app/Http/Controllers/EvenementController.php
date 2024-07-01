@@ -33,8 +33,13 @@ public function tousevenements()
 
     public function accueil()
     {
+        $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
+
+        if (!$evenement) {
+            return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
+        }
         $evenements = Evenement::all();
-        return view('evenements.accueil', compact('evenements'));
+        return view('evenements.accueil', compact('evenements', 'evenement'));
     }
 
     public function detail(Evenement $evenement)
