@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AssociationController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\Admin\RoleController;
 // use App\Http\Controllers\AssociationController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth','role:super_admin'])->group(function () {
+// Route::middleware(['auth','role:super_admin'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('associations', AssociationController::class);
@@ -53,7 +54,7 @@ Route::middleware(['auth','role:super_admin'])->group(function () {
     Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions');
     Route::put('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.permissions.store');
 
-});
+// });
 
 require __DIR__.'/auth.php';
 
@@ -62,6 +63,7 @@ require __DIR__.'/auth.php';
 // Route pour l'inscription de l'association
 Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
 Route::post('/associations/register', [AssociationController::class, 'register']);
+Route::get('/inscription' ,  [AssociationController::class,'inscription']);
 
 Route::controller(EvenementController::class)->group(function (){
     Route::get('create/Evenement', 'create');
@@ -71,4 +73,14 @@ Route::controller(EvenementController::class)->group(function (){
     Route::get('evenementModifier/{id}', 'edit');
     Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('evenementmodifierTraitement');
     Route::get('detailEvenement/{id}' , 'show');
+    Route::get('/bloquees' , 'listeUserBloquee');
+    
+ 
+    // Route::put('utilisateurs/bloque/{utilisateur}' , [UserController::class, 'bloquee_un_user'])->name('utilisateurs.bloque');
+    // Route::put('utilisateurs/debloque/{utilisateur}' , [UserController::class, 'debloquee_un_user'])->name('utilisateurs.debloque');
+
    });
+Route::controller(ReservationController::class)->group(function (){
+   Route::get('/reservation' , 'listeReservation');
+
+});

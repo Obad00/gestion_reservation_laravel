@@ -37,7 +37,7 @@
         <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
-            <div class="bg-[#3C2A4D] text-white fixed w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
+            <div class="bg-red-700 text-white fixed w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
                 id="sidebar">
                 <div class="flex items-center justify-center h-16 bg-cyan-950-900">
                     <span class="text-[#E06F1F] font-bold uppercase">Onyx Events</span>

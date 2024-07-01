@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Association;
 use Illuminate\Http\Request;
@@ -109,4 +110,15 @@ class EvenementController extends Controller
         $evenement->delete();
         return back();
     }
+
+    public function listeUserBloquee()
+    {
+        $utilisateurs = User::all()->where('etat',false);
+        return view('evenements.reservation',compact('utilisateurs'));
+    }
+
+
+
+  
+
 }

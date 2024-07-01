@@ -133,5 +133,8 @@ class AssociationController extends Controller
         // Rediriger vers la page d'accueil ou une autre page appropriée
         return redirect()->route('home');
     }
+    public function inscription(){
+        return view('admins.associations.incription');
+    }
 
 }
