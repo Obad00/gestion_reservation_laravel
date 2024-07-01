@@ -3,7 +3,7 @@
         <h1 class="text-3xl mb-11 font-bold ">Dashboard</h1>
         <div class="block flex-row">
 
-            <div class="bg-no-repeat flex justify-between  bg-[#3C2A4D] border border-red-300 rounded-2xl w-full mr-2 p-6"
+            <div class="bg-no-repeat flex justify-between  bg-primary border border-red-300 rounded-2xl w-full mr-2 p-6"
                 style="background-image: url(https://previews.dropbox.com/p/thumb/AAvyFru8elv-S19NMGkQcztLLpDd6Y6VVVMqKhwISfNEpqV59iR5sJaPD4VTrz8ExV7WU9ryYPIUW8Gk2JmEm03OLBE2zAeQ3i7sjFx80O-7skVlsmlm0qRT0n7z9t07jU_E9KafA9l4rz68MsaZPazbDKBdcvEEEQPPc3TmZDsIhes1U-Z0YsH0uc2RSqEb0b83A1GNRo86e-8TbEoNqyX0gxBG-14Tawn0sZWLo5Iv96X-x10kVauME-Mc9HGS5G4h_26P2oHhiZ3SEgj6jW0KlEnsh2H_yTego0grbhdcN1Yjd_rLpyHUt5XhXHJwoqyJ_ylwvZD9-dRLgi_fM_7j/p.png?fv_content=true&size_mode=5); background-position: 90% center;">
                 <div class="block pt-7 px-20">
                     <p class="text-xl text-white">Evenements </p>
@@ -16,7 +16,7 @@
                     <div class="flex flex-wrap px-12">
                         <div class="w-full px-9 sm:w-1/2 xl:w-1/2 ">
                             <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl w-full pr-24  bg-slate-100">
-                                <div class="p-3 rounded-full bg-orange-500 bg-opacity-75">
+                                <div class="p-3 rounded-full bg-orange bg-opacity-75">
                                     <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svgfull
                                     <path
@@ -51,7 +51,7 @@
                         </div>
                         <div class="w-full px-9 sm:w-1/2  xl:w-1/2">
                             <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl bg-slate-100">
-                                <div class="p-3 rounded-full bg-orange-700 bg-opacity-75">
+                                <div class="p-3 rounded-full bg-orange bg-opacity-75">
                                     <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -117,21 +117,21 @@
         <div class=" mx-auto gap-2  px-4">
             <h1 class="text-3xl pt-6 -mb-11 font-bold ">Liste des Associations</h1>
             <x-dynamic-table :headers="$headers" :donnee="$associations" :columns="$columns" :actions="$actions" />
-        </div>          
-                    
+        </div>
+
 
               <div class=" mx-auto gap-2  px-4 rounded-xl w-5/12 ml-2 p-6 ">
                 @php
                 $headers = ['Nom',  'Status',''];
                 $columns = ['nom', 'etat'];
                 $actions = [
-            
+
                 [
                 'url' => function($item) { return route('associations.edit', $item->id); },
                 'class' => 'text-indigo-600 hover:text-indigo-900',
                 'icon' => ''
             ],
-              ];      
+              ];
             @endphp
                 <h1 class=" text-3xl -mb-40 text-indigo-900">Utilisateurs</strong></h1>
                 <x-dynamic-table :headers="$headers" :donnee="$utilisateurs" :columns="$columns" :actions="$actions" />
@@ -163,9 +163,9 @@
                             </div>
                         </div>
                         @endforeach
-                        
+
                     </div>
-            
+
                 </div>
             </div>
           </div>

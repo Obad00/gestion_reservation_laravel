@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen text-gray-900 flex justify-center">
         <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-            <div class="flex-1 bg-[#3C2A4D] text-center block lg:flex">
+            <div class="flex-1 bg-primary text-center block lg:flex">
                 <!-- Section de l'image de l'événement -->
                 <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
                     style="background-image: url('{{ asset('images/image_login.png') }}');">

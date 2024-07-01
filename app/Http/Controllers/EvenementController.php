@@ -8,7 +8,6 @@ use App\Models\Association;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
-use Illuminate\Http\Request;
 
 class EvenementController extends Controller
 {
@@ -17,6 +16,9 @@ class EvenementController extends Controller
      */
     public function index()
     {
+
+        $evenements=Evenement::all();
+        return view ('/evenements/index',compact('evenements'));
         //evenements.index
     }
     public function affichageevenement(){
@@ -58,7 +60,7 @@ class EvenementController extends Controller
         $evenement->save();
 
         // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
-        $association = auth()->user()->associations()->findOrFail($request->association_id);
+        $association = auth()->user()->association()->findOrFail($request->association_id);
 
         $association->evenements()->create($request->all());
 

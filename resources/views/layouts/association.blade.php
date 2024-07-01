@@ -21,13 +21,13 @@
         <div class="flex h-screen bg-gray-100">
 
             <!-- sidebar -->
-            <div class="bg-[#3C2A4D] text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
+            <div class="bg-primary text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
                 id="sidebar">
                 <div class="flex items-center justify-center h-16 bg-cyan-950-900">
                     <span class="text-[#E06F1F] font-bold uppercase">Onyx Events</span>
                 </div>
                 <div class="flex flex-col flex-1 overflow-y-auto">
-                    <nav class="flex-1 px-2 py-12 bg-[#3C2A4D]">
+                    <nav class="flex-1 px-2 py-12 bg-primary">
                         <a href="#" class="flex items-center px-4 py-5 gap-2 text-gray-100 hover:bg-gray-700">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21.5 14H14.5V21H21.5V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
