@@ -29,7 +29,7 @@
     </div>
     <div>
         <label for="image">Image:</label>
-        <input type="text" id="image" name="image" required>
+        <input type="file" id="image" name="image" required>
     </div>
     <!-- Catégorie -->
     <div class="mt-4">

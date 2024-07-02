@@ -29,9 +29,11 @@
                 <label for="nombre_place">Nombre de Places:</label>
                 <input type="number" class="form-control" id="nombre_place" name="nombre_place" value="{{ old('nombre_place', $evenement->nombre_place) }}" required>
             </div>
-            <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $evenement->image) }}" required>
+             <!-- Image -->
+             <div class="mb-4">
+                <label for="nombre_place">Image:</label>
+
+                <input id="image" class="block mt-1 w-full" type="file" name="image" accept="image/*" value="{{ old('image', $evenement->image) }}  />
             </div>
 
                 <!-- Catégorie -->
