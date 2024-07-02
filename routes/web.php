@@ -65,6 +65,7 @@ Route::get('/associations/register', [AssociationController::class, 'create'])->
 Route::post('/associations/register', [AssociationController::class, 'register']);
 Route::get('/inscription' ,  [AssociationController::class,'inscription']);
 Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard']);
+Route::get('/association/listereservation' ,  [AssociationController::class,'listereservation']);
 
 Route::controller(EvenementController::class)->group(function (){
     Route::get('create/Evenement', 'create');
