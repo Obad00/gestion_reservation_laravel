@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('evenements', EvenementController::class);
-Route::resource('associations', AssociationController::class);
+// Route::resource('evenements', EvenementController::class);
+// Route::resource('associations', AssociationController::class);
 
 
 Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
