@@ -26,7 +26,7 @@ class AssociationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function created()
+    public function create()
     {
         return view('auth.association-register');
     }
@@ -83,8 +83,8 @@ class AssociationController extends Controller
             'password' => Hash::make($request->password),
 
 
-        ])->assignRole('user');
-    
+        ])->assignRole('association');
+
         // Créer l'association associée à l'utilisateur
         $association = new Association([
             'nom' => $request->association_nom,

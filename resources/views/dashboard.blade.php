@@ -69,39 +69,7 @@
         </h2>
     </x-slot>
 
-        <form action="{{ route('associations.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea name="description" class="form-control" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="logo">Logo</label>
-                <input type="text" name="logo" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="adresse">Adresse</label>
-                <input type="text" name="adresse" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="contact">Contact</label>
-                <input type="number" name="contact" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="secteur">Secteur d'Activité</label>
-                <input type="text" name="secteur" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="ninea">NINEA</label>
-                <input type="text" name="ninea" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Créer</button>
-        </form>
-    </div>
+
 
 
 </body>

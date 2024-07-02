@@ -38,8 +38,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// Route::resource('evenements', EvenementController::class);
-// Route::resource('associations', AssociationController::class);
 
 
 Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
@@ -51,6 +49,7 @@ Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins
 
 
 
+
     Route::get('liste/', [AdminController::class,'index'])->middleware( 'permission:view permissions');
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin')->middleware( 'permission:view permissions');
@@ -58,6 +57,8 @@ Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins
     Route::get('evenements/liste', [DashboardController::class , 'listeEvenements'])->name('liste.evenements.admin')->middleware( 'permission:edit evenements');
 
     // association
+
+    Route::get('/association' , [AssociationAdminController::class, 'index'])->name('admin.associations.index')->middleware( 'permission:view permissions');
     Route::get('/association/evenements/{id}' , [AssociationAdminController::class, 'show'])->name('admin.associations.show')->middleware( 'permission:view permissions');
     Route::get('/association/bloquees/' , [AssociationAdminController::class, 'listeBloquee'])->name('association.liste.bloque')->middleware( 'permission:view permissions');
 
@@ -123,8 +124,8 @@ Route::controller(ReservationController::class)->group(function (){
 
 });
 
-Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
-Route::post('/associations/register', [AssociationController::class, 'register']);
+Route::get('/associatios/register', [AssociationController::class, 'create'])->name('association-register');
+Route::post('/associations/register', [AssociationController::class, 'register'])->name('association-register.store');
 
 
 Route::get('/events', [EvenementController::class, 'index'])->name('events.index');

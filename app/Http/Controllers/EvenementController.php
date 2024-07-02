@@ -29,12 +29,12 @@ class EvenementController extends Controller
 
 //     return redirect()->route('home')->with('evenement', $evenement);
 // }
-    
+
 public function tousevenements()
 {
     $evenements = Evenement::all(); // Récupère tous les événements depuis la base de données
 
-    return view('evenements.index', compact('evenements'));
+    return view('evenements.tousevents', compact('evenements'));
 }
 
     public function accueil()
@@ -45,7 +45,7 @@ public function tousevenements()
             return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
         }
         $evenements = Evenement::all();
-        return view('evenements.accueil', compact('evenements', 'evenement'));
+        return view('welcome', compact('evenements', 'evenement'));
     }
 
     public function detail(Evenement $evenement)
@@ -86,7 +86,7 @@ public function tousevenements()
         return view('evenements.ajoutEvenement', compact('associations'));
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -131,7 +131,7 @@ public function tousevenements()
         $evenement=Evenement::find($id);
         return view('evenements/detailEvenement',compact('evenement'));
 
-  
+
     }
 
     /**
