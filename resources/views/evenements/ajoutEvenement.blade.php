@@ -218,6 +218,7 @@
 
 </x-association-layout> --}}
 <x-association-layout> 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -231,7 +232,7 @@
       z-index: 1000;
       background-color: white;
       padding: 20px; 
-      border-radius: 2px;
+      border-radius: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       max-height: 90vh;
       overflow: hidden;
@@ -242,7 +243,7 @@
     }
 
     .btn-submit {
-        background-color: #ce0033;
+        background-color: #E06F1F;
         color: white;
         padding: 10px;
         border: none;
@@ -254,7 +255,7 @@
     }
 
     .btn-submit:hover {
-        background-color: #ce0033;
+        background-color:#E06F1F;
     }
 
     .form-control, .form-control-file, .form-control select {
@@ -267,6 +268,7 @@
         font-size: 16px;
         margin-top: 20px;
         border-radius: 5px;
+        border: #333;
     }
 </style>
 
