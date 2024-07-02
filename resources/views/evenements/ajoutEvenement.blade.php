@@ -1,4 +1,7 @@
-<form action="{{ url('create/Evenement/traitement') }}" method="POST" enctype="multipart/form-data">
+<x-association-layout>
+
+
+<form action="{{ route('association.evenements.save') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
         <label for="nom">nom:</label>
@@ -40,3 +43,7 @@
         <button type="submit">Submit</button>
     </div>
 </form>
+
+
+</x-association-layout>
+

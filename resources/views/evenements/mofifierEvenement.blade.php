@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Événement</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+</x-association-layout>
+
     <div class="container">
         <h1>Modifier Événement</h1>
         <form action="{{ route('evenementmodifierTraitement', ['id' => $evenement->id]) }}" method="POST" enctype="multipart/form-data">
@@ -40,7 +33,7 @@
                 <label for="image">Image:</label>
                 <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $evenement->image) }}" required>
             </div>
-            {{-- 
+            {{--
             <div class="form-group">
                 <label for="association_id">Association:</label>
                 <select class="form-control" id="association_id" name="association_id" required>
@@ -48,12 +41,12 @@
                         <option value="{{ $association->id }}" {{ $evenement->association_id == $association->id ? 'selected' : '' }}>{{ $association->nom }}</option>
                     @endforeach
                 </select>
-            </div>  
+            </div>
             --}}
             <button type="submit" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-</body>
-</html>
+
+</x-association-layout>
