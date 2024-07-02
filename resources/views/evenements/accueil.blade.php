@@ -6,7 +6,7 @@
     <title>Les Événements</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        
+
         body, html {
             margin: 0;
             padding: 0;
@@ -89,7 +89,7 @@
 
         .btn {
             padding: 10px 20px;
-            background-color: #E06F1F; 
+            background-color: #E06F1F;
             color: white;
             text-decoration: none;
             font-size: 1em;
@@ -117,7 +117,7 @@
         }
 
     </style>
-    
+
 </head>
 <body>
     {{-- <header class="banner">
@@ -182,7 +182,8 @@
                 </div>
             </section>
         </header>
-        
+
+
 
     <div class="search-container">
         <section class="search-section">
@@ -258,25 +259,25 @@
             <div class="text-content">
                 <h2>Créez votre propre événement</h2>
                 <p>Organisez des événements incroyables avec notre plateforme. Rejoignez-nous pour créer des moments inoubliables.</p>
-                <a href="{{ route('evenements.create') }}" class="btn-create-event">Créer un événement</a>
+                <a href="{{ route('evenements.a') }}" class="btn-create-event">Créer un événement</a>
             </div>
         </div>
     </section>
 
     <div class="max-w-3xl mx-auto px-5 mt-28">
         <div class="flex flex-col justify-center">
-    
+
             <div class="text-center">
-    
+
                 <h2 class="font-semibold text-3xl">Rejoindre ces marques</h2>
-    
+
                 <p class="max-w-md mx-auto mt-2 text-gray-500">
-                    Nous avons eu le plaisir de travailler avec des marques qui ont marqué l'industrie. 
+                    Nous avons eu le plaisir de travailler avec des marques qui ont marqué l'industrie.
                     En voici quelques-unes.
                 </p>
-    
+
             </div>
-    
+
             <div class="container mx-auto mt-4">
                 <div class="flex flex-wrap justify-center">
                     <img src="path/to/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
@@ -293,13 +294,13 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
-    
+
    <x-footer/>
-    
-   
-    
-      
+
+
+
+
 </body>
 </html>

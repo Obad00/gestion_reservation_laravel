@@ -24,6 +24,7 @@ Nous sommes convaincus que la transformation numérique est un puissant vecteur 
             'secteur' => 'NUMERIQUE',
             'ninea' => 'NINEA001',
             'etat' => 1,
+            'date_creation_association' => '12/12/2014',
             'user_id' => 3, // Assuming this is the ID of the association user created in UserSeeder
             'date_creation_association' => now(), // Provide a default value for date_creation_association
         ]);
@@ -37,6 +38,8 @@ Nous sommes convaincus que la transformation numérique est un puissant vecteur 
             'secteur' => 'Education',
             'ninea' => 'NINEA002',
             'etat' => 1,
+            'date_creation_association' => '23/04/2024',
+
             'user_id' => 4, // Assuming this is the ID of the association user created in UserSeeder
             'date_creation_association' => now(), // Provide a default value for date_creation_association
         ]);

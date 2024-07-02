@@ -21,12 +21,18 @@ class Evenement extends Model
 
         'image',
         'user_id',
-        'association_id'
+        'association_id',
+        'categorie_id',
 
     ];
 
     public function association()
     {
         return $this->belongsTo(Association::class);
+    }
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
     }
 }

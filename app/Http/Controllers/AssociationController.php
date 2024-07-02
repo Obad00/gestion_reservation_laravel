@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Evenement;
 use App\Models\Association;
+use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreAssociationRequest;
 use App\Http\Requests\UpdateAssociationRequest;
-use App\Models\User;
 use App\Http\Requests\RegisterAssociationRequest;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 class AssociationController extends Controller
 {
@@ -26,7 +28,7 @@ class AssociationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function created()
+    public function create()
     {
         return view('auth.association-register');
     }
@@ -83,8 +85,8 @@ class AssociationController extends Controller
             'password' => Hash::make($request->password),
 
 
-        ])->assignRole('user');
-    
+        ])->assignRole('association');
+
         // Créer l'association associée à l'utilisateur
         $association = new Association([
             'nom' => $request->association_nom,
@@ -110,5 +112,15 @@ class AssociationController extends Controller
     public function inscription(){
         return view('admins.associations.incription');
     }
-
+    // public function dashboard(){
+    //     return view('admins.associations.dashboard');
+    // }
+    public function dashboard(){
+    $utilisateurs = User::latest()->take(5)->get();
+    $associations= Association::latest()->take(5)->get();
+    $evenements= Evenement::latest()->take(3)->get();
+    $reservations= Reservation::All();
+ 
+    return view('associations.dashboard', compact('associations','evenements','reservations','utilisateurs'));
+    }
 }

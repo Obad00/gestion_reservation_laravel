@@ -1,6 +1,6 @@
 
-<x-admin-layout>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+<x-association-layout>
    <style>
        .btn-icon {
            margin-top: 10px;
@@ -26,48 +26,72 @@
            margin: 8px
                /* Couleur de texte pour l'élément actif */
        }
-  
+
        .active>span {
            /* Couleur de fond pour l'élément actif */
            color: #ffffff;
            /* Couleur de texte pour l'élément actif */
        }
    </style>
-  
+
    <body class="font-sans container antialiased">
+
        <div class=" container bg-gray-100">
            <div class="flex  bg-gray-100">
-  
+
 
 
        <!-- Main Content -->
-       <div class="flex-1 p-6">
-           <h2 class="text-3xl font-semibold mb-6">Section</h2>
-           <div class="grid grid-cols-3 gap-8">
-               @foreach($evenements as $evenement)
-               <div class="w-full p-2 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
-                   <img class="w-full h-40 object-cover rounded-t-lg" alt="Card Image" src="https://via.placeholder.com/150">
-                   <div class="p-4">
-                       <h3 class="text-gray-600">SIMPLON</h3>
-                       <div class="flex justify-between items-center">
-                           <h2 class="text-xl font-semibold">{{ $evenement->nom }}</h2>
-                           <p>14/12/2024</p>
-                       </div>
-                       <p class="text-gray-600 mt-2">{{ $evenement->description }}</p>
-                       <div class="flex justify-between items-center mt-4">
-                           <p>{{ $evenement->nombre_place }} places</p>
-                       </div>
-                       <a href="/evenementSupprimer/{{ $evenement->id }}" class="btn-icon">
-                           <i class="fas fa-trash-alt"></i>
-                       </a>
-                       <a href="/evenementModifier/{{ $evenement->id }}" class="btn-icon">
-                           <i class="fas fa-edit"></i>
-                       </a>
-                   </div>
-               </div>
-               @endforeach
-           </div>
-       </div>
+       <div class="container mx-auto px-4 py-8">
+        <div class=" justify-between flex">
+
+            <h2 class="text-3xl font-semibold mb-6">Mes événements</h2>
+            <a href="{{ route('association.evenements.create') }}" class="inline-block bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded mb-4">Ajouter</a>
+
+        </div>
+
+        @if ($evenements->isEmpty())
+            <div class="flex justify-center items-center h-64">
+                <p class="text-gray-600 text-lg">Vous n'avez aucun événement.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-3 gap-8">
+                @foreach($evenements as $evenement)
+                    <div class="w-full p-2 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
+                        <img src="{{ asset('storage/evenements/' . $evenement->image) }}" alt="{{ $evenement->nom }}"
+                        width="50" class="object-cover w-full h-56">                        <div class="p-4">
+                            <h3 class="text-gray-600">{{ $evenement->association->nom }}</h3>
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-semibold">{{ $evenement->nom }}</h2>
+                                <p>{{ \Carbon\Carbon::parse($evenement->date_evenement)->format('d/m/Y') }}</p>
+                            </div>
+                            <p class="text-gray-600 mt-2">{{ $evenement->description }}</p>
+                            <div class="flex justify-between items-center mt-4">
+                                <p>{{ $evenement->nombre_place }} places</p>
+                                <div class="flex justify-between items-center ">
+                                    <a href="{{ route('association.evenements.edit', $evenement->id) }}" class="btn-icon text-green-300  px-4 rounded hover:bg-green-700">
+
+
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                                          </svg></a>
+                                    <form action="{{ route('association.evenements.destroy', $evenement->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-icon text-red-300  px-4 rounded hover:text-red-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                                              </svg>                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
    </div>
 
 
@@ -75,48 +99,4 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-</x-admin-layout>
-=======
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
-<div class="container justify-center ml-12 pl-6 mt-8">
-    <h1 class="text-left">Événements à venir</h1>
-    <br>
-    <div class="grid  justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
-        @foreach($evenements as $evenement)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm">
-                {{-- <img src="{{ $evenement->image_url }}" alt="{{ $evenement->nom }}" class="w-full h-64 object-cover"> --}}
-                <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
-                <div class="p-8">
-                    <div class="flex justify-start items-center space-x-4 mb-2">
-                        <div>
-                            <span class="text-gray-600 block">{{ \Carbon\Carbon::parse($evenement->date)->format('d') }}</span>
-                            <span class="text-gray-600">{{ \Carbon\Carbon::parse($evenement->date)->format('M') }}</span>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold text-gray-800">
-                                <a href="{{ route('evenements.detail', $evenement) }}">{{ $evenement->nom }}</a>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                <a href="{{ route('evenements.detail', $evenement) }}">
-                                    <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </a>
-                            </span>
-                            <p class="text-gray-700 leading-tight mb-4">
-                                {{ $evenement->description }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-<x-footer/>
+</x-association-layout>

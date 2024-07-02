@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Événement</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+<x-association-layout>
+
     <div class="container">
         <h1>Modifier Événement</h1>
-        <form action="{{ route('evenementmodifierTraitement', ['id' => $evenement->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('association.evenements.update', ['id' => $evenement->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $evenement->id }}">
             <div class="form-group">
@@ -36,11 +29,25 @@
                 <label for="nombre_place">Nombre de Places:</label>
                 <input type="number" class="form-control" id="nombre_place" name="nombre_place" value="{{ old('nombre_place', $evenement->nombre_place) }}" required>
             </div>
-            <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $evenement->image) }}" required>
+             <!-- Image -->
+             <div class="mb-4">
+                <label for="nombre_place">Image:</label>
+
+                <input id="image" class="block mt-1 w-full" type="file" name="image" accept="image/*" value="{{ old('image', $evenement->image) }}  />
             </div>
-            {{-- 
+
+                <!-- Catégorie -->
+    <div class="mt-4">
+        <x-input-label for="categorie_id" :value="__('Catégorie')" />
+        <select id="categorie_id" name="categorie_id" class="block mt-1 w-full" required>
+            <option value="">Choisir une catégorie</option>
+            @foreach($categories as $categorie)
+                <option  value="{{ $categorie->id }}"{{ $evenement->categorie_id == $categorie->id ? 'selected' : '' }}>{{ $categorie->name }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('categorie_id')" class="mt-2" />
+    </div>
+            {{--
             <div class="form-group">
                 <label for="association_id">Association:</label>
                 <select class="form-control" id="association_id" name="association_id" required>
@@ -48,12 +55,12 @@
                         <option value="{{ $association->id }}" {{ $evenement->association_id == $association->id ? 'selected' : '' }}>{{ $association->nom }}</option>
                     @endforeach
                 </select>
-            </div>  
+            </div>
             --}}
             <button type="submit" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-</body>
-</html>
+
+</x-association-layout>

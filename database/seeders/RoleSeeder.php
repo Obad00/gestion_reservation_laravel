@@ -11,7 +11,6 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-
         // Vider les tables
         DB::table('role_has_permissions')->truncate();
         DB::table('model_has_roles')->truncate();
@@ -50,28 +49,6 @@ class RoleSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-
-        // Disable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        // Delete all records from the roles and permissions tables
-        Role::truncate();
-        Permission::truncate();
-
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        // Create roles
-        $roleUser = Role::create(['name' => 'user']);
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleSuperAdmin = Role::create(['name' => 'super_admin']);
-        $roleAssociation = Role::create(['name' => 'association']);
-
-        // Create permissions
-        Permission::create(['name' => 'manage associations']);
-        Permission::create(['name' => 'manage events']);
-        Permission::create(['name' => 'view events']);
-        Permission::create(['name' => 'reserve events']);
 
         // Créer les rôles
         $superAdminRole = Role::create(['name' => 'super_admin']);

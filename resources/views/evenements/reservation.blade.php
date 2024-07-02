@@ -1,3 +1,3 @@
-<x-admin-layout>
-   
-</x-admin-layout>
+<x-association-layout>
+
+</x-association-layout>
