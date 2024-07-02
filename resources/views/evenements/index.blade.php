@@ -1,5 +1,4 @@
-<x-admin-layout>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+<x-association-layout>
    <style>
        .btn-icon {
            margin-top: 10px;
@@ -25,19 +24,22 @@
            margin: 8px
                /* Couleur de texte pour l'élément actif */
        }
-  
+
        .active>span {
            /* Couleur de fond pour l'élément actif */
            color: #ffffff;
            /* Couleur de texte pour l'élément actif */
        }
    </style>
-  
+
    <body class="font-sans container antialiased">
        <div class=" container bg-gray-100">
-           <div class="flex  bg-gray-100">
-  
+        <a href="{{ route('association.evenements.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Permissions</a>
 
+           <div class="flex  bg-gray-100">
+
+
+            <a href="{{ route('association.evenements.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Permissions</a>
 
        <!-- Main Content -->
        <div class="flex-1 p-6">
@@ -56,11 +58,17 @@
                        <div class="flex justify-between items-center mt-4">
                            <p>{{ $evenement->nombre_place }} places</p>
                        </div>
-                       <a href="/evenementSupprimer/{{ $evenement->id }}" class="btn-icon">
-                           <i class="fas fa-trash-alt"></i>
+                       <a href="{{ route('association.evenements.destroy', $evenement->id) }}" class="btn-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
                        </a>
-                       <a href="/evenementModifier/{{ $evenement->id }}" class="btn-icon">
-                           <i class="fas fa-edit"></i>
+                       <a href="{{route('association.evenements.update',  $evenement->id )}}" class="btn-icon">
+                        <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                        </a>
                    </div>
                </div>
@@ -74,4 +82,4 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-</x-admin-layout>
+</x-association-layout>

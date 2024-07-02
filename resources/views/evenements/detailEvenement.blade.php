@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-association-layout>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carte</title>
@@ -19,7 +19,7 @@
                     <span class="text-gray-800">14/12/2024</span>
                 </div>
                 <p class="text-gray-600 mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id id velit condimentum. Nec euismod vel, hac amet. Velit, pharetra amet ac ante purus eu gravida. Convallis sollicitudin morbi neque leo duis et morbi dignissim. Posuere 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id id velit condimentum. Nec euismod vel, hac amet. Velit, pharetra amet ac ante purus eu gravida. Convallis sollicitudin morbi neque leo duis et morbi dignissim. Posuere
                     sapien maecenas nibh ullamcorper dignissim imperdiet et. Nibh ut in pretium fringilla dolor pellentesque blandit magna faucibus.
                     Quam aliquam orci feugiat tincidunt rhoncus purus donec. Fames orci vulputate gravida lacus, massa nibh est et. Pellentesque volutpat purus eget tortor. Eget imperdiet purus nulla eu pharetra porttitor sociis. Rutrum sed nulla massa ipsum, pellentesque risus sed mollis nibh. Aliquam amet, amet condimentum tellus nisl, feugiat. Nisi vel platea etiam eget consectetur nisl, fermentum id. Sed duis massa elit massa at amet, mattis tincidunt.
                 </p>
@@ -34,9 +34,9 @@
     </div>
     <div class="apropos">
         <h2><strong>A propos de l’évènement</strong></h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id id velit condimentum. Nec euismod vel, hac amet. Velit, pharetra amet ac ante purus eu gravida. Convallis sollicitudin morbi neque leo duis et morbi dignissim. Posuere 
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id id velit condimentum. Nec euismod vel, hac amet. Velit, pharetra amet ac ante purus eu gravida. Convallis sollicitudin morbi neque leo duis et morbi dignissim. Posuere
             sapien maecenas nibh ullamcorper dignissim imperdiet et. Nibh ut in pretium fringilla dolor pellentesque blandit magna faucibus.
             Quam aliquam orci feugiat tincidunt rhoncus purus donec. Fames orci vulputate gravida lacus, massa nibh est et. Pellentesque volutpat purus eget tortor. Eget imperdiet purus nulla eu pharetra porttitor sociis. Rutrum sed nulla massa ipsum, pellentesque risus sed mollis nibh. Aliquam amet, amet condimentum tellus nisl, feugiat. Nisi vel platea etiam eget consectetur nisl, fermentum id. Sed duis massa elit massa at amet, mattis tincidunt</p>
     </div>
 </body>
-</x-admin-layout>
+</x-association-layout>

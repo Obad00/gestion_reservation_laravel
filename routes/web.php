@@ -64,24 +64,29 @@ require __DIR__.'/auth.php';
 Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
 Route::post('/associations/register', [AssociationController::class, 'register']);
 Route::get('/inscription' ,  [AssociationController::class,'inscription']);
-Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard']);
+Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard'])->name('association.dashboard');
+
+
+Route::prefix('associations')->group(function (){
 
 Route::controller(EvenementController::class)->group(function (){
-    Route::get('create/Evenement', 'create');
-    Route::post('create/Evenement/traitement', 'store');
-    Route::get('index/Evenement', 'affichageevenement')->name('evenements.index');
-    Route::get('evenementSupprimer/{id}', 'destroy');
-    Route::get('evenementModifier/{id}', 'edit');
-    Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('evenementmodifierTraitement');
-    Route::get('detailEvenement/{id}' , 'show');
-    Route::get('/bloquees' , 'listeUserBloquee');
-    
- 
+    Route::get('create/Evenement', 'create')->name('association.evenements.create');
+    Route::post('create/Evenement/traitement', 'store')->name('association.evenements.save');
+    Route::get('index/Evenement', 'affichageevenement')->name('association.evenements.index');
+    Route::get('evenementSupprimer/{id}', 'destroy')->name('association.evenements.destroy');
+    Route::get('evenementModifier/{id}', 'edit')->name('association.evenements.edit');
+    Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('association.evenements.update');
+    Route::get('detailEvenement/{id}' , 'show')->name('association.evenements.show');
+    Route::get('/bloquees' , 'listeUserBloquee')->name('association.evenements.bloques');
+
+
     // Route::put('utilisateurs/bloque/{utilisateur}' , [UserController::class, 'bloquee_un_user'])->name('utilisateurs.bloque');
     // Route::put('utilisateurs/debloque/{utilisateur}' , [UserController::class, 'debloquee_un_user'])->name('utilisateurs.debloque');
 
    });
 Route::controller(ReservationController::class)->group(function (){
-   Route::get('/reservation' , 'listeReservation');
+   Route::get('/reservationee' , 'listeReservation')->name('association.reservation');
 
 });
+});
+
