@@ -21,9 +21,9 @@ class AssociationAdminController extends Controller
         return view('admins.associations.bloquee',compact('associations'));
     }
 
-    public function show(Association $association)
+    public function show($id)
     {
-
+        $association= Association::findOrFail($id);
         // Use the relationship to get the events associated with the specific association
         $evenements = $association->evenements;
 

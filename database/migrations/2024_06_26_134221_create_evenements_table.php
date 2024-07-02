@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('image');
             $table->foreign('association_id')->references('id')->on('associations')->onDelete('cascade');
             $table->unsignedBigInteger('association_id');
+
+            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('categorie_id');
             $table->timestamps();
         });
     }

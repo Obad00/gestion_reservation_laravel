@@ -290,7 +290,7 @@
                                     </div>
                                     <div class="block">
 
-                                        {{-- <div> {{ Auth::user()->prenom }}</div> --}}
+                                        <div> {{ Auth::user()->prenom }}</div>
                                         {{-- <div> {{ Auth::user()->roles }}</div> --}}
                                     </div>
                                     <div class="ms-1">

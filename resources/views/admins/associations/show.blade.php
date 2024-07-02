@@ -4,15 +4,15 @@
         <div class="block flex-row">
             <h1 class="text-3xl font-bold">{{ $association->nom }}</h1>
             <p class="mt-4">{{ $association->description }}</p>
-    
-           
+
+
             <div class=" py-1">
                 <div class="container mx-auto px-4">
                     <h2 class="text-3xl font-bold text-blac mb-8">Les evenements de <span>{{ $association->nom }}</span></h2>
                     @if($evenements->isEmpty())
                     <p>No events found for this association.</p>
                 @else
-        
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                         @foreach($evenements as $evenement)
@@ -34,9 +34,9 @@
                             </div>
                         </div>
                         @endforeach
-                      
-                 
-                        
+
+
+
                     </div>
                     @endif
                 </div>

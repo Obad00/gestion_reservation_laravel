@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 
 // database/seeders/EvenementSeeder.php
+use App\Models\Categorie;
 use Illuminate\Database\Seeder;
 use App\Models\Evenement;
 
@@ -10,6 +11,22 @@ class EvenementSeeder extends Seeder
     public function run()
     {
         Evenement::truncate();
+        Categorie::truncate();
+
+
+        Categorie::create([
+
+            'name' => 'Educations',
+        ]);
+
+        Categorie::create([
+
+            'name' => 'Sports',
+        ]);
+        Categorie::create([
+
+            'name' => 'Informatiques',
+        ]);
 
         Evenement::create([
 
@@ -21,6 +38,7 @@ class EvenementSeeder extends Seeder
             'nombre_place' => '80',
             'image' => 'event2.png',
             'association_id' => 1, // Assuming this is the ID of the first association
+            'categorie_id' => 1,
         ]);
 
         Evenement::create([
@@ -32,6 +50,8 @@ class EvenementSeeder extends Seeder
             'nombre_place' => '100',
             'image' => 'event1.png',
             'association_id' => 2, // Assuming this is the ID of the first association
+            'categorie_id' => 2,
+
         ]);
     }
 }
