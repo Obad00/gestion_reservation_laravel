@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\User;
 use App\Models\Evenement;
 
@@ -81,9 +82,9 @@ public function tousevenements()
     public function create()
     {
 
-
+        $categories= Categorie::all();
         $associations = auth()->user()->associations;
-        return view('evenements.ajoutEvenement', compact('associations'));
+        return view('evenements.ajoutEvenement', compact('associations','categories'));
     }
 
 
@@ -93,17 +94,24 @@ public function tousevenements()
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'localite' => 'required|string|max:255',
+            'date_evenement' => 'required|date',
+            'date_limite_inscription' => 'required|date',
+            'nombre_place' => 'required|integer',
+            'image' => 'nullable|string',
+        ]);
 
-        // $request->validate([
-        //     'nom' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        //     'localite' => 'required|string',
-        //     'date_evenement' => 'required|date',
-        //     'date_limite_inscription' => 'required|date|before:date_evenement',
-        //     'nombre_place' => 'required|integer',
-        //     'image' => 'required|string',
-        //     'association_id' => 'required|exists:associations,id',
-        // ]);
+        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
+        $user = auth()->user();
+        $association = $user->association;
+
+        if (!$association) {
+            return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
+        }
+
         $evenement = new Evenement();
         $evenement->nom = $request->nom;
         $evenement->description = $request->description;
@@ -112,16 +120,13 @@ public function tousevenements()
         $evenement->date_limite_inscription = $request->date_limite_inscription;
         $evenement->nombre_place = $request->nombre_place;
         $evenement->image = $request->image;
-        $evenement->association_id = $request->association_id;
-        $evenement->save();
+        $evenement->categorie_id = $request->categorie_id;
 
-        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
-        $association = auth()->user()->association()->findOrFail($request->association_id);
+        $association->evenements()->save($evenement);
 
-        $association->evenements()->create($request->all());
-
-        return redirect()->route('evenements.index')->with('success', 'Événement créé avec succès.');
+        return redirect()->route('association.evenements.index')->with('success', 'Événement créé avec succès.');
     }
+
     /**
      * Display the specified resource.
      */
@@ -130,8 +135,6 @@ public function tousevenements()
     {
         $evenement=Evenement::find($id);
         return view('evenements/detailEvenement',compact('evenement'));
-
-
     }
 
     /**
@@ -139,31 +142,63 @@ public function tousevenements()
      */
     public function edit($id)
     {
+        $categories= Categorie::all();
+
         $evenement = Evenement::find($id);
-        return view('evenements.mofifierEvenement', compact('evenement'));
+        return view('evenements.mofifierEvenement', compact('evenement','categories'));
+  }
+  public function update(Request $request, $id)
+{
+    $user = auth()->user();
+    $association = $user->association;
+
+    if (!$association) {
+        return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
     }
+
+    // Validation des données
+    $request->validate([
+        'nom' => 'required|string|max:255',
+        'description' => 'required|string',
+        'localite' => 'required|string|max:255',
+        'date_evenement' => 'required|date',
+        'date_limite_inscription' => 'required|date',
+        'nombre_place' => 'required|integer',
+        'image' => 'nullable|string',
+        'categorie_id' => 'required|exists:categories,id',
+    ]);
+
+    // Trouver l'événement à mettre à jour
+    $evenement = Evenement::find($id);
+
+    if (!$evenement) {
+        return redirect()->route('association.evenements.index')->withErrors('Événement introuvable.');
+    }
+
+    // Vérifier si l'événement appartient à l'association de l'utilisateur
+    if ($evenement->association_id != $association->id) {
+        return redirect()->route('association.evenements.index')->withErrors('Vous n\'avez pas la permission de mettre à jour cet événement.');
+    }
+
+    // Mise à jour des données de l'événement
+    $evenement->nom = $request->nom;
+    $evenement->description = $request->description;
+    $evenement->localite = $request->localite;
+    $evenement->date_evenement = $request->date_evenement;
+    $evenement->date_limite_inscription = $request->date_limite_inscription;
+    $evenement->nombre_place = $request->nombre_place;
+    $evenement->image = $request->image;
+    $evenement->categorie_id = $request->categorie_id;
+    $evenement->save();
+
+    return redirect()->route('association.evenements.index')->with('success', 'Événement mis à jour avec succès.');
+}
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        $evenement = Evenement::find($id);
-        $evenement->nom = $request->nom;
-        $evenement->description = $request->description;
-        $evenement->localite = $request->localite;
-        $evenement->date_evenement = $request->date_evenement;
-        $evenement->date_limite_inscription = $request->date_limite_inscription;
-        $evenement->nombre_place = $request->nombre_place;
-        $evenement->image = $request->image;
-        $evenement->association_id = $request->association_id;
-        $evenement->update();
 
-        $association = auth()->user()->associations()->findOrFail($request->association_id);
-
-        $association->evenements()->create($request->all());
-        return redirect('index/Evenement');
-    }
 
     /**
      * Remove the specified resource from storage.

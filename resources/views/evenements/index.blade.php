@@ -35,10 +35,11 @@
    </style>
 
    <body class="font-sans container antialiased">
+    <a href="{{ route('association.evenements.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Ajouter</a>
+
        <div class=" container bg-gray-100">
            <div class="flex  bg-gray-100">
 
-        <a href="{{ route('association.evenements.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Permissions</a>
 
 
        <!-- Main Content -->
@@ -63,12 +64,12 @@
                         d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                        </a>
-                       <a href="{{route('association.evenements.update',  $evenement->id )}}" class="btn-icon">
-                        <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                       <a href="{{route('association.evenements.edit',  $evenement->id )}}" class="btn-icon">
+                       Modifier
+                       </a>
+
+                       <a href="{{route('association.evenements.destroy',  $evenement->id )}}" class="btn-icon">
+                       supprimer
                        </a>
                    </div>
                </div>

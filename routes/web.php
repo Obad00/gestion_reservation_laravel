@@ -109,15 +109,20 @@ Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard'
 
 Route::prefix('associations')->group(function (){
 
-Route::controller(EvenementController::class)->group(function (){
-    Route::get('create/Evenement', 'create');
-    Route::post('create/Evenement/traitement', 'store');
-    Route::get('index/Evenement', 'affichageevenement')->name('evenements.index');
-    Route::get('evenementSupprimer/{id}', 'destroy');
-    Route::get('evenementModifier/{id}', 'edit');
-    Route::post('/evenementmodifierTraitement/{id}' , 'update')->name('evenementmodifierTraitement');
-    Route::get('detailEvenement/{id}' , 'show');
-    Route::get('/bloquees' , 'listeUserBloquee');
+    Route::controller(EvenementController::class)->group(function (){
+        Route::get('create/Evenement', 'create')->name('association.evenements.create');
+        Route::post('create/Evenement/traitement', 'store')->name('association.evenements.save');
+        Route::get('index/Evenement', 'affichageevenement')->name('association.evenements.index');
+        Route::get('evenementSupprimer/{id}', 'destroy')->name('association.evenements.destroy');
+        Route::get('evenementModifier/{id}', 'edit')->name('association.evenements.edit');
+        Route::post('/evenements/update/{id}' , 'update')->name('association.evenements.update');
+        Route::get('detailEvenement/{id}' , 'show')->name('association.evenements.show');
+        Route::get('/bloquees' , 'listeUserBloquee')->name('association.evenements.bloques');
+
+        Route::get('/events', [EvenementController::class, 'index'])->name('events.index');
+
+
+        Route::get('/events/{event}/reservations', [EvenementController::class, 'showReservations'])->name('events.reservations');
 
 
     // Route::put('utilisateurs/bloque/{utilisateur}' , [UserController::class, 'bloquee_un_user'])->name('utilisateurs.bloque');
@@ -128,3 +133,31 @@ Route::controller(ReservationController::class)->group(function (){
    Route::get('/reservationee' , 'listeReservation')->name('association.reservation');
 
 });
+
+
+});
+
+Route::prefix('user')->group(function (){
+
+Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
+Route::post('/associations/register', [AssociationController::class, 'register'])->name('association-register.store');
+Route::get('/inscription' ,  [AssociationController::class,'inscription']);
+
+
+});
+
+
+
+Route::post('/reservations/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
+Route::post('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+
+
+Route::get('/', [EvenementController::class, 'accueil'])->name('evenements.accueil');
+Route::get('/pagesevenements', [EvenementController::class, 'tousevenements'])->name('evenements.index');
+Route::get('/evenements/{evenement}', [EvenementController::class, 'detail'])->name('evenements.detail');
+Route::post('/evenements/{evenement}/reserver', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+// Auth::routes();
+
+Route::get('/reservations/confirmation/{reservation}', [ReservationController::class, 'confirmation'])->name('associations.reservations.confirmation')->middleware('auth');
+Route::post('/reservations/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm')->middleware('auth');
+Route::post('/reservations/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel')->middleware('auth');

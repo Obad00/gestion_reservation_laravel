@@ -1,8 +1,8 @@
-</x-association-layout>
+<x-association-layout>
 
     <div class="container">
         <h1>Modifier Événement</h1>
-        <form action="{{ route('evenementmodifierTraitement', ['id' => $evenement->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('association.evenements.update', ['id' => $evenement->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $evenement->id }}">
             <div class="form-group">
@@ -33,6 +33,18 @@
                 <label for="image">Image:</label>
                 <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $evenement->image) }}" required>
             </div>
+
+                <!-- Catégorie -->
+    <div class="mt-4">
+        <x-input-label for="categorie_id" :value="__('Catégorie')" />
+        <select id="categorie_id" name="categorie_id" class="block mt-1 w-full" required>
+            <option value="">Choisir une catégorie</option>
+            @foreach($categories as $categorie)
+                <option  value="{{ $categorie->id }}"{{ $evenement->categorie_id == $categorie->id ? 'selected' : '' }}>{{ $categorie->name }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('categorie_id')" class="mt-2" />
+    </div>
             {{--
             <div class="form-group">
                 <label for="association_id">Association:</label>

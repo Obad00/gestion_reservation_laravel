@@ -31,6 +31,17 @@
         <label for="image">Image:</label>
         <input type="text" id="image" name="image" required>
     </div>
+    <!-- Catégorie -->
+    <div class="mt-4">
+        <x-input-label for="categorie_id" :value="__('Catégorie')" />
+        <select id="categorie_id" name="categorie_id" class="block mt-1 w-full" required>
+            <option value="">Choisir une catégorie</option>
+            @foreach($categories as $categorie)
+                <option  value="{{ $categorie->id }}" class="text-black">{{ $categorie->name }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('categorie_id')" class="mt-2" />
+    </div>
     {{-- <div>
         <label for="association_id">Association:</label>
         <select id="association_id" name="association_id" required>
