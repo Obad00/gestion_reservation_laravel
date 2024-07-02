@@ -11,7 +11,7 @@ class AssociationSeeder extends Seeder
 {
     public function run()
     {
-        Association::truncate();
+        // Association::truncate();
 
         Association::create([
             'nom' => 'Simplon',
@@ -26,6 +26,7 @@ Nous sommes convaincus que la transformation numérique est un puissant vecteur 
             'etat' => 1,
             'date_creation_association' => '12/12/2014',
             'user_id' => 3, // Assuming this is the ID of the association user created in UserSeeder
+            'date_creation_association' => now(), // Provide a default value for date_creation_association
         ]);
 
         Association::create([
@@ -40,6 +41,7 @@ Nous sommes convaincus que la transformation numérique est un puissant vecteur 
             'date_creation_association' => '23/04/2024',
 
             'user_id' => 4, // Assuming this is the ID of the association user created in UserSeeder
+            'date_creation_association' => now(), // Provide a default value for date_creation_association
         ]);
     }
 }

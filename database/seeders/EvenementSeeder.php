@@ -28,6 +28,7 @@ class EvenementSeeder extends Seeder
             'name' => 'Informatiques',
         ]);
 
+
         Evenement::create([
 
             'nom' => 'Bootscamps',

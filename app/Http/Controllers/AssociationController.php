@@ -81,8 +81,10 @@ class AssociationController extends Controller
             'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
 
+
+        ])->assignRole('user');
+    
         // Créer l'association associée à l'utilisateur
         $association = new Association([
             'nom' => $request->association_nom,
@@ -103,7 +105,7 @@ class AssociationController extends Controller
         Auth::login($user);
 
         // Rediriger vers la page d'accueil ou une autre page appropriée
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
     public function inscription(){
         return view('admins.associations.incription');
