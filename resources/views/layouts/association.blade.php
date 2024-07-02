@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
+    <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -184,9 +185,9 @@
                                     </div>
                                     <div class="block">
 
-                                        <div> {{ Auth::user()->prenom }}</div>
+                                        {{-- <div> {{ Auth::user()->prenom }}</div> --}}
                                         {{-- <div> {{ Auth::user()->roles }}</div> --}}
-                                    </div>
+                                    </div>  
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20">

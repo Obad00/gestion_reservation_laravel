@@ -64,6 +64,7 @@ require __DIR__.'/auth.php';
 Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
 Route::post('/associations/register', [AssociationController::class, 'register']);
 Route::get('/inscription' ,  [AssociationController::class,'inscription']);
+Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard']);
 
 Route::controller(EvenementController::class)->group(function (){
     Route::get('create/Evenement', 'create');
