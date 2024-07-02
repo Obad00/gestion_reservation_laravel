@@ -24,11 +24,6 @@ class AssociationController extends Controller
     }
 
     // asssociations bloquees
-    public function listeBloquee()
-    {
-        $associations = Association::withCount('evenements')->where('etat',false)->get();
-        return view('admins.associations.bloquee',compact('associations'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,34 +44,7 @@ class AssociationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Association $association)
-    {
-        
-        // Use the relationship to get the events associated with the specific association
-        $evenements = $association->evenements;
-        
-        // Return the view with the association and its related events
-        return view('admins.associations.show', compact('association', 'evenements'));
-    }
 
-    // bloquee un association 
-    public function bloquee_un_associatiation(Association $association){
-    $association->update([
-        'etat' => false,
-    ]);
-    return redirect()->back()->with('success','association est '.$association->nom.' bloquee');
-    }
-
-
-    public function debloquee_un_associatiation(Association $association){
-        $association->update([
-            'etat' => true,
-        ]);
-        return redirect()->back()->with('success','association est '.$association->nom.' debloquee');
-        }
-    
-
-    
 
     /**
      * Show the form for editing the specified resource.
@@ -86,6 +54,10 @@ class AssociationController extends Controller
         //
     }
 
+    public function show(Association $association)
+    {
+        //
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -111,13 +83,15 @@ class AssociationController extends Controller
             'telephone' => $request->telephone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
-    
+
+
+        ])->assignRole('association');
+
         // Créer l'association associée à l'utilisateur
         $association = new Association([
             'nom' => $request->association_nom,
             'description' => $request->description,
-            'logo' => $request->logo, 
+            'logo' => $request->logo,
             'adresse' => $request->adresse,
             'contact' => $request->contact,
             'secteur' => $request->secteur,
@@ -125,15 +99,15 @@ class AssociationController extends Controller
             'date_creation_association' => $request->date_creation_association,
             'etat' => $request->etat,
         ]);
-    
+
         // Sauvegarder l'association liée à l'utilisateur
         $user->association()->save($association);
-    
+
         // Connecter l'utilisateur
         Auth::login($user);
-    
+
         // Rediriger vers la page d'accueil ou une autre page appropriée
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
     public function inscription(){
         return view('admins.associations.incription');

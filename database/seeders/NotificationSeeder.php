@@ -10,7 +10,7 @@ class NotificationSeeder extends Seeder
 {
     public function run()
     {
-        Notification::truncate();
+        // Notification::truncate();
         Notification::create([
             'id' => Str::uuid(),
             'type' => 'App\Notifications\ReservationStatus',

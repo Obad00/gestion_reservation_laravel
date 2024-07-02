@@ -17,17 +17,22 @@ class Evenement extends Model
         'date_limite_inscription',
         'nombre_place',
         'image',
-
         'etat',
 
         'image',
         'user_id',
-        'association_id'
+        'association_id',
+        'categorie_id',
 
     ];
 
     public function association()
     {
         return $this->belongsTo(Association::class);
+    }
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
     }
 }

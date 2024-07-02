@@ -3,7 +3,7 @@
         {{-- <h1 class="text-3xl mb-11 font-bold ">{{$evenement->association->nom}}</h1> --}}
         <div class="block flex-row">
 
-           
+
             <div class=" py-1">
                 <div class="container mx-auto px-4">
                     <h2 class="text-3xl font-bold text-blac mb-8">Les evenements</h2>
@@ -19,6 +19,7 @@
                                 </div>
                             </div>
                             <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->association->nom}}</h3>
+                            <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->categorie->name}}</h3>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nom}}</span>
                                 <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->created_at}}</button>
@@ -26,6 +27,8 @@
                             <p class="text-gray-500 text-sm mt-2">{{$evenement->description}}</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nombre_place}}</span>
+                                <h3 class="text-sm font-bold text-red-600 ">{{$evenement->categorie->name}}</h3>
+
                             </div>
                         </div>
                         @endforeach
@@ -39,6 +42,7 @@
                                 </div>
                             </div>
                             <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->association->nom}}</h3>
+                            <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->categorie->name}}</h3>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nom}}</span>
                                 <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->created_at}}</button>
@@ -46,6 +50,8 @@
                             <p class="text-gray-500 text-sm mt-2">{{$evenement->description}}</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nombre_place}}</span>
+                                <h3 class="text-sm font-bold text-red-600 ">{{$evenement->categorie->name}}</h3>
+
                             </div>
                         </div>
                         @endforeach
@@ -59,6 +65,7 @@
                                 </div>
                             </div>
                             <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->association->nom}}</h3>
+                            <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->categorie->name}}</h3>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nom}}</span>
                                 <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->created_at}}</button>
@@ -66,12 +73,16 @@
                             <p class="text-gray-500 text-sm mt-2">{{$evenement->description}}</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nombre_place}}</span>
+                                <h3 class="text-sm font-bold text-red-600 ">{{$evenement->categorie->name}}</h3>
+
                             </div>
                         </div>
                         @endforeach
-                        
+
+
+
                     </div>
-            
+
                 </div>
             </div>
           </div>

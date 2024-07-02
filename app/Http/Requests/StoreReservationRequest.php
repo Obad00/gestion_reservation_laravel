@@ -11,7 +11,7 @@ class StoreReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,9 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             //
+            'user_id',
+            'evenement_id',
+            'statut',
         ];
     }
 }

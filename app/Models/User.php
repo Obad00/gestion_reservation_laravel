@@ -50,24 +50,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
     public function association()
     {
         return $this->hasOne(Association::class);
     }
 
-    
+
+    public function associations()
+    {
+        return $this->hasOne(Association::class);
+    }
+
 
 
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+
     }
 
-    public function role()
-    {
-        return $this->hasMany(Role::class);
-    }
 
-    
-}
+ }

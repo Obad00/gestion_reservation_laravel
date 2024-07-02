@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,32 +14,38 @@ class UserController extends Controller
     public function index()
     {
         // $utilisateurs = User::all()->where('roles','role:super_admin');
-        $utilisateurs = User::all()->where('etat',true);
+        // $utilisateurs = User::all()->where('etat',true);
+
+
+        $utilisateurs = User::where('etat',true)->whereHas('roles', function($query) {
+            $query->whereIn('name',[ 'association', 'user']  );
+        })->get();
         return view('admins.utilisateurs.index', compact('utilisateurs'));
     }
 
     public function listeUserBloquee()
     {
-        $utilisateurs = User::all()->where('etat',false);
-        return view('admins.utilisateurs.bloquee',compact('utilisateurs'));
+        $utilisateurs = User::where('etat',false)->whereHas('roles', function($query) {
+            $query->whereIn('name',[ 'association', 'user']  );
+        })->get();        return view('admins.utilisateurs.bloquee',compact('utilisateurs'));
     }
 
     public function bloquee_un_user(User $utilisateur){
         $utilisateur->update([
             'etat' => false,
         ]);
-        return redirect()->back()->with('success','utilisateur est '.$utilisateur->nom.' bloquee');
+        return redirect()->back()->with('success','utilisateur '.$utilisateur->nom.' est  bloquee');
         }
-    
-    
+
+
         public function debloquee_un_user(User $utilisateur){
             $utilisateur->update([
                 'etat' => true,
             ]);
-            return redirect()->back()->with('success','utilisateur est '.$utilisateur->nom.' debloquee');
+            return redirect()->back()->with('success','utilisateur '.$utilisateur->nom.' est  debloquee');
             }
-        
-    
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,9 +66,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function inscrite()
     {
-        //
+
+        $evenement= Evenement::find(1);
+        return view('utilisateurs.inscrite', compact('evenement'));
     }
 
     /**

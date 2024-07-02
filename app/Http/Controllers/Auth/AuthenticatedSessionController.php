@@ -16,6 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        
         return view('auth.login');
     }
 
@@ -24,11 +25,23 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Authentifie l'utilisateur avec les informations de connexion fournies
         $request->authenticate();
 
+        // Regénère la session pour prévenir les attaques de fixation de session
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Récupère l'utilisateur authentifié
+        $user = $request->user();
+
+        // Vérifie le rôle de l'utilisateur et redirige en conséquence
+        if ($user->hasRole('super_admin|admin') ) {
+            return redirect()->intended(route('dashboard.admin', [], false));
+        } elseif ($user->hasRole('association')) {
+            return redirect()->intended(route('association.dashboard', [], false));
+        } else {
+            return redirect()->intended(route('dashboard', [], false));
+        }
     }
 
     /**
