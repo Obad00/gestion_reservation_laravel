@@ -51,11 +51,14 @@ class EvenementController extends Controller
         $evenement->date_limite_inscription = $request->date_limite_inscription;
         $evenement->nombre_place = $request->nombre_place;
         $evenement->image = $request->image;
-        $evenement->association_id = $request->association_id;
+        // $evenement->association_id = 4;
+        $association = Association::findOrFail(4);
+        $evenement->association()->associate($association); // Associez l'événement à l'association
         $evenement->save();
 
+
         // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
-        $association = auth()->user()->associations()->findOrFail($request->association_id);
+        $association = auth()->user()->associations()->findOrFail(4);
 
         $association->evenements()->create($request->all());
 
