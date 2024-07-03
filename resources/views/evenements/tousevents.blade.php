@@ -12,9 +12,16 @@
                 <a href="#" class="navbar-link">Événement</a>
                 <a href="#" class="navbar-link">Contact</a>
             </div>
-            <div>
-                <button class="navbar-button">Connexion</button>
-            </div>
+            @guest
+                <div>
+                    <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 navbar-button font-bold transition hover:border-black hover:bg-white">Connexion</a>
+                </div>
+            @endguest
+            @auth
+                <div>
+                    <a href="{{ route('dashboard') }}" class="navbar-link">{{ Auth::user()->prenom }}</a>
+                </div>
+            @endauth
         </div>
     </div>
 </navbar>
@@ -74,9 +81,9 @@
 <div class="container justify-center ml-12 pl-6 mt-8">
     <h1 class="text-left">Événements à venir</h1>
     <br>
-     {{-- breadcrumbs --}}
-     <x-breadcrumb />
-     {{-- Fin breadcrumbs --}}
+    @if(isset($category))
+    <x-category-breadcrumb :categories="$category" :breadcrumbs="$breadcrumbs" />
+    @endif
      
     <div class="grid  justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
         @foreach($evenements as $evenement)

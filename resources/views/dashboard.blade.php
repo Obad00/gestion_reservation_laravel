@@ -62,7 +62,6 @@
         </x-dropdown-link>
     </form>
     <div class="container">
-        <h1>Créer une Association</h1>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}

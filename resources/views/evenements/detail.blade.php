@@ -12,12 +12,20 @@
                 <a href="#" class="navbar-link">Événement</a>
                 <a href="#" class="navbar-link">Contact</a>
             </div>
-            <div>
-                <button class="navbar-button">Connexion</button>
-            </div>
+            @guest
+                <div>
+                    <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 navbar-button font-bold transition hover:border-black hover:bg-white">Connexion</a>
+                </div>
+            @endguest
+            @auth
+                <div>
+                    <a href="{{ route('dashboard') }}" class="navbar-link">{{ Auth::user()->prenom }}</a>
+                </div>
+            @endauth
         </div>
     </div>
 </navbar>
+
 <style>
     .navbar {
     width: 100%;

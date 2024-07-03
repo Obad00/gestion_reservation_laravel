@@ -65,10 +65,7 @@ public function tousevenements()
     }
 
 
-    //     $evenements=Evenement::all();
-    //     return view ('/evenements/index',compact('evenements'));
-    //     //evenements.index
-    // }
+   
     public function affichageevenement(){
         $user = auth()->user();
         $association = $user->association;
