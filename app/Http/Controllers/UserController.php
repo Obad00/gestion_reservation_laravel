@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -13,14 +14,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $utilisateurs = User::all()->where('roles','role:super_admin');
+        $roles = Role::all()->whereIn('name',[ 'association', 'user']  );
         // $utilisateurs = User::all()->where('etat',true);
 
 
         $utilisateurs = User::where('etat',true)->whereHas('roles', function($query) {
             $query->whereIn('name',[ 'association', 'user']  );
         })->get();
-        return view('admins.utilisateurs.index', compact('utilisateurs'));
+        return view('admins.utilisateurs.index', compact('utilisateurs','roles'));
     }
 
     public function listeUserBloquee()

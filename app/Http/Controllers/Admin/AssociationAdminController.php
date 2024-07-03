@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Association;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
 
 class AssociationAdminController extends Controller
@@ -11,7 +12,9 @@ class AssociationAdminController extends Controller
     public function index()
     {
         $associations = Association::withCount('evenements')->where('etat',true)->get();
-        return view('admins.associations.index',compact('associations'));
+        $evenement_count = Evenement::all()->$associations->count();
+
+        return view('admins.associations.index',compact('associations','evenement_count'));
     }
 
     // asssociations bloquees

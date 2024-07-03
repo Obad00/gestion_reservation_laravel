@@ -82,6 +82,9 @@ Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins
     Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions')->middleware( 'permission:view permissions');
     Route::put('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.permissions.store');
 
+    Route::post('/users/{id}/assign-role', [RoleController::class, 'assignRole'])->name('users.assign-role');
+
+
 });
 
 // User Lamda

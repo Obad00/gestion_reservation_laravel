@@ -1,7 +1,7 @@
 @props(['headers', 'donnee', 'columns', 'actions'])
 
 
-<table class="min-w-full divide-y shadow-xl  p-8 divide-gray-200 overflow-x-auto">
+<table class="min-w-full  shadow-xl  p-8 divide-gray-200 overflow-x-auto">
     <thead class="bg-gray-50">
         <tr>
             <th></th>

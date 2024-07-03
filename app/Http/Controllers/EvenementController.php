@@ -13,6 +13,8 @@ use App\Models\Reservation;
 
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+use Illuminate\Support\Facades\Storage;
+
 // use Illuminate\Http\Request;
 
 
@@ -40,11 +42,8 @@ public function tousevenements()
 
     public function accueil()
     {
-        $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
+        $evenement = Evenement::where('date_evenement', '<=', now())->orderBy('date_evenement', 'asc')->first();
 
-        if (!$evenement) {
-            return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
-        }
         $evenements = Evenement::all();
         return view('welcome', compact('evenements', 'evenement'));
     }

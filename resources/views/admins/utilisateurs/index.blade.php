@@ -22,10 +22,14 @@
     <table class="min-w-full divide-y  p-8 divide-gray-200 overflow-x-auto">
         <thead class="bg-gray-50">
             <tr>
-                
+
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nom
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Role Actuelle
                 </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -45,7 +49,7 @@
                 </th>
                 <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
+                Asigne role
             </th>
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -77,6 +81,10 @@
                             </div>
                         </div>
                     </td>
+                    <td>{{ $utilisateur->roles->pluck('name')->implode(', ') }}</td>
+
+
+
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if (  $utilisateur->etat  == true)
                         <span
@@ -101,9 +109,20 @@
                             {{ $utilisateur->email }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $utilisateur->created_at }} </td>
-                    <td class="px-6 gap-3 pt-6 whitespace-nowrap flex  text-sm font-medium">
+                    <td>
+                        <form action="{{ route('users.assign-role', $utilisateur->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <select name="role" class="form-control text-black">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Assigner</button>
+                        </form>
+                    </td>
+                <td>
                         <a href="{{ route('utilisateurs.show', $utilisateur->id) }}"
                             class="text-indigo-600 hover:text-indigo-900"><svg width="22" height="15"
                                 viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">

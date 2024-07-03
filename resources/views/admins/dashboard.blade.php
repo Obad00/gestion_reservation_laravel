@@ -89,11 +89,12 @@
             </div>
         </div>
 
+{{-- les Associations --}}
 
         <div class="flex flex-row">
             @php
             $headers = ['Nom', 'Adresse', 'Téléphone', 'Nombre d\'événements', 'Actions'];
-            $columns = ['nom', 'adresse', 'contact', 'evenements_count'];
+            $columns = ['nom', 'adresse', 'contact', 'evenement_count'];
             $actions = [
                 [
                     'url' => function ($item) {
@@ -115,12 +116,12 @@
         @endphp
 
         <div class=" mx-auto gap-2  px-4">
-            <h1 class="text-3xl pt-6 -mb-11 font-bold ">Liste des Associations</h1>
+            <h1  class="text-3xl pt-6 -mb-11 font-bold ">Liste des Associations</h1>
             <x-dynamic-table :headers="$headers" :donnee="$associations" :columns="$columns" :actions="$actions" />
         </div>
 
-
-              <div class=" mx-auto gap-2  px-4 rounded-xl w-5/12 ml-2 p-6 ">
+{{-- les utilisateurs --}}
+              <div class=" mx-auto gap-2   pt-0   px-4 rounded-xl ">
                 @php
                 $headers = ['Nom',  'Status',''];
                 $columns = ['nom', 'etat'];
@@ -133,7 +134,8 @@
             ],
               ];
             @endphp
-                <h1 class=" text-3xl -mb-40 text-indigo-900">Utilisateurs</strong></h1>
+                        <h1 class="text-3xl pt-6 -mb-20 font-bold ">Utilisateurs</h1>
+
                 <x-dynamic-table :headers="$headers" :donnee="$utilisateurs" :columns="$columns" :actions="$actions" />
             </div>
             </div>

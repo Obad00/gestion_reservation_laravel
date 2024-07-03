@@ -40,8 +40,25 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request, Evenement $evenement)
     {
+        $user = Auth::user();
+
+        // Vérifiez si l'utilisateur a le rôle "user"
+        if (!$user->hasRole('user')) {
+            return redirect()->back()->with('error', 'Seuls les utilisateurs avec le rôle "user" peuvent réserver un événement.');
+        }
+
+        // Vérifiez si l'utilisateur a déjà une réservation pour cet événement
+        $existingReservation = Reservation::where('user_id', $user->id)
+                                          ->where('evenement_id', $evenement->id)
+                                          ->first();
+
+        if ($existingReservation) {
+            return redirect()->back()->with('error', 'Vous avez déjà réservé cet événement.');
+        }
+
+        // Créez une nouvelle réservation
         $reservation = new Reservation();
-        $reservation->user_id = Auth::id();
+        $reservation->user_id = $user->id;
         $reservation->evenement_id = $evenement->id;
         $reservation->statut = 'acceptee';
         $reservation->save();
@@ -72,7 +89,7 @@ class ReservationController extends Controller
         return redirect('/')->with('success', 'Votre réservation a été annulée.');
     }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -134,7 +151,7 @@ class ReservationController extends Controller
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect('/')->with('success', 'Votre reservation a été soumise avec succès.');
+        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
     }
 
 public function decline(Reservation $reservation)
@@ -161,6 +178,6 @@ public function decline(Reservation $reservation)
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect('/')->with('success', 'Votre reservation a été soumise avec succès.');
+        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
 }
 }

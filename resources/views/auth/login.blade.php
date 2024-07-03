@@ -73,7 +73,7 @@
                         </div>
                         @if (Route::has('password.request'))
                         <a class="underline text-sm text-gray-600 hover:text-gray-900 text-center pl-52 my-12 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            href="{{ route('password.request') }}">
+                            href="{{ route('register') }}">
                             {{ __('Mot de passe oublier?') }}
                         </a>
                     @endif
