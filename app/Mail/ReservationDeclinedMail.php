@@ -14,15 +14,15 @@ class ReservationDeclinedMail extends Mailable
     use Queueable, SerializesModels;
 
     public $utilisateur;
-    public $reservation;
+    public $evenement;
     /**
      * Create a new message instance.
      */
-    public function __construct($utilisateur, $reservation)
+    public function __construct($utilisateur, $evenement)
     {
         //
         $this->utilisateur = $utilisateur;
-        $this->reservation = $reservation;
+        $this->evenement = $evenement;
     }
 
     /**
@@ -43,9 +43,8 @@ class ReservationDeclinedMail extends Mailable
         return new Content(
             view: 'emails.reservation-declined',
             with: [
-                'prenom' => $this->utilisateur->prenom,
-                'nom' => $this->utilisateur->nom,
-                'reservation' => $this->reservation,
+                'utilisateur' => $this->utilisateur,
+                'evenement' => $this->evenement,
             ]
         );
     }

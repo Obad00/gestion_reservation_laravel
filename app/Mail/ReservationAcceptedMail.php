@@ -16,12 +16,12 @@ class ReservationAcceptedMail extends Mailable
     use Queueable, SerializesModels;
 
     public $utilisateur;
-    public $reservation;
+    public $evenement;
 
-    public function __construct($utilisateur, $reservation)
+    public function __construct($utilisateur, $evenement)
     {
         $this->utilisateur = $utilisateur;
-        $this->reservation = $reservation;
+        $this->evenement = $evenement;
     }
     
      
@@ -41,7 +41,7 @@ class ReservationAcceptedMail extends Mailable
         with: [
             'prenom' => $this->utilisateur->prenom,
             'nom' => $this->utilisateur->nom,
-            'reservation' => $this->reservation,
+            // 'reservation' => $this->reservation,
         ]
     );
 }

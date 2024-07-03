@@ -1,5 +1,15 @@
-# Confirmation de réservation déclinée
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation de réservation déclinée</title>
+</head>
+<body>
+    <p>Bonjour {{ $utilisateur->prenom }} {{ $utilisateur->nom }},</p>
 
-Votre réservation a été déclinée.
+    <p>Votre réservation pour l'événement "{{ $evenement->nom }}" a été déclinée.</p>
 
-Merci,<br>
+    <p>Nous espérons vous revoir prochainement.</p>
+
+    <p>Cordialement,<br>L'équipe</p>
+</body>
+</html>

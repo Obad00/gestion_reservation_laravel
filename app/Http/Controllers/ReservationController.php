@@ -168,7 +168,7 @@ public function decline(Reservation $reservation)
         // Récupérer les informations nécessaires pour l'email
        // Récupérer l'utilisateur associé à la réservation
        $utilisateur = $reservation->user;
-        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; // Assurez-vous que la formation existe
+        $evenement = Evenement::findOrFail($reservation->evenement_id); // Assurez-vous que la formation existe
 
         // Envoyer un email de confirmation au candidat
         Mail::to($utilisateur->email)->send(new ReservationDeclinedMail($utilisateur, $evenement));
