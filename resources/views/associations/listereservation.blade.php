@@ -42,7 +42,6 @@
                                         fill="currentColor"></path>
                                 </svg>
                             </div>
-
                             <div class="mx-5">
                                 <div class="text-gray-500">Total Reservation</div>
 

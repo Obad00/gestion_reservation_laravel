@@ -100,10 +100,7 @@ require __DIR__.'/auth.php';
 
 // Route::resource('associations', AssociationController::class);
 // Route pour l'inscription de l'association
-Route::get('/associations/register', [AssociationController::class, 'create'])->name('association-register');
-Route::post('/associations/register', [AssociationController::class, 'register']);
-Route::get('/inscription' ,  [AssociationController::class,'inscription']);
-Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard']);
+
 Route::get('/association/listereservation' ,  [AssociationController::class,'listereservation']);
 
 Route::resource('associations', AssociationController::class);
@@ -126,7 +123,7 @@ Route::prefix('associations')->group(function (){
         Route::get('evenementModifier/{id}', 'edit')->name('association.evenements.edit');
         Route::post('/evenements/update/{id}' , 'update')->name('association.evenements.update');
         Route::get('detailEvenement/{id}' , 'show')->name('association.evenements.show');
-        Route::get('/bloquees' , 'listeUserBloquee')->name('association.evenements.bloques');
+        Route::get('/bloquees', 'listeUserBloquee')->name('association.evenements.bloques');
 
         Route::get('/events', [EvenementController::class, 'index'])->name('events.index');
 

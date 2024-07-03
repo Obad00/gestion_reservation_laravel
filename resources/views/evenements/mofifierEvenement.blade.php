@@ -1,7 +1,4 @@
 
-
-
-
 <x-association-layout> 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -139,8 +136,7 @@
              <!-- Image -->
              <div class="mb-4">
                 <label for="nombre_place">Image:</label>
-
-                <input id="image" class="block mt-1 w-full" type="file" name="image" accept="image/*" value="{{ old('image', $evenement->image) }}  />
+                <input id="image" class="block mt-1 w-full" type="file" name="image" accept="image/*" value="{{ old('image', $evenement->image) }}/>
             </div>
 
                 <!-- Catégorie -->
@@ -154,8 +150,8 @@
         </select>
         <x-input-error :messages="$errors->get('categorie_id')" class="mt-2" />
     </div>
-            {{--
-            <div class="form-group">
+          
+          {{--    <div class="form-group">
                 <label for="association_id">Association:</label>
                 <select class="form-control" id="association_id" name="association_id" required>
                     @foreach($associations as $association)

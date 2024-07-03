@@ -1,5 +1,8 @@
 <x-association-layout>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        
+    </style>
     <div class="container mx-auto gap-2 px-4">
         <h1 class="text-3xl mb-11 font-bold ">Dashboard</h1>
     <div class="block flex-row">
