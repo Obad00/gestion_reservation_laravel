@@ -115,12 +115,65 @@ class AssociationController extends Controller
     // public function dashboard(){
     //     return view('admins.associations.dashboard');
     // }
-    public function dashboard(){
+    public function dashboard()
+{
+    // Récupérer les derniers utilisateurs et associations
     $utilisateurs = User::latest()->take(5)->get();
-    $associations= Association::latest()->take(5)->get();
-    $evenements= Evenement::latest()->take(3)->get();
-    $reservations= Reservation::All();
- 
-    return view('associations.dashboard', compact('associations','evenements','reservations','utilisateurs'));
+    $associations = Association::latest()->take(5)->get();
+
+    // Récupérer l'utilisateur connecté et son association
+    $user = auth()->user();
+    $association = $user->association;
+
+    // Récupérer tous les événements de l'association
+    $evenements = $association->evenements;
+
+    // Récupérer toutes les réservations
+    $reservations = Reservation::all();
+
+    // Récupérer les événements passés et en cours
+    $evenementsPasse = $evenements->where('date_evenement', '<=', now());
+    $evenementsEncour = $evenements->where('date_evenement', '>=', now());
+
+    // Compter les événements en cours et passés
+    $countEvenementsEncour = $evenementsEncour->count();
+    $countEvenementsPasse = $evenementsPasse->count();
+
+    // Compter toutes les réservations
+    $countReservations = $reservations->count();
+
+    // Compter les réservations en cours (selon un statut, par exemple 'en cours')
+    $countReservationsEncour = $reservations->where('date_evenement', '>=', now())->count();
+
+    // Récupérer le dernier événement de l'association
+    $dernierEvenement = $evenements->sortByDesc('date_evenement')->first();
+
+    // Récupérer les réservations du dernier événement
+    $reservationsDernierEvenement = $dernierEvenement ?
+                                    Reservation::where('evenement_id', $dernierEvenement->id)->get() :
+                                    collect();
+
+    return view('associations.dashboard', compact(
+        'associations',
+        'evenements',
+        'dernierEvenement',
+        'reservations',
+        'evenementsPasse',
+        'reservationsDernierEvenement',
+        'utilisateurs',
+        'countEvenementsEncour',
+        'countEvenementsPasse',
+        'countReservations',
+        'countReservationsEncour'
+    ));
+}
+
+
+
+
+    public function listereservation(){
+        $utilisateurs = User::latest()->take(5)->get();
+        $reservations= Reservation::All();
+        return view('associations.listereservation', compact('reservations','utilisateurs'));
     }
 }
