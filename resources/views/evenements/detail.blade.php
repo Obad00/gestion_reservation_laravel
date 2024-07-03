@@ -134,7 +134,16 @@
         class="max-w-lg bg-white md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12">
         
         <div class="flex flex-col p-12 md:px-16">
-            
+            @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                {{ session('success') }}
+            </div>
+        @endif
+            @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-green-700 px-4 py-3 rounded mb-6">
+                {{session('error') }}
+            </div>
+             @endif
             <h2 class="text-2xl font-medium uppercase text-black lg:text-4xl">{{ $evenement->nom }}</h2>
             <p class="mt-4">
                 {{ $evenement->description }}

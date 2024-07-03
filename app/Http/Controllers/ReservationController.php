@@ -158,7 +158,8 @@ public function cancel(Request $request, Reservation $reservation)
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
+       
+        return redirect()->back()->with('success', 'Votre avez accepté la réservation de '.$utilisateur->nom);
     }
 
 public function decline(Reservation $reservation)
@@ -185,6 +186,6 @@ public function decline(Reservation $reservation)
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
+        return redirect()->back()->with('success', 'Votre avez décliné la réservation de '.$utilisateur->nom);
 }
 }

@@ -20,12 +20,10 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+//Route pour la page d'accueil
+Route::get('/', [EvenementController::class, 'accueil'])->name('evenements.accueil');
 
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -169,7 +167,6 @@ Route::prefix('reservations')->middleware('auth')->group(function () {
 });
 
 Route::prefix('evenements')->group(function () {
-    Route::get('/', [EvenementController::class, 'accueil'])->name('evenements.accueil');
     Route::get('/pagesevenements', [EvenementController::class, 'tousevenements'])->name('evenements.index');
     Route::get('/{evenement}', [EvenementController::class, 'detail'])->name('evenements.detail');
     Route::post('/{evenement}/reserver', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
