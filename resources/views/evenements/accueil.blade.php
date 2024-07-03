@@ -120,28 +120,6 @@
 
 </head>
 <body>
-    {{-- <header class="banner">
-        <div class="banner-content">
-            <h1>Bienvenue sur OnyxEvents</h1>
-            <p>Vivez une expérience inoubliable avec nos événements exceptionnels.</p>
-        </div>
-    </header> --}}
-
-        {{-- <div>
-            <img src="{{ $evenement->image }}" alt="Image de l'événement">
-        </div> --}}
-        {{-- <div class="banner-content">
-            <h1>{{ $evenement->nom }}</h1>
-            <p>{{ $evenement->description }}</p>
-            <div class="but">
-                <div>
-                    <a href="#" class="btn">En savoir plus</a>
-                </div>
-                <div class="flex justify-center mt-8">
-                    <a href="{{ route('evenements.detail', $evenement->id) }}" class="btn">En savoir plus</a>            </div>
-                </div>
-            </div>
-        </div> --}}
         <header class="banner relative">
             <nav class="absolute top-0 left-0 right-0 z-10 bg-transparent px-5 py-4 md:px-10">
                 <div class="flex items-center justify-between">

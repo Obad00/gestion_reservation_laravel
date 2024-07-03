@@ -13,23 +13,12 @@ use App\Models\Reservation;
 
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
-// use Illuminate\Http\Request;
 
 
 class EvenementController extends Controller
 {
 
-//     public function voirNextEvent()
-// {
-//     // Récupérer l'événement le plus proche en fonction de la date
-//     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
 
-//     if (!$evenement) {
-//         return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
-//     }
-
-//     return redirect()->route('home')->with('evenement', $evenement);
-// }
 
 public function tousevenements()
 {
@@ -51,8 +40,16 @@ public function tousevenements()
 
     public function detail(Evenement $evenement)
     {
-        return view('evenements.detail', compact('evenement'));
+        // Récupère l'association liée à cet événement
+        $association = $evenement->association;
+    
+        // Récupère les autres événements de la même association
+        $evenements = $association->evenements()->where('id', '!=', $evenement->id)->get();
+    
+        // Retourne la vue avec les données nécessaires
+        return view('evenements.detail', compact('evenement', 'evenements'));
     }
+    
     /**
      * Display a listing of the resource.
      */
@@ -267,5 +264,8 @@ public function tousevenements()
         'reservations' => $reservations,
     ]);
 }
+
+
+
 
 }
