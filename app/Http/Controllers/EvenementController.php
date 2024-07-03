@@ -77,6 +77,7 @@ public function tousevenements()
     public function affichageevenement(){
         $user = auth()->user();
         $association = $user->association;
+        $categories= Categorie::all();
 
         if (!$association) {
             return redirect()->route('home')->withErrors('Vous devez être associé à une association pour voir vos événements.');
@@ -84,7 +85,7 @@ public function tousevenements()
 
         $evenements = $association->evenements;
 
-        return view('evenements.index', compact('evenements'));
+        return view('evenements.index', compact('evenements','categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -102,58 +103,96 @@ public function tousevenements()
     /**
      * Store a newly created resource in storage.
      */
+    public function storezz(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'localite' => 'required|string|max:255',
+            'date_evenement' => 'required|date',
+            'date_limite_inscription' => 'required|date',
+            'nombre_place' => 'required|integer',
+            'image' => 'nullable|string',
+        ]);
+
+        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
+        $user = auth()->user();
+        $association = $user->association;
+
+        if (!$association) {
+            return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
+        }
+
+        $evenement = new Evenement();
+        $evenement->nom = $request->nom;
+        $evenement->description = $request->description;
+        $evenement->localite = $request->localite;
+        $evenement->date_evenement = $request->date_evenement;
+        $evenement->date_limite_inscription = $request->date_limite_inscription;
+        $evenement->nombre_place = $request->nombre_place;
+        $evenement->image = $request->image;
+        $evenement->categorie_id = $request->categorie_id;
+
+        $association->evenements()->save($evenement);
+
+        return redirect()->route('association.evenements.index')->with('success', 'Événement créé avec succès.');
+    }
+
+
+
     public function store(Request $request)
     {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string',
+            'localite' => 'required|string|max:255',
+            'date_evenement' => 'required|date',
+            'date_limite_inscription' => 'required|date',
+            'nombre_place' => 'required|integer',
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categorie_id' => 'required|integer|exists:categories,id'
+        ]);
 
-    $request->validate([
-        'nom' => 'required|string|max:255',
-        'description' => 'required|string',
-        'localite' => 'required|string|max:255',
-        'date_evenement' => 'required|date',
-        'date_limite_inscription' => 'required|date',
-        'nombre_place' => 'required|integer',
-        'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'categorie_id' => 'required|integer|exists:categories,id'
-    ]);
+        // Vérifier si l'utilisateur authentifié est associé à une association
+        $user = auth()->user();
+        $association = $user->association;
 
-    // Vérifier si l'utilisateur authentifié est associé à une association
-    $user = auth()->user();
-    $association = $user->association;
-
-    if (!$association) {
-        return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
-    }
-
-    // Gérer le téléchargement de l'image
-    $image = null;
-    if ($request->hasFile('image')) {
-        // Stocker l'image dans le répertoire 'public/evenements'
-        $chemin_image = $request->file('image')->store('public/evenements');
-        // Vérifier si le chemin de l'image est bien généré
-        if ($chemin_image) {
-            // Récupérer le nom du fichier de l'image
-            $image = basename($chemin_image);
-        } else {
-            return redirect()->back()->with('error', 'Erreur lors du téléchargement de l\'image.');
+        if (!$association) {
+            return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
         }
+
+        // Gérer le téléchargement de l'image
+        $image = null;
+        if ($request->hasFile('image')) {
+            // Stocker l'image dans le répertoire 'public/evenements'
+            $chemin_image = $request->file('image')->store('public/evenements');
+            // Vérifier si le chemin de l'image est bien généré
+            if ($chemin_image) {
+                // Récupérer le nom du fichier de l'image
+                $image = basename($chemin_image);
+            } else {
+                return redirect()->back()->with('error', 'Erreur lors du téléchargement de l\'image.');
+            }
+        }
+
+        // Créer le nouvel événement
+        $evenement = new Evenement();
+        $evenement->nom = $request->nom;
+        $evenement->description = $request->description;
+        $evenement->localite = $request->localite;
+        $evenement->date_evenement = $request->date_evenement;
+        $evenement->date_limite_inscription = $request->date_limite_inscription;
+        $evenement->nombre_place = $request->nombre_place;
+        $evenement->image = $image;
+        $evenement->categorie_id = $request->categorie_id;
+        $evenement->association_id = $association->id;
+
+        // Enregistrer l'événement dans l'association
+        $association->evenements()->save($evenement);
+
+        return redirect()->route('association.evenements.index')->with('success', 'Événement créé avec succès.');
     }
-    // Créer le nouvel événement
-    $evenement = new Evenement();
-    $evenement->nom = $request->nom;
-    $evenement->description = $request->description;
-    $evenement->localite = $request->localite;
-    $evenement->date_evenement = $request->date_evenement;
-    $evenement->date_limite_inscription = $request->date_limite_inscription;
-    $evenement->nombre_place = $request->nombre_place;
-    $evenement->image = $image;
-    $evenement->categorie_id = $request->categorie_id;
-    $evenement->association_id = $association->id;
 
-    // Enregistrer l'événement dans l'association
-    $association->evenements()->save($evenement);
-
-    return redirect()->route('association.evenements.index')->with('success', 'Événement créé avec succès.');
-}
 
 
     /**
@@ -177,7 +216,7 @@ public function tousevenements()
         return view('evenements.mofifierEvenement', compact('evenement','categories'));
     }
     public function update(Request $request, $id)
-    {
+{
     $request->validate([
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
@@ -230,7 +269,7 @@ public function tousevenements()
     $evenement->save();
 
     return redirect()->route('association.evenements.index')->with('success', 'Événement mis à jour avec succès.');
-    }
+}
 
 
     /**

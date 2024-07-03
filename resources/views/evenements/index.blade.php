@@ -36,7 +36,16 @@
         </style>
 
         <body class="font-sans container antialiased">
-
+            @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                {{ session('success') }}
+            </div>
+        @endif
+            @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-green-700 px-4 py-3 rounded mb-6">
+                {{session('error') }}
+            </div>
+             @endif
             <div class=" container bg-gray-100">
                 <div class="flex  bg-gray-100">
 
@@ -47,7 +56,7 @@
                         <div class=" justify-between flex">
 
                             <h2 class="text-3xl font-semibold mb-6">Mes événements</h2>
-                            <a href="{{ route('association.evenements.create') }}"
+                            <a href="#" id="openModalBtn"
                                 class="inline-block bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded mb-4">Ajouter</a>
 
                         </div>
@@ -63,7 +72,7 @@
                                         class="w-full p-2 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
                                         <a href="{{ route('events.reservations', $evenement->id) }}">
 
-                                            <img src="{{ asset('storage/evenements/' . $evenement->image) }}"
+                                            <img src="{{ asset('storage/evenements/' .$evenement->image) }}"
                                                 alt="{{ $evenement->nom }}" width="50"
                                                 class="object-cover w-full h-56">
                                             <div class="p-4">
@@ -102,7 +111,6 @@
                                                 <div>
                                                     <form
                                                     action="{{ route('association.evenements.destroy', $evenement->id) }}"
-                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
@@ -125,6 +133,8 @@
                     @endif
                 </div>
             </div>
+
+        @include('evenements.ajoutEvenement')
 
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
