@@ -171,4 +171,9 @@ class AssociationController extends Controller
 
 
 
+    public function listereservation(){
+        $utilisateurs = User::latest()->take(5)->get();
+        $reservations= Reservation::All();
+        return view('associations.listereservation', compact('reservations','utilisateurs'));
+    }
 }

@@ -44,6 +44,9 @@ public function tousevenements()
     {
         $evenement = Evenement::where('date_evenement', '<=', now())->orderBy('date_evenement', 'asc')->first();
 
+        // if (!$evenement) {
+        //     return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
+        // }
         $evenements = Evenement::all();
         return view('welcome', compact('evenements', 'evenement'));
     }
@@ -90,8 +93,8 @@ public function tousevenements()
     {
 
         $categories= Categorie::all();
-        $associations = auth()->user()->associations;
-        return view('evenements.ajoutEvenement', compact('associations','categories'));
+        // $associations = auth()->user()->associations;
+        return view('evenements.ajoutEvenement', compact('categories'));
     }
 
 
@@ -100,7 +103,8 @@ public function tousevenements()
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
+
     $request->validate([
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
@@ -133,7 +137,6 @@ public function tousevenements()
             return redirect()->back()->with('error', 'Erreur lors du téléchargement de l\'image.');
         }
     }
-
     // Créer le nouvel événement
     $evenement = new Evenement();
     $evenement->nom = $request->nom;
@@ -172,9 +175,9 @@ public function tousevenements()
 
         $evenement = Evenement::find($id);
         return view('evenements.mofifierEvenement', compact('evenement','categories'));
-  }
-  public function update(Request $request, $id)
-{
+    }
+    public function update(Request $request, $id)
+    {
     $request->validate([
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
@@ -227,7 +230,7 @@ public function tousevenements()
     $evenement->save();
 
     return redirect()->route('association.evenements.index')->with('success', 'Événement mis à jour avec succès.');
-}
+    }
 
 
     /**
@@ -256,7 +259,7 @@ public function tousevenements()
 
 
     public function showReservations(Evenement $event)
-{
+    {
     // Récupérer les réservations pour cet événement spécifique
     $reservations = Reservation::where('evenement_id', $event->id)->get();
 
@@ -265,6 +268,6 @@ public function tousevenements()
         'event' => $event,
         'reservations' => $reservations,
     ]);
-}
+    }
 
 }
