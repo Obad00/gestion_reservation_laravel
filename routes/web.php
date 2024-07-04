@@ -20,12 +20,10 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+//Route pour la page d'accueil
+Route::get('/', [EvenementController::class, 'accueil'])->name('evenements.accueil');
 
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,6 +36,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
+// Route::resource('evenements', EvenementController::class);
+// Route::resource('associations', AssociationController::class);
 
 
 Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
@@ -158,16 +159,16 @@ Route::get('/inscription' ,  [AssociationController::class,'inscription']);
 
 
 
-Route::post('/reservations/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
-Route::post('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+Route::prefix('reservations')->middleware('auth')->group(function () {
+    Route::post('/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
+    Route::post('/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+    Route::get('/confirmation/{reservation}', [ReservationController::class, 'confirmation'])->name('associations.reservations.confirmation');
+    Route::post('/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::post('/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel');
+});
 
-
-Route::get('/', [EvenementController::class, 'accueil'])->name('evenements.accueil');
-Route::get('/pagesevenements', [EvenementController::class, 'tousevenements'])->name('evenements.index');
-Route::get('/evenements/{evenement}', [EvenementController::class, 'detail'])->name('evenements.detail');
-Route::post('/evenements/{evenement}/reserver', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
-// Auth::routes();
-
-Route::get('/reservations/confirmation/{reservation}', [ReservationController::class, 'confirmation'])->name('associations.reservations.confirmation')->middleware('auth');
-Route::post('/reservations/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm')->middleware('auth');
-Route::post('/reservations/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel')->middleware('auth');
+Route::prefix('evenements')->group(function () {
+    Route::get('/pagesevenements', [EvenementController::class, 'tousevenements'])->name('evenements.index');
+    Route::get('/{evenement}', [EvenementController::class, 'detail'])->name('evenements.detail');
+    Route::post('/{evenement}/reserver', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+});

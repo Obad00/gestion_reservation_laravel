@@ -2,33 +2,33 @@
 
 namespace App\Mail;
 
+use App\Models\Evenement;
+use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Attachment;
 
-
-class ReservationAcceptedMail extends Mailable
+class ReservationConfirmedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $utilisateur;
+    public $user;
     public $evenement;
 
-    public function __construct($utilisateur, $evenement)
+    public function __construct(User $user, Evenement $evenement)
     {
-        $this->utilisateur = $utilisateur;
+        $this->user = $user;
         $this->evenement = $evenement;
     }
-    
      
 // Get the message envelope.
   public function envelope(): Envelope{
       return new Envelope(
-          subject: 'Confirmation de réservation acceptée',
+          subject: 'Confirmation de réservation soumise',
         );
     }
 
@@ -37,10 +37,10 @@ class ReservationAcceptedMail extends Mailable
 // Get the message content definition.
   public function content(): Content{
     return new Content(
-        view: 'emails.reservation-accepted',
+        view: 'emails.reservation-confirmed',
         with: [
-            'utilisateur' => $this->utilisateur,
-            'evenement' => $this->evenement,
+            'prenom' => $this->user->prenom,
+            'nom' => $this->user->nom,
         ]
     );
 }
@@ -49,5 +49,6 @@ class ReservationAcceptedMail extends Mailable
      
 */
 public function attachments(): array{
-    return [];}
+    return [];
+}
 }

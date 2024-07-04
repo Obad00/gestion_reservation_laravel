@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use App\Mail\ReservationAcceptedMail;
 use App\Mail\ReservationDeclinedMail;
+use App\Mail\ReservationConfirmedMail;
+use App\Mail\ReservationCancelledMail;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
@@ -60,7 +62,7 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         $reservation->user_id = $user->id;
         $reservation->evenement_id = $evenement->id;
-        $reservation->statut = 'acceptee';
+        $reservation->statut = 'en attente';
         $reservation->save();
 
         return redirect()->route('associations.reservations.confirmation', $reservation);
@@ -72,22 +74,27 @@ class ReservationController extends Controller
     }
 
     public function confirm(Request $request, Reservation $reservation)
-    {
-        $reservation->update(['statut' => 'confirmee']);
+{
+    $reservation->update(['statut' => 'confirmee']);
 
-        Mail::to($reservation->user->email)->send(new ReservationAcceptedMail($reservation->user, $reservation->evenement));
+    // Envoyer un email de confirmation
+    Mail::to($reservation->user->email)->send(new ReservationConfirmedMail($reservation->user, $reservation->evenement));
 
-        return redirect('/')->with('success', 'Votre réservation a été confirmée.');
-    }
+    return redirect()->route('evenements.detail', $reservation->evenement)->with('success', 'Votre réservation a été confirmée.');
+}
 
-    public function cancel(Request $request, Reservation $reservation)
-    {
-        $reservation->update(['statut' => 'annulee']);
+public function cancel(Request $request, Reservation $reservation)
+{
+    $reservation->update(['statut' => 'annulee']);
 
-        // Vous pouvez également envoyer un email d'annulation si nécessaire
+    // Envoyer un email d'annulation
+    Mail::to($reservation->user->email)->send(new ReservationCancelledMail($reservation->user, $reservation->evenement));
 
-        return redirect('/')->with('success', 'Votre réservation a été annulée.');
-    }
+
+    return redirect()->route('evenements.detail', $reservation->evenement)->with('success', 'Votre réservation a été annulée.');
+}
+    
+    
 
 
 
@@ -133,7 +140,7 @@ class ReservationController extends Controller
         // Récupérer les informations nécessaires pour l'email
        // Récupérer l'utilisateur associé à la réservation
        $utilisateur = $reservation->user;
-        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; // Assurez-vous que la formation existe
+        $evenement = Evenement::findOrFail($reservation->evenement_id); 
 
         // Envoyer un email de confirmation au candidat
         Mail::to($utilisateur->email)->send(new ReservationAcceptedMail($utilisateur, $evenement));
@@ -151,7 +158,8 @@ class ReservationController extends Controller
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
+       
+        return redirect()->back()->with('success', 'Votre avez accepté la réservation de '.$utilisateur->nom);
     }
 
 public function decline(Reservation $reservation)
@@ -160,7 +168,7 @@ public function decline(Reservation $reservation)
         // Récupérer les informations nécessaires pour l'email
        // Récupérer l'utilisateur associé à la réservation
        $utilisateur = $reservation->user;
-        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; // Assurez-vous que la formation existe
+        $evenement = Evenement::findOrFail($reservation->evenement_id); // Assurez-vous que la formation existe
 
         // Envoyer un email de confirmation au candidat
         Mail::to($utilisateur->email)->send(new ReservationDeclinedMail($utilisateur, $evenement));
@@ -178,6 +186,6 @@ public function decline(Reservation $reservation)
         //     'objet' => 'reservation Envoyé'
         // ]);
 
-        return redirect()->back()->with('success', 'Votre reservation a été soumise avec succès.');
+        return redirect()->back()->with('success', 'Votre avez décliné la réservation de '.$utilisateur->nom);
 }
 }

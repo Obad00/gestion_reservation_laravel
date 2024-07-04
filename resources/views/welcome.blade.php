@@ -120,30 +120,24 @@
 
 </head>
 <body>
-    {{-- <header class="banner">
-        <div class="banner-content">
-            <h1>Bienvenue sur OnyxEvents</h1>
-            <p>Vivez une expérience inoubliable avec nos événements exceptionnels.</p>
-        </div>
-    </header> --}}
-
-        {{-- <div>
-            <img src="{{ $evenement->image }}" alt="Image de l'événement">
-        </div> --}}
-        {{-- <div class="banner-content">
-            <h1>{{ $evenement->nom }}</h1>
-            <p>{{ $evenement->description }}</p>
-            <div class="but">
-                <div>
-                    <a href="#" class="btn">En savoir plus</a>
+   
+        <header class="banner relative">
+            <nav class="absolute top-0 left-0 right-0 z-10 bg-transparent px-5 py-4 md:px-10">
+                <div class="flex items-center justify-between">
+                    <!-- Platform Name -->
+                    <div class="text-xl font-bold text-white">OnyxEvents</div>
+                    <!-- Navbar Links -->
+                    <div class="hidden md:flex space-x-6 text-lg">
+                        <a href="/" class="text-white hover:text-green-700">Accueil</a>
+                        <a href="#about" class="text-white hover:text-green-700">À Propos</a>
+                        <a href="#events" class="text-white hover:text-green-700">Événements</a>
+                        <a href="#contact" class="text-white hover:text-green-700">Contact</a>
+                    </div>
+                    <!-- Login Button -->
+                    <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 text-black font-bold transition hover:border-black hover:bg-white">Connexion</a>
                 </div>
-                <div class="flex justify-center mt-8">
-                    <a href="{{ route('evenements.detail', $evenement->id) }}" class="btn">En savoir plus</a>            </div>
-                </div>
-            </div>
-        </div> --}}
-        <header class="banner">
-            <section class="relative bg-gradient-to-r from-violet-50 to-orange-50">
+            </nav>
+            <section class="relative bg-gradient-to-r from-violet-50 to-orange-50 pt-16">
                 <!-- Container -->
                 <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
                     <!-- Component -->
@@ -154,7 +148,7 @@
                         </div>
                         <!-- Heading Content (right side on large screens) -->
                         <div class="max-w-[720px]">
-                            <h1 class="mb-3 pb-4 text-4xl font-bold text-green-700 md:text-6xl">{{ $evenement->nom }}</h1>
+                            <h1 class="mb-3 pb-4 text-4xl font-bold text-white md:text-6xl">{{ $evenement->nom }}</h1>
                             <p class="mb-6 max-w-[528px] text-xl md:mb-10">{{ $evenement->description }}</p>
                             <div class="flex items-center">
                                 <a href="#" class="mr-5 inline-block rounded-full bg-[#c9fd02] px-6 py-4 text-center font-bold text-black transition hover:border-black hover:bg-white md:mr-6 lg:mr-8">Obtenir une réservation</a>

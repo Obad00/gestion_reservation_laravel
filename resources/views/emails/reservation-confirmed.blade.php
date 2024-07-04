@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Confirmation de Réservation Déclinée</title>
+    <title>Réservation Soumise</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,18 +26,18 @@
 </head>
 <body>
     <div class="container">
-        <p>Bonjour {{ $utilisateur->prenom }} {{ $utilisateur->nom }},</p>
+        <p>Bonjour {{ $user->prenom }} {{ $user->nom }},</p>
 
-        <p>Nous regrettons de vous informer que votre réservation pour l'événement "{{ $evenement->nom }}" n'a pas pu être acceptée.</p>
+        <p>Nous avons bien reçu votre demande de réservation pour l'événement "{{ $evenement->nom }}". Votre demande est actuellement en attente de validation par notre équipe.</p>
 
-        <p>Nous comprenons votre déception et espérons avoir l'occasion de vous accueillir lors d'un prochain événement. N'hésitez pas à consulter notre site pour découvrir nos futurs événements.</p>
+        <p>Nous vous remercions de votre patience et nous vous tiendrons informé de l'évolution de votre demande dans les plus brefs délais. Si vous avez des questions en attendant, n'hésitez pas à nous contacter.</p>
 
-        <p>Nous restons à votre disposition pour toute question ou information complémentaire.</p>
+        <p>Merci de votre compréhension !</p>
 
         <p>Cordialement,<br>L'équipe de l'organisation</p>
 
         <div class="footer">
-            <p>Si vous avez des questions, vous pouvez nous contacter à <a href="mailto:adodao00@gmail.com">adodabo00@gmail.com</a>.</p>
+            <p>Pour toute question, vous pouvez nous contacter à <a href="mailto:adodabo00@gmail.com">adodabo00@gmail.com</a>.</p>
         </div>
     </div>
 </body>

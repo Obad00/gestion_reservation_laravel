@@ -13,6 +13,8 @@ use App\Models\Reservation;
 
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
+
+
 use Illuminate\Support\Facades\Storage;
 
 // use Illuminate\Http\Request;
@@ -54,13 +56,6 @@ class EvenementController extends Controller
 //     // Récupérer l'événement le plus proche en fonction de la date
 //     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
 
-//     if (!$evenement) {
-//         return view('events.no-events'); // Vue à afficher s'il n'y a pas d'événements
-//     }
-
-//     return redirect()->route('home')->with('evenement', $evenement);
-// }
-
 public function tousevenements()
 {
     $evenements = Evenement::all(); // Récupère tous les événements depuis la base de données
@@ -81,8 +76,16 @@ public function tousevenements()
 
     public function detail(Evenement $evenement)
     {
-        return view('evenements.detail', compact('evenement'));
+        // Récupère l'association liée à cet événement
+        $association = $evenement->association;
+
+        // Récupère les autres événements de la même association
+        $evenements = $association->evenements()->where('id', '!=', $evenement->id)->get();
+
+        // Retourne la vue avec les données nécessaires
+        return view('evenements.detail', compact('evenement', 'evenements'));
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -98,10 +101,7 @@ public function tousevenements()
     }
 
 
-    //     $evenements=Evenement::all();
-    //     return view ('/evenements/index',compact('evenements'));
-    //     //evenements.index
-    // }
+
     public function affichageevenement(){
         $user = auth()->user();
         $association = $user->association;
@@ -303,5 +303,8 @@ public function tousevenements()
         'reservations' => $reservations,
     ]);
     }
+
+
+
 
 }

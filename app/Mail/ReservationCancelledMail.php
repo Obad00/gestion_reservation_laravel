@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReservationDeclinedMail extends Mailable
+class ReservationCancelledMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class ReservationDeclinedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Confirmation de réservation déclinée',
+            subject: 'Confirmation de réservation annulée',
         );
     }
 
@@ -41,10 +41,11 @@ class ReservationDeclinedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.reservation-declined',
+            view: 'emails.reservation-cancelled',
             with: [
-                'utilisateur' => $this->utilisateur,
-                'evenement' => $this->evenement,
+                'prenom' => $this->utilisateur->prenom,
+                'nom' => $this->utilisateur->nom,
+                // 'reservation' => $this->reservation,
             ]
         );
     }
