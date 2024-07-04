@@ -149,6 +149,7 @@
             }
             .grid {
                 grid-template-columns: repeat(1, 1fr); /* Une colonne sur les écrans jusqu'à 768px */
+                /* display: flex; */
             }
         }
 
@@ -222,7 +223,7 @@
                 .grid {
                     grid-template-columns: repeat(3, 1fr); /* Trois colonnes sur les écrans de 1024px et plus */
                 }
-}
+            }
         }
     </style>
 </head>
