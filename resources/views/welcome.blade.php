@@ -115,6 +115,11 @@
             background-color: #3C2A4D; /* Fond de couleur 3C2A4D au survol */
             color: #ffffff; /* Texte blanc au survol */
         }
+        .container {
+            max-width: 1200px; /* Ajustez la largeur maximale selon vos besoins */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
         @media (max-width: 768px) {
             .banner {
@@ -138,6 +143,12 @@
 
             .search-form {
                 flex-direction: column;
+            }
+            .container {
+                padding: 0 10px;
+            }
+            .grid {
+                grid-template-columns: repeat(1, 1fr); /* Une colonne sur les écrans jusqu'à 768px */
             }
         }
 
@@ -201,6 +212,17 @@
             .nav-links.show {
                 display: flex;
             }
+            @media (min-width: 769px) and (max-width: 1023px) {
+                .grid {
+                    grid-template-columns: repeat(2, 1fr); /* Deux colonnes sur les écrans de 769px à 1023px */
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .grid {
+                    grid-template-columns: repeat(3, 1fr); /* Trois colonnes sur les écrans de 1024px et plus */
+                }
+}
         }
     </style>
 </head>
@@ -261,47 +283,53 @@
         </section>
     </div>
 
-    <div class="container mx-auto mt-8 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-left text-2xl font-bold mb-6">Événements à venir</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    <div class="container justify-center ml-12 pl-6 mt-8">
+        <h1 class="text-left">Événements à venir</h1>
+        <br>
+        <div class="grid  justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
             @foreach($evenements as $evenement)
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <div class="flex justify-start items-center space-x-4 mb-2">
-                        <div>
-                            <span class="text-gray-600 block text-lg font-bold">{{ \Carbon\Carbon::parse($evenement->date)->format('d') }}</span>
-                            <span class="text-gray-600 text-sm">{{ \Carbon\Carbon::parse($evenement->date)->format('M') }}</span>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm">
+                    {{-- <img src="{{ $evenement->image_url }}" alt="{{ $evenement->nom }}" class="w-full h-64 object-cover"> --}}
+                    <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <div class="flex justify-start items-center space-x-4 mb-2">
+                            <div>
+                                <span class="text-gray-600 block">{{ \Carbon\Carbon::parse($evenement->date)->format('d') }}</span>
+                                <span class="text-gray-600">{{ \Carbon\Carbon::parse($evenement->date)->format('M') }}</span>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800">
+                                    <a href="{{ route('evenements.detail', $evenement) }}">{{ $evenement->nom }}</a>
+                                </h2>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-gray-800">
-                                <a href="{{ route('evenements.detail', $evenement) }}">{{ $evenement->nom }}</a>
-                            </h2>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                                    <a href="{{ route('evenements.detail', $evenement) }}">
+                                        <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </a>
+                                </span>
+                                <p class="text-gray-700 leading-tight mb-4">
+                                    {{ $evenement->description }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <p class="text-gray-700 leading-tight mb-4">{{ $evenement->description }}</p>
-                    <div class="flex items-center">
-                        <a href="{{ route('evenements.detail', $evenement) }}" class="text-indigo-600 hover:text-indigo-900">
-                            <svg class="w-4 h-4 mr-1 inline-block" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            Voir plus
-                        </a>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
-    <div class="flex justify-center mt-8">
-        <a href="{{ route('evenements.index') }}" class="btn-en-savoir-plus">En savoir plus</a>
+        <div class="flex justify-center mt-8">
+            <a href="{{ route('evenements.index') }}" class="btn-en-savoir-plus">En savoir plus</a>
+        </div>
     </div>
-</div>
-
 <section class="section-bg">
     <div class="container1 flex flex-wrap justify-center items-center">
         <div class="image-content w-full sm:w-1/2 p-4">
-            <img src="https://via.placeholder.com/500" alt="Illustration" class="w-full h-auto">
+            <img src="https://img.freepik.com/photos-gratuite/femme-tenant-son-verre-champagne-dansant_23-2148757445.jpg?ga=GA1.1.1277564984.1709547824&semt=ais_user" alt="Illustration" class="w-full h-auto">
         </div>
         <div class="text-content w-full sm:w-1/2 p-4">
             <h2 class="text-3xl font-bold mb-4">Créez votre propre événement</h2>
@@ -326,17 +354,15 @@
         </div>
 
         <div class="container mx-auto mt-4">
-            <div class="flex flex-wrap justify-center">
-                <img src="path/to/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
-                <img src="path/to/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
-                <img src="path/to/sponsor3.png" alt="Sponsor 3" class="sponsor-logo">
-                <img src="path/to/sponsor4.png" alt="Sponsor 4" class="sponsor-logo">
-                <img src="path/to/sponsor5.png" alt="Sponsor 5" class="sponsor-logo">
-                <img src="path/to/sponsor6.png" alt="Sponsor 6" class="sponsor-logo">
-                <img src="path/to/sponsor7.png" alt="Sponsor 7" class="sponsor-logo">
-                <img src="path/to/sponsor8.png" alt="Sponsor 8" class="sponsor-logo">
-                <img src="path/to/sponsor9.png" alt="Sponsor 9" class="sponsor-logo">
-                <img src="path/to/sponsor10.png" alt="Sponsor 10" class="sponsor-logo">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 1" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 2" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 3" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 4" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 5" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 6" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 7" class="sponsor-logo">
+                <img src="https://simplon.sn/wp-content/uploads/2023/07/logo-simplonSenegal.png" alt="Sponsor 8" class="sponsor-logo">
                 <!-- Add more logos as needed -->
             </div>
         </div>
