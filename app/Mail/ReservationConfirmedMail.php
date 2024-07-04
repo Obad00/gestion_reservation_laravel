@@ -41,7 +41,6 @@ class ReservationConfirmedMail extends Mailable
         with: [
             'prenom' => $this->user->prenom,
             'nom' => $this->user->nom,
-            // 'reservation' => $this->reservation,
         ]
     );
 }

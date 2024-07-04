@@ -39,9 +39,8 @@ class ReservationAcceptedMail extends Mailable
     return new Content(
         view: 'emails.reservation-accepted',
         with: [
-            'prenom' => $this->utilisateur->prenom,
-            'nom' => $this->utilisateur->nom,
-            // 'reservation' => $this->reservation,
+            'utilisateur' => $this->utilisateur,
+            'evenement' => $this->evenement,
         ]
     );
 }

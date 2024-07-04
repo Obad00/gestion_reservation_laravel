@@ -140,7 +140,7 @@ public function cancel(Request $request, Reservation $reservation)
         // Récupérer les informations nécessaires pour l'email
        // Récupérer l'utilisateur associé à la réservation
        $utilisateur = $reservation->user;
-        $evenement = Evenement::findOrFail($reservation->evenement_id)->nom; 
+        $evenement = Evenement::findOrFail($reservation->evenement_id); 
 
         // Envoyer un email de confirmation au candidat
         Mail::to($utilisateur->email)->send(new ReservationAcceptedMail($utilisateur, $evenement));
