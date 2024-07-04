@@ -7,7 +7,7 @@
         <h1 class="text-3xl mb-11 font-bold ">Dashboard</h1>
         <div class="block flex-row">
 
-            <div class="bg-no-repeat flex justify-between  bg-[#3C2A4D] border border-red-300 rounded-2xl w-full mr-2 p-6"
+            <div  style="background:#3C2A4D "  class="bg-no-repeat flex justify-between  bg-[#3C2A4D] border border-red-300 rounded-2xl w-full mr-2 p-6"
                 style="background-image: url(https://previews.dropbox.com/p/thumb/AAvyFru8elv-S19NMGkQcztLLpDd6Y6VVVMqKhwISfNEpqV59iR5sJaPD4VTrz8ExV7WU9ryYPIUW8Gk2JmEm03OLBE2zAeQ3i7sjFx80O-7skVlsmlm0qRT0n7z9t07jU_E9KafA9l4rz68MsaZPazbDKBdcvEEEQPPc3TmZDsIhes1U-Z0YsH0uc2RSqEb0b83A1GNRo86e-8TbEoNqyX0gxBG-14Tawn0sZWLo5Iv96X-x10kVauME-Mc9HGS5G4h_26P2oHhiZ3SEgj6jW0KlEnsh2H_yTego0grbhdcN1Yjd_rLpyHUt5XhXHJwoqyJ_ylwvZD9-dRLgi_fM_7j/p.png?fv_content=true&size_mode=5); background-position: 90% center;">
                 <div class="block pt-7 px-20">
                     <p class="text-xl text-white">Evenements Passes </p>
@@ -19,8 +19,8 @@
                 <div class="mx-6">
                     <div class="flex flex-wrap px-12">
                         <div class="w-fullsm:w-1/2 xl:w-1/2 ">
-                            <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl w-full pr-24  bg-slate-100">
-                                <div class="p-3 rounded-full bg-orange bg-opacity-75">
+                            <div class="flex items-center px-1 py-6 shadow-sm rounded-3xl w-full pr-24  bg-white">
+                                <div style="background:#E06F1F " class="p-3 rounded-full   bg-white">
                                     <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svgfull
                                 <path
@@ -46,7 +46,7 @@
                                     </svg>
                                 </div>
 
-                                <div class="mx-5">
+                                <div class="mx-6">
                                     <div class="text-gray-500 w-42">Resevation en cours</div>
 
                                     <h4 class="text-2xl font-semibold text-gray-700">{{ $countReservationsEncour }}</h4>
@@ -54,8 +54,8 @@
                             </div>
                         </div>
                         <div class="w-full px-9 sm:w-1/2  xl:w-1/2">
-                            <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl bg-slate-100">
-                                <div class="p-3 rounded-full bg-orange bg-opacity-75">
+                            <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl bg-white">
+                                <div  style="background:#E06F1F "  class="p-3 rounded-full bg-orange bg-opacity-75">
                                     <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -316,79 +316,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                            @foreach ($evenements as $evenement)
-                            <li>
-                                <div class="relative   pb-8">
-                                    <span class="absolute top-5 left-5 -ml-px h-11 my-5 w-0.5 bg-gray-200"
-                                        aria-hidden="true"></span>
-                                    <div class="relative flex items-start space-x-3">
-                                        <div>
-                                            <div class="relative px-1">
-                                                <div
-                                                    class="h-8 w-8  rounded-full ring-8 ring-white text-green-400 flex items-center justify-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor"
-                                                        class="bi bi-bell-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="min-w-0 flex-1 py-0">
-                                            <div class="text-md text-gray-500">
-                                                <div>
-                                                    <a href="#"
-                                                        class="font-medium text-gray-900 mr-2">{{ $evenement->nom }}</a>
-                                                </div>
-                                                <span
-                                                    class="whitespace-nowrap text-sm">{{ $evenement->date_evenement }}</span>
-                                            </div>
-                                            <div class="mt-2 text-gray-700">
-                                                <!-- Additional content here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                        @foreach ($evenements as $evenement)
-                        <li>
-                            <div class="relative   pb-8">
-                                <span class="absolute top-5 left-5 -ml-px h-11 my-5 w-0.5 bg-gray-200"
-                                    aria-hidden="true"></span>
-                                <div class="relative flex items-start space-x-3">
-                                    <div>
-                                        <div class="relative px-1">
-                                            <div
-                                                class="h-8 w-8  rounded-full ring-8 ring-white text-green-400 flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-bell-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="min-w-0 flex-1 py-0">
-                                        <div class="text-md text-gray-500">
-                                            <div>
-                                                <a href="#"
-                                                    class="font-medium text-gray-900 mr-2">{{ $evenement->nom }}</a>
-                                            </div>
-                                            <span
-                                                class="whitespace-nowrap text-sm">{{ $evenement->date_evenement }}</span>
-                                        </div>
-                                        <div class="mt-2 text-gray-700">
-                                            <!-- Additional content here -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-
+                           
 
 
                         </ul>
