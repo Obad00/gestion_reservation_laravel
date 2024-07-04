@@ -11,18 +11,18 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        User::truncate();
+        // User::truncate();
         User::create([
             'nom' => 'Ndiaye',
             'prenom' => 'Souleymane',
             'telephone' => '766657278',
             'etat' => 1,
-            'email' => 'soleymane@gmail.com',
+            'email' => 'souleymane9700@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('super_admin');
 
         User::create([
-            'nom' => 'Aabo',
+            'nom' => 'Dabo',
             'prenom' => 'Adama',
             'telephone' => '770000000',
             'etat' => 1,
