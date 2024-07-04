@@ -23,22 +23,22 @@
 <table>
     <thead>
         <tr>
-            <th>ID Utilisateur</th>
+            <th>N</th>
             <th>Nom Complet</th>
             <th>Email</th>
             <th>Téléphone</th>
-            <th>Status</th>
+            <th>Signature</th>
             <!-- Ajoutez d'autres colonnes selon vos besoins -->
         </tr>
     </thead>
     <tbody>
-        @foreach ($reservations as $reservation)
+        @foreach ($reservations as $index => $reservation)
         <tr>
-            <td>{{ $reservation->user->id }}</td>
+            <td>{{ $index +1 }}</td>
             <td>{{ $reservation->user->nom }} {{ $reservation->user->prenom }}</td>
             <td>{{ $reservation->user->email }}</td>
             <td>{{ $reservation->user->telephone }}</td>
-            <td>{{ $reservation->statut }}</td>
+            <td></td>
             <!-- Ajoutez d'autres colonnes selon vos besoins -->
         </tr>
         @endforeach

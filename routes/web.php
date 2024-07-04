@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\MariamaController;
 // use App\Http\Controllers\EvenementController;
 // use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
 // Route::resource('associations', AssociationController::class);
 
 
-Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
+Route::middleware(['auth','role:super_admin|admin|'])->prefix('admins')->group(function () {
 
     Route::resource('roles', RoleController::class)->middleware( 'permission:view roles');
     Route::resource('permissions', PermissionController::class)->middleware( 'permission:view permissions');

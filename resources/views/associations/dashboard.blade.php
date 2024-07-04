@@ -12,7 +12,7 @@
                 <div class="block pt-7 px-20">
                     <p class="text-xl text-white">Evenements Passes </p>
                     <div class="block px-10 ">
-                        <p class="text-3xl w-full text-white">{{ $reservations->count() }}</p>
+                        <p class="text-3xl w-full text-white">{{ $countEvenementsPasse }}</p>
                         <span class=" text-xl text-white inline-block rounded-full   py-1">incrits</span>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                 <div class="mx-5">
                                     <div class="text-gray-500 w-42">Resevation en cours</div>
 
-                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countReservationsEncour }}</h4>
+                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countEvenementsEncour }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 <div class="mx-5">
                                     <div class="text-gray-500 w-58">Evenements </div>
 
-                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countReservationsEncour }}</h4>
+                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $evenements->count() }}</h4>
                                 </div>
 
                             </div>

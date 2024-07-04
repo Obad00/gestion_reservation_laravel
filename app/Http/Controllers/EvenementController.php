@@ -296,7 +296,14 @@ public function tousevenements()
     {
     // Récupérer les réservations pour cet événement spécifique
     $reservations = Reservation::where('evenement_id', $event->id)->get();
+    $user = auth()->user();
+    $association = $user->association;
 
+    // Récupérer tous les événements de l'association
+    $evenements = $association->evenements;
+
+    // Récupérer toutes les réservations
+    $reservations = Reservation::all();
     // Passer les données à la vue
     return view('events.reservations', [
         'event' => $event,

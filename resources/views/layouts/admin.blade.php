@@ -185,7 +185,8 @@
 
                             <span> Notifications</span>
                         </a>
-                        @role('super_admin')
+                        
+                        @role('super_admin|admin')
                             <details class="group">
 
                                 <summary
@@ -211,7 +212,7 @@
                                             </defs>
                                         </svg>
                                         <span>
-                                            Pramaitre
+                                            Parametre
                                         </span>
                                     </span>
                                     <svg class="w-5 h-5 text-gray-500 transition group-open:rotate-90"
