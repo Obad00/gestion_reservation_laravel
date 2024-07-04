@@ -22,7 +22,7 @@
         <div class="flex h-screen bg-gray-100">
 
             <!-- sidebar -->
-            <div class="bg-primary text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
+            <div style="background:#3C2A4D " class="bg-primary text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
                 id="sidebar">
                 <div class="flex items-center justify-center h-16 bg-cyan-950-900">
                     <span class="text-[#E06F1F] font-bold uppercase">Onyx Events</span>
@@ -158,40 +158,38 @@
                     <input class="mx-4 h-4  w-full border-spacing-0 border-0  px-4 py-5 " type="text"
                         placeholder="Search">
                     <i class="fs fa-search"></i>
-                    <div class="hidden sm:flex sm:items-center pr-8 sm:ms-6">
-                        <x-dropdown align="right" width="48">
+                    
 
-                            <x-slot name="trigger" class="flex ">
+<div class="hidden sm:flex sm:items-center pr-8 sm:ms-6">
+                       
 
+   
+        <details class="group">
 
-                                <button
-                                    class="inline-flex gap-4 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div class="bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
+            <summary
+                class="flex items-center justify-between gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
+
+              
+                    <div class="bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
                                         style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
                                     </div>
-                                    <div class="block">
 
-                                        {{-- <div> {{ Auth::user()->prenom }}</div> --}}
-                                        {{-- <div> {{ Auth::user()->roles }}</div> --}}
-                                    </div>
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                    
+                                         <div> {{ Auth::user()->prenom }}</div> 
+                    </span>
+                </span>
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20">
                                             <path fill-rule="evenodd"
                                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                                 clip-rule="evenodd" />
                                         </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link>
-
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
+            </summary>
+                               
+            <article class="px-4 pb-4">
+                <ul class="flex flex-col gap-1 pl-2">
+                  
+                    <li><form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
                                     <x-dropdown-link :href="route('logout')"
@@ -199,11 +197,16 @@
                                                         this.closest('form').submit();">
                                         {{ __('Deconnexion') }}
                                     </x-dropdown-link>
-                                </form>
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                                </form></li>
+                 
+                </ul>
+            </article>
 
+        </details>
+    
+  
+
+                    </div>
 
                 </header>
 
