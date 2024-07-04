@@ -21,6 +21,34 @@ use Illuminate\Support\Facades\Storage;
 class EvenementController extends Controller
 {
 
+    // public function printEvents()
+    // {
+    //     $reservations = Reservation::all(); // Récupérez vos données
+
+    //     return view('associations.pdf', compact('reservations'));
+    // }
+
+    public function printEvents(Evenement $event)
+    {
+
+        // Récupérer les réservations pour cet événement spécifique
+        $reservations = Reservation::where('evenement_id', $event->id)
+        ->where('statut', 'acceptee')
+        ->get();
+
+    // Debugging output
+    if ($reservations->isEmpty()) {
+        dd('No reservations found for event ID: ' . $event->id . ' with status "acceptee".');
+    }
+        // Passer les données à la vue PDF
+        return view('associations.pdf', [
+            'event' => $event,
+            'reservations' => $reservations,
+        ]);
+    }
+
+
+
 //     public function voirNextEvent()
 // {
 //     // Récupérer l'événement le plus proche en fonction de la date
@@ -103,40 +131,7 @@ public function tousevenements()
     /**
      * Store a newly created resource in storage.
      */
-    public function storezz(Request $request)
-    {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'description' => 'required|string',
-            'localite' => 'required|string|max:255',
-            'date_evenement' => 'required|date',
-            'date_limite_inscription' => 'required|date',
-            'nombre_place' => 'required|integer',
-            'image' => 'nullable|string',
-        ]);
 
-        // Vérifier si l'utilisateur authentifié est le propriétaire de l'association
-        $user = auth()->user();
-        $association = $user->association;
-
-        if (!$association) {
-            return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
-        }
-
-        $evenement = new Evenement();
-        $evenement->nom = $request->nom;
-        $evenement->description = $request->description;
-        $evenement->localite = $request->localite;
-        $evenement->date_evenement = $request->date_evenement;
-        $evenement->date_limite_inscription = $request->date_limite_inscription;
-        $evenement->nombre_place = $request->nombre_place;
-        $evenement->image = $request->image;
-        $evenement->categorie_id = $request->categorie_id;
-
-        $association->evenements()->save($evenement);
-
-        return redirect()->route('association.evenements.index')->with('success', 'Événement créé avec succès.');
-    }
 
 
 

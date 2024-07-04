@@ -132,6 +132,7 @@ Route::prefix('associations')->group(function (){
 
 
         Route::get('/events/{event}/reservations', [EvenementController::class, 'showReservations'])->name('events.reservations');
+        Route::get('/evenement/{event}/print', 'printEvents')->name('evenement.export');
 
 
     // Route::put('utilisateurs/bloque/{utilisateur}' , [UserController::class, 'bloquee_un_user'])->name('utilisateurs.bloque');
