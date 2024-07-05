@@ -19,14 +19,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <a href="{{ route('roles.index') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Roles</a>
+                    <a href="{{ route('roles.index') }}" class="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mb-4">Roles</a>
 
                     <div class="p-6 text-gray-900">
                         <form action="{{ route('permissions.store') }}" method="POST">
                             @csrf
                             <div class="mb-4 flex">
                                 <input type="text" name="name" placeholder="Nom de la permission" class="border mr-3 border-gray-300 p-2 w-52">
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter</button>
+                                <button type="submit" class="bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded">Ajouter</button>
                             </div>
                         </form>
                     </div>
@@ -34,11 +34,12 @@
                     <table class="min-w-full">
                         <thead>
                             <tr>
-                                <th class="border-b-2 px-4 py-2 bg-gray-100">Nom de la permission</th>
-                                <th class="border-b-2 px-4 py-2 bg-gray-100">Actions</th>
+                                <th class="border-b-2 py-2 bg-gray-100">N*</th>
+                                <th class="border-b-2 py-2 bg-gray-100">Nom de la permission</th>
+                                <th class="border-b-2 py-2 bg-gray-100">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class=" ">
                             @foreach ($permissions as $index => $permission)
                                 <tr>
                                     <td class="border px-4 py-2">{{ $index +1 }}</td>

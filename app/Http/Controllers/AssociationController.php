@@ -36,43 +36,7 @@ class AssociationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAssociationRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Association $association)
-    {
-        //
-    }
-
-    public function show(Association $association)
-    {
-        //
-    }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAssociationRequest $request, Association $association)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Association $association)
-    {
-        //
-    }
 
     public function register(RegisterAssociationRequest $request)
     {
@@ -175,5 +139,43 @@ class AssociationController extends Controller
         $utilisateurs = User::latest()->take(5)->get();
         $reservations= Reservation::All();
         return view('associations.listereservation', compact('reservations','utilisateurs'));
+    }
+
+    public function store(StoreAssociationRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Association $association)
+    {
+        //
+    }
+
+    public function show(Association $association)
+    {
+        //
+    }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateAssociationRequest $request, Association $association)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Association $association)
+    {
+        //
     }
 }

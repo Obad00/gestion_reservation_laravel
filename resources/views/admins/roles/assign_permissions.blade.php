@@ -19,7 +19,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <a href="{{ route('roles.index') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Roles</a>
+                    <a href="{{ route('roles.index') }}" class="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mb-4">Roles</a>
 
                     <h1 class="text-xl font-semibold mb-4">Assigner des permissions à {{ $role->name }}</h1>
                     <form action="{{ route('roles.permissions.store', $role->id) }}" method="POST">
@@ -35,7 +35,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Assigner</button>
+                        <button type="submit" class="mt-4 bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded">Assigner</button>
                     </form>
                 </div>
             </div>

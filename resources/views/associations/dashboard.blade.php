@@ -171,7 +171,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if ($reservation->user->etat == true)
+                                    @if ($reservation->statut == 'acceptee')
                                         <span
                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                             Acceptee
@@ -236,22 +236,26 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
-                                        <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Êtes-vous sûr de
-                                            vouloir debloquer cet utilisateur ?</h3>
+                                        <div class="flex">
+                                            <form action="{{ route('reservations.accept', $reservation->id) }}" method="POST">
+                                                @csrf
+                                                @method('put')
 
+                                                <input type="hidden" name="etat" placeholder="nom role">
+                                                <button class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-2 py-1 text-center mr-2" type="submit">
+                                                    Accepter
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('reservations.decline', $reservation->id) }}" method="POST">
+                                                @csrf
+                                                @method('put')
 
-                                        <form action="{{ route('admins.index') }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <input type="hidden" name="etat" placeholder="nom role">
-                                            <button
-                                                class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2"
-                                                type="submit"> Debloqué(e)</button>
-                                        </form> <a href="#" onclick="closeModal('modelConfirm')"
-                                            class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                                            data-modal-toggle="delete-user-modal">
-                                            Annuler
-                                        </a>
+                                                <input type="hidden" name="etat" placeholder="nom role">
+                                                <button class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-2 py-1 text-center mr-2" type="submit">
+                                                    Décliner
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
 
 
@@ -316,7 +320,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                           
+
 
 
                         </ul>

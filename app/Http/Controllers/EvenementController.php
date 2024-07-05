@@ -38,10 +38,7 @@ class EvenementController extends Controller
         ->where('statut', 'acceptee')
         ->get();
 
-    // Debugging output
-    if ($reservations->isEmpty()) {
-        dd('No reservations found for event ID: ' . $event->id . ' with status "acceptee".');
-    }
+
         // Passer les données à la vue PDF
         return view('associations.pdf', [
             'event' => $event,
@@ -102,6 +99,7 @@ public function tousevenements()
 
 
 
+
     public function affichageevenement(){
         $user = auth()->user();
         $association = $user->association;
@@ -113,7 +111,21 @@ public function tousevenements()
 
         $evenements = $association->evenements;
 
-        return view('evenements.index', compact('evenements','categories'));
+        return view('associations.evenements.index', compact('evenements','categories'));
+    }
+    w
+
+    public function evenementPassee(){
+        $user = auth()->user();
+        $association = $user->association;
+        $categories= Categorie::all();
+
+        if (!$association) {
+            return redirect()->route('home')->withErrors('Vous devez être associé à une association pour voir vos événements.');
+        }
+        $evenements = $association->evenements->where('date_evenement','<=', now());
+
+        return view('associations.evenements.evenements_passee', compact('evenements','categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -137,16 +149,24 @@ public function tousevenements()
 
     public function store(Request $request)
     {
+if (!auth()->user()->hasPermission('super_admin')) {
+        return redirect()->back()->with('error', 'Vous n\'avez pas l\'autorisation d\'assigner des rôles.');
+    }
         $request->validate([
-            'nom' => 'required|string|max:255',
+            'nom' => 'required|string|max:50|min:4',
             'description' => 'required|string',
-            'localite' => 'required|string|max:255',
-            'date_evenement' => 'required|date',
-            'date_limite_inscription' => 'required|date',
-            'nombre_place' => 'required|integer',
+            'localite' => 'required|string|max:50|min:4',
+            'date_evenement' => 'required|date|after:today',
+            'date_limite_inscription' => 'required|date|after:today',
+            'nombre_place' => 'required|integer|min:0',
             'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'categorie_id' => 'required|integer|exists:categories,id'
+            'categorie_id' => 'required|integer|exists:categories,id',
+        ], [
+            'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',
+            'date_limite_inscription.after' => 'La date limite d\'inscription doit être supérieure à la date d\'aujourd\'hui.',
+            'nombre_place.min' => 'Le nombre de places doit être un nombre positif.',
         ]);
+
 
         // Vérifier si l'utilisateur authentifié est associé à une association
         $user = auth()->user();
@@ -155,6 +175,12 @@ public function tousevenements()
         if (!$association) {
             return redirect()->route('association.evenements.create')->withErrors('Vous devez être associé à une association pour créer un événement.');
         }
+
+
+        if (!$association->etat ===true) {
+            return redirect()->back()->with('error','Vous compte est bloquee !!!.');
+        }
+
 
         // Gérer le téléchargement de l'image
         $image = null;
@@ -212,16 +238,20 @@ public function tousevenements()
     }
     public function update(Request $request, $id)
 {
-    $request->validate([
-        'nom' => 'required|string|max:255',
-        'description' => 'required|string',
-        'localite' => 'required|string|max:255',
-        'date_evenement' => 'required|date',
-        'date_limite_inscription' => 'required|date',
-        'nombre_place' => 'required|integer',
-        'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'categorie_id' => 'required|integer|exists:categories,id'
-    ]);
+     $request->validate([
+            'nom' => 'required|string|max:50|min:4',
+            'description' => 'required|string',
+            'localite' => 'required|string|max:50|min:4',
+            'date_evenement' => 'required|date|after:today',
+            'date_limite_inscription' => 'required|date|after:today',
+            'nombre_place' => '|integer|min:0',
+            'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categorie_id' => 'required|integer|exists:categories,id',
+        ], [
+            'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',
+            'date_limite_inscription.after' => 'La date limite d\'inscription doit être supérieure à la date d\'aujourd\'hui.',
+            'nombre_place.min' => 'Le nombre de places doit être un nombre positif.',
+        ]);
 
     // Vérifier si l'utilisateur authentifié est associé à une association
     $user = auth()->user();
@@ -296,16 +326,10 @@ public function tousevenements()
     {
     // Récupérer les réservations pour cet événement spécifique
     $reservations = Reservation::where('evenement_id', $event->id)->get();
-    $user = auth()->user();
-    $association = $user->association;
-
-    // Récupérer tous les événements de l'association
-    $evenements = $association->evenements;
 
     // Récupérer toutes les réservations
-    $reservations = Reservation::all();
     // Passer les données à la vue
-    return view('events.reservations', [
+    return view('associations.reservations.reservations', [
         'event' => $event,
         'reservations' => $reservations,
     ]);

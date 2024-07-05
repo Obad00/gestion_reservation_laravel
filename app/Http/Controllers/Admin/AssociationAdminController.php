@@ -39,7 +39,7 @@ class AssociationAdminController extends Controller
     $association->update([
         'etat' => false,
     ]);
-    return redirect()->back()->with('success','association est '.$association->nom.' bloquee');
+    return redirect()->back()->with('success','Association '.$association->nom.' est bloquee');
     }
 
 
@@ -47,7 +47,7 @@ class AssociationAdminController extends Controller
         $association->update([
             'etat' => true,
         ]);
-        return redirect()->back()->with('success','association est '.$association->nom.' debloquee');
+        return redirect()->back()->with('success','Association'.$association->nom.' est  debloquee');
         }
 
 

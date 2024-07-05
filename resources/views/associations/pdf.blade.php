@@ -27,7 +27,7 @@
             <th>Nom Complet</th>
             <th>Email</th>
             <th>Téléphone</th>
-            <th>Signature</th>
+            <th>Emargement</th>
             <!-- Ajoutez d'autres colonnes selon vos besoins -->
         </tr>
     </thead>
