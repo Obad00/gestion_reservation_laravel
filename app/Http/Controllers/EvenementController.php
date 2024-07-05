@@ -113,7 +113,7 @@ public function tousevenements()
 
         return view('associations.evenements.index', compact('evenements','categories'));
     }
-    w
+    
 
     public function evenementPassee(){
         $user = auth()->user();
@@ -135,8 +135,7 @@ public function tousevenements()
 
         $categories= Categorie::all();
         // $associations = auth()->user()->associations;
-        return view('evenements.ajoutEvenement', compact('categories'));
-    }
+dd('test')   ; }
 
 
 
@@ -149,9 +148,7 @@ public function tousevenements()
 
     public function store(Request $request)
     {
-if (!auth()->user()->hasPermission('super_admin')) {
-        return redirect()->back()->with('error', 'Vous n\'avez pas l\'autorisation d\'assigner des rôles.');
-    }
+
         $request->validate([
             'nom' => 'required|string|max:50|min:4',
             'description' => 'required|string',
@@ -234,7 +231,7 @@ if (!auth()->user()->hasPermission('super_admin')) {
         $categories= Categorie::all();
 
         $evenement = Evenement::find($id);
-        return view('evenements.mofifierEvenement', compact('evenement','categories'));
+        return view('associations.evenements.mofifierEvenement', compact('evenement','categories'));
     }
     public function update(Request $request, $id)
 {
@@ -258,7 +255,7 @@ if (!auth()->user()->hasPermission('super_admin')) {
     $association = $user->association;
 
     if (!$association) {
-        return redirect()->route('evenements.index')->withErrors('Vous devez être associé à une association pour mettre à jour un événement.');
+        return redirect()->route('association.evenements.index')->withErrors('Vous devez être associé à une association pour mettre à jour un événement.');
     }
 
     // Trouver l'événement à mettre à jour
