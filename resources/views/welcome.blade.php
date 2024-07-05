@@ -329,21 +329,7 @@
         </div>
 
 
-    <section class="section-bg">
-        <div class="container1">
-            <div class="image-content">
-                <img src="https://via.placeholder.com/500" alt="Illustration">
-            </div>
-            <div class="text-content">
-                <h2>Créez votre propre événement</h2>
-                <p>Organisez des événements incroyables avec notre plateforme. Rejoignez-nous pour créer des moments inoubliables.</p>
-                <a href="{{ route('association-register') }}" class="btn-create-event">Créer un événement</a>
-            </div>
-
-        <div class="flex justify-center mt-8">
-            <a href="{{ route('evenements.index') }}" class="btn-en-savoir-plus">En savoir plus</a>
-        </div>
-    </div>
+   
 <section class="section-bg">
     <div class="container1 flex flex-wrap justify-center items-center">
         <div class="image-content w-full sm:w-1/2 p-4">
