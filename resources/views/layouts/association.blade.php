@@ -17,9 +17,24 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <div class="flex h-screen bg-gray-100">
+<style>
+    .active {
+        background-color: #574F7D;
+        /* Couleur de fond pour l'élément actif */
+        color: #ffffff;
+        margin: 8px
+            /* Couleur de texte pour l'élément actif */
+    }
+
+    .active>span {
+        /* Couleur de fond pour l'élément actif */
+        color: #ffffff;
+        /* Couleur de texte pour l'élément actif */
+    }
+</style>
+<body class="font-sans container antialiased">
+    <div class="  container bg-gray-100">
+        <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
             <div style="background:#3C2A4D " class="bg-primary text-white w-64 min-h-screen overflow-y-auto transition-transform transform ease-in-out duration-300"
@@ -41,7 +56,7 @@
                            <span> Dashbord</span>
                         </a>
 
-                        <a href="{{ route('association.reservation') }}" class="flex  gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
+                        <a href="#" class="flex  gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M16 17H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -111,8 +126,8 @@
                                     <li class="flex gap-2">
 
 
-                                        <a href="{{ route('association.evenements.bloques') }}">
-                                            Evenements bloques
+                                        <a href="{{ route('association.evenements.passee') }}">
+                                            Evenements Passe
                                         </a>
                                     </li>
                                 </ul>
@@ -158,24 +173,24 @@
                     <input class="mx-4 h-4  w-full border-spacing-0 border-0  px-4 py-5 " type="text"
                         placeholder="Search">
                     <i class="fs fa-search"></i>
-                    
+
 
 <div class="hidden sm:flex sm:items-center pr-8 sm:ms-6">
-                       
 
-   
+
+
         <details class="group">
 
             <summary
                 class="flex items-center justify-between gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
 
-              
+
                     <div class="bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
                                         style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
                                     </div>
 
-                    
-                                         <div> {{ Auth::user()->prenom }}</div> 
+
+                                         <div> {{ Auth::user()->prenom }}</div>
                     </span>
                 </span>
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -185,10 +200,10 @@
                                                 clip-rule="evenodd" />
                                         </svg>
             </summary>
-                               
+
             <article class="px-4 pb-4">
                 <ul class="flex flex-col gap-1 pl-2">
-                  
+
                     <li><form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
@@ -198,13 +213,13 @@
                                         {{ __('Deconnexion') }}
                                     </x-dropdown-link>
                                 </form></li>
-                 
+
                 </ul>
             </article>
 
         </details>
-    
-  
+
+
 
                     </div>
 
@@ -213,11 +228,26 @@
 
 
 
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                    <div class="container mx-auto px-6 py-8">
+                <main class="flex-1  h-screen container overflow-x-hidden overflow-y-auto bg-gray-100">
+                    <div class="  px-6 py-8">
+                        {{-- breadcrumbs --}}
+                        {{-- Fin breadcrumbs --}}
                         {{ $slot }}
+
                     </div>
+
+
+
                 </main>
+                <footer class="">
+                    <div
+                        class=" mt-14 pl-7
+                    border-t-[150px] border-t-transparent
+                    border-r-[1060px] border-[#3C2A4D]
+                    ">
+                    </div>
+                </footer>
+
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@ class ReservationController extends Controller
 
         // Vérifiez si l'utilisateur a le rôle "user"
         if (!$user->hasRole('user')) {
-            return redirect()->back()->with('error', 'Seuls les utilisateurs avec le rôle peuvent réserver un événement.');
+            return redirect()->back()->with('error', 'Seuls les utilisateurs peuvent réserver un événement.');
         }
 
         // Vérifiez si l'utilisateur a déjà une réservation pour cet événement
@@ -141,6 +141,9 @@ public function cancel(Request $request, Reservation $reservation)
        // Récupérer l'utilisateur associé à la réservation
        $utilisateur = $reservation->user;
         $evenement = Evenement::findOrFail($reservation->evenement_id);
+
+
+
 
         // Envoyer un email de confirmation au candidat
         Mail::to($utilisateur->email)->send(new ReservationAcceptedMail($utilisateur, $evenement));

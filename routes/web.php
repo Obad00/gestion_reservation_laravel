@@ -124,6 +124,7 @@ Route::prefix('associations')->group(function (){
         Route::get('create/Evenement', 'create')->name('association.evenements.create');
         Route::post('create/Evenement/traitement', 'store')->name('association.evenements.save');
         Route::get('index/Evenement', 'affichageevenement')->name('association.evenements.index');
+        Route::get('evenements/passee', 'evenementPassee')->name('association.evenements.passee');
         Route::get('evenementSupprimer/{id}', 'destroy')->name('association.evenements.destroy');
         Route::get('evenementModifier/{id}', 'edit')->name('association.evenements.edit');
         Route::post('/evenements/update/{id}' , 'update')->name('association.evenements.update');
@@ -161,8 +162,8 @@ Route::get('/inscription' ,  [AssociationController::class,'inscription']);
 
 
 Route::prefix('reservations')->middleware('auth')->group(function () {
-    Route::post('/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
-    Route::post('/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+    Route::put('/{reservation}/accept', [ReservationController::class, 'accept'])->name('reservations.accept');
+    Route::put('/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
     Route::get('/confirmation/{reservation}', [ReservationController::class, 'confirmation'])->name('associations.reservations.confirmation');
     Route::post('/{reservation}/confirmer', [ReservationController::class, 'confirm'])->name('reservations.confirm');
     Route::post('/{reservation}/annuler', [ReservationController::class, 'cancel'])->name('reservations.cancel');

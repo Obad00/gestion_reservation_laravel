@@ -60,12 +60,6 @@
                                 class="inline-block bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded mb-4">Ajouter</a>
 
                         </div>
-
-                        @if ($evenements->isEmpty())
-                            <div class="flex justify-center items-center h-64">
-                                <p class="text-gray-600 text-lg">Vous n'avez aucun événement.</p>
-                            </div>
-                        @else
                             <div class="grid grid-cols-3 gap-8">
                                 @foreach ($evenements as $evenement)
                                     <div
@@ -130,7 +124,6 @@
                             </div>
                         @endforeach
                     </div>
-                    @endif
                 </div>
             </div>
 

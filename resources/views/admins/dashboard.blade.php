@@ -123,13 +123,13 @@
 {{-- les utilisateurs --}}
               <div class=" mx-auto gap-2   pt-0   px-4 rounded-xl ">
                 @php
-                $headers = ['Nom',  'Status',''];
-                $columns = ['nom', 'etat'];
+                $headers = ['Prenom','Nom',  ''];
+                $columns = ['prenom','nom' ];
                 $actions = [
 
                 [
                 'url' => function($item) { return route('associations.edit', $item->id); },
-                'class' => 'text-indigo-600 hover:text-indigo-900',
+                'class' => 'text-indigo-600 p-0 m-0 hover:text-indigo-900',
                 'icon' => ''
             ],
               ];
@@ -142,7 +142,7 @@
 
             <div class=" py-1">
                 <div class="container mx-auto px-4">
-                    <h2 class="text-3xl font-bold text-blac mb-8">Nos evenements</h2>
+                    <h2 class="text-3xl font-bold text-blac mb-8">Les evenements</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                         @foreach($evenements as $evenement)
@@ -157,11 +157,11 @@
                             <h3 class="text-xl font-bold text-blue-800 ">{{$evenement->association->nom}}</h3>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nom}}</span>
-                                <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->created_at}}</button>
+                                <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->date_evenement}}</button>
                             </div>
                             <p class="text-gray-500 text-sm mt-2">{{$evenement->description}}</p>
                             <div class="flex items-center justify-between mt-4">
-                                <span class="text-gray-900 font-bold text-lg">{{$evenement->nombre_place}}</span>
+                                 <span class="text-gray-900 font-bold text-lg">Nombres place: <strong>{{$evenement->nombre_place}}</strong></span>
                             </div>
                         </div>
                         @endforeach
