@@ -32,8 +32,8 @@
         /* Couleur de texte pour l'élément actif */
     }
 </style>
-<body class="font-sans container antialiased">
-    <div class="  container bg-gray-100">
+<body class="font-sans  antialiased">
+    <div class="   bg-gray-100">
         <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
@@ -56,7 +56,7 @@
                            <span> Dashbord</span>
                         </a>
 
-                        <a href="#" class="flex  gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
+                        {{-- <a href="#" class="flex  gap-2 items-center px-4 py-5  mt-2 text-gray-100 hover:bg-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M16 17H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -68,7 +68,7 @@
 
                             <span>   Gestion Reservation</span>
 
-                        </a>
+                        </a> --}}
 
 
                         <details class="group">
@@ -179,45 +179,51 @@
 
 
 
-        <details class="group">
+    <div class="hidden sm:flex sm:items-center pr-8 sm:ms-6">
+        <x-dropdown align="right" width="48">
 
-            <summary
-                class="flex items-center justify-between gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
+            <x-slot name="trigger" class="flex ">
 
 
+                <button
+                    class="inline-flex gap-4 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                     <div class="bg-center bg-cover bg-no-repeat rounded-full inline-block h-12 w-12 ml-2"
-                                        style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
-                                    </div>
+                        style="background-image: url(https://i.pinimg.com/564x/de/0f/3d/de0f3d06d2c6dbf29a888cf78e4c0323.jpg)">
+                    </div>
+                    <div class="block">
 
+                        <div> {{ Auth::user()->prenom }}</div>
+                        {{-- <div> {{ Auth::user()->roles }}</div> --}}
+                    </div>
+                    <div class="ms-1">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </button>
+            </x-slot>
 
-                                         <div> {{ Auth::user()->prenom }}</div>
-                    </span>
-                </span>
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-            </summary>
+            <x-slot name="content">
+                <x-dropdown-link :href="route('profile.edit')">
+                    {{ __('Profile') }}
+                </x-dropdown-link>
 
-            <article class="px-4 pb-4">
-                <ul class="flex flex-col gap-1 pl-2">
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                    <li><form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                        {{ __('Deconnexion') }}
-                                    </x-dropdown-link>
-                                </form></li>
-
-                </ul>
-            </article>
-
-        </details>
+                    <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Deconnexion') }}
+                    </x-dropdown-link>
+                </form>
+            </x-slot>
+        </x-dropdown>
+    </div>
 
 
 

@@ -23,12 +23,6 @@ use Illuminate\Support\Facades\Storage;
 class EvenementController extends Controller
 {
 
-    // public function printEvents()
-    // {
-    //     $reservations = Reservation::all(); // Récupérez vos données
-
-    //     return view('associations.pdf', compact('reservations'));
-    // }
 
     public function printEvents(Evenement $event)
     {
@@ -48,10 +42,6 @@ class EvenementController extends Controller
 
 
 
-//     public function voirNextEvent()
-// {
-//     // Récupérer l'événement le plus proche en fonction de la date
-//     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
 
 public function tousevenements()
 {

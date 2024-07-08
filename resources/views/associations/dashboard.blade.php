@@ -10,50 +10,16 @@
             <div  style="background:#3C2A4D "  class="bg-no-repeat flex justify-between  bg-[#3C2A4D] border border-red-300 rounded-2xl w-full mr-2 p-6"
                 style="background-image: url(https://previews.dropbox.com/p/thumb/AAvyFru8elv-S19NMGkQcztLLpDd6Y6VVVMqKhwISfNEpqV59iR5sJaPD4VTrz8ExV7WU9ryYPIUW8Gk2JmEm03OLBE2zAeQ3i7sjFx80O-7skVlsmlm0qRT0n7z9t07jU_E9KafA9l4rz68MsaZPazbDKBdcvEEEQPPc3TmZDsIhes1U-Z0YsH0uc2RSqEb0b83A1GNRo86e-8TbEoNqyX0gxBG-14Tawn0sZWLo5Iv96X-x10kVauME-Mc9HGS5G4h_26P2oHhiZ3SEgj6jW0KlEnsh2H_yTego0grbhdcN1Yjd_rLpyHUt5XhXHJwoqyJ_ylwvZD9-dRLgi_fM_7j/p.png?fv_content=true&size_mode=5); background-position: 90% center;">
                 <div class="block pt-7 px-20">
-                    <p class="text-xl text-white">Evenements Passes </p>
+                    <p class="text-xl text-white">Resevations </p>
                     <div class="block px-10 ">
-                        <p class="text-3xl w-full text-white">{{ $countEvenementsPasse }}</p>
-                        <span class=" text-xl text-white inline-block rounded-full   py-1">incrits</span>
+                        <p class="text-3xl w-full text-white">{{ $countReservations }}</p>
+                        <span class=" text-xl text-orange  inline-block rounded-full   py-1">incrits</span>
                     </div>
                 </div>
                 <div class="mx-6">
-                    <div class="flex flex-wrap px-12">
-                        <div class="w-fullsm:w-1/2 xl:w-1/2 ">
-                            <div class="flex items-center px-1 py-6 shadow-sm rounded-3xl w-full pr-24  bg-white">
-                                <div style="background:#E06F1F " class="p-3 rounded-full   bg-white">
-                                    <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
-                                        xmlns="http://www.w3.org/2000/svgfull
-                                <path
-                                    d="M18.2
-                                        9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373
-                                        9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2
-                                        6.64043 18.2 9.08889Z" fill="currentColor"></path>
-                                        <path
-                                            d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </div>
+                    <div class=" grid  gap-7  grid-rows-1 grid-cols-3 px-12">
 
-                                <div class="mx-6">
-                                    <div class="text-gray-500 w-42">Resevation en cours</div>
-
-                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countEvenementsEncour }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full px-9 sm:w-1/2  xl:w-1/2">
+                        <div class="w-full">
                             <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl bg-white">
                                 <div  style="background:#E06F1F "  class="p-3 rounded-full bg-orange bg-opacity-75">
                                     <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
@@ -88,6 +54,66 @@
                             </div>
                         </div>
 
+                        <div class="w-full">
+                            <div class="flex items-center  py-6 shadow-sm rounded-3xl  bg-white">
+                                <div class="p-3 rounded-full   bg-white">
+                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_548_2252)">
+                                        <path d="M9.28393 13.3137H9.55761C10.6113 13.3137 11.4734 14.1758 11.4734 15.2295V24.8083C11.4734 25.862 10.6113 26.724 9.55761 26.724H9.28393C8.23026 26.724 7.36816 25.862 7.36816 24.8083V15.2295C7.36816 14.1758 8.23026 13.3137 9.28393 13.3137ZM16.947 7.56641C18.0007 7.56641 18.8627 8.4285 18.8627 9.48217V24.8083C18.8627 25.862 18.0007 26.724 16.947 26.724C15.8933 26.724 15.0312 25.862 15.0312 24.8083V9.48217C15.0312 8.4285 15.8933 7.56641 16.947 7.56641ZM24.61 18.5136C25.6637 18.5136 26.5258 19.3757 26.5258 20.4294V24.8083C26.5258 25.862 25.6637 26.724 24.61 26.724C23.5564 26.724 22.6943 25.862 22.6943 24.8083V20.4294C22.6943 19.3757 23.5564 18.5136 24.61 18.5136Z" fill="#ED8936"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_548_2252">
+                                        <rect width="32.8417" height="32.8417" fill="white" transform="translate(0.526367 0.722656)"/>
+                                        </clipPath>
+                                        </defs>
+                                        </svg>
+                                        
+                                </div>
+
+                                <div class="mx-6">
+                                    <div class="text-gray-500 w-42">Evenement passes</div>
+
+                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countEvenementsPasse }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="w-full ">
+                            <div class="flex items-center px-5 py-6 shadow-sm rounded-3xl bg-white">
+                                <div  style="background:#E06F1F "  class="p-3 rounded-full bg-orange bg-opacity-75">
+                                    <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </div>
+
+                                <div class="mx-5">
+                                    <div class="text-gray-500 w-58">Evenement en cours </div>
+
+                                    <h4 class="text-2xl font-semibold text-gray-700">{{ $countEvenementsEncour  }}</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+
                     </div>
                 </div>
             </div>
@@ -97,7 +123,16 @@
         <div class=" mt-10 gap-6 gap-x-32  flex">
             <div class="x gap-9">
 
+@if (empty($dernierEvenement))
 
+<div class="flex justify-between mb-9">
+    <h1 class="text-3xl font-bold ">welcom:</h1>
+    <a href="#" id="openModalBtn"
+    class="inline-block bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded mb-4">Ajouter</a>
+
+
+
+</div>@else
 
                 <div class="flex justify-between mb-9">
                     <h1 class="text-3xl font-bold ">Evenement: {{ $dernierEvenement->nom }}</h1>
@@ -264,7 +299,7 @@
                         @endforeach
 
 
-
+                        @endif
 
 
 
@@ -329,27 +364,8 @@
             </div>
 
         </div>
-        <script type="text/javascript">
-            window.openModal = function(modalId) {
-                document.getElementById(modalId).style.display = 'block'
-                document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
-            }
+     
+            @include('associations.evenements.ajoutEvenement')
 
-            window.closeModal = function(modalId) {
-                document.getElementById(modalId).style.display = 'none'
-                document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
-            }
-
-            // Close all modals when press ESC
-            document.onkeydown = function(event) {
-                event = event || window.event;
-                if (event.keyCode === 27) {
-                    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
-                    let modals = document.getElementsByClassName('modal');
-                    Array.prototype.slice.call(modals).forEach(i => {
-                        i.style.display = 'none'
-                    })
-                }
-            };
         </script>
 </x-association-layout>

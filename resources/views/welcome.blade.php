@@ -235,10 +235,27 @@
                 <div class="hidden md:flex space-x-6 text-lg">
                     <a href="/" class="text-white hover:text-green-700">Accueil</a>
                     <a href="#about" class="text-white hover:text-green-700">À Propos</a>
-                    <a href="#events" class="text-white hover:text-green-700">Événements</a>
+                    <a href="{{ route('evenements.index') }}" class="text-white hover:text-green-700">Événements</a>
                     <a href="#contact" class="text-white hover:text-green-700">Contact</a>
                 </div>
+                @if ( !Auth::user())
+                    
                 <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 text-black font-bold transition hover:border-black hover:bg-white">Connexion</a>
+               
+               @else
+
+               <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Deconnexion') }}
+                </x-dropdown-link>
+            </form>
+                @endif
+
+
             </div>
         </nav>
         <section class="relative bg-gradient-to-r from-violet-50 to-orange-50 pt-16">

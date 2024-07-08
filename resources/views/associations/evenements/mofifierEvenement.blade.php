@@ -83,14 +83,14 @@
                         <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
                         <input type="text" id="nom" name="nom" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Nom" value="{{ $evenement->nom }}">
                         @error('nom')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="localite" class="block text-sm font-medium text-gray-700">Localité</label>
                         <input type="text" id="localite" name="localite" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Localité" value="{{ $evenement->localite }}">
                         @error('localite')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -105,16 +105,16 @@
                     <div class="form-group">
                         <label for="date_evenement" class="block text-sm font-medium text-gray-700">Date d'événement</label>
                         <input type="date" id="date_evenement" name="date_evenement" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $evenement->date_evenement }}">
-                        @error('date_evenement')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
-                        @enderror
+                        @ @error('nombre_place')
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
+                    @enderror
                     </div>
                     <div class="form-group">
                         <label for="date_limite_inscription" class="block text-sm font-medium text-gray-700">Date limite d'inscription</label>
                         <input type="date" id="date_limite_inscription" name="date_limite_inscription" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $evenement->date_limite_inscription }}">
                         @error('date_limite_inscription')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
-                        @enderror
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
+                    @enderror
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4">
@@ -122,14 +122,14 @@
                         <label for="nombre_place" class="block text-sm font-medium text-gray-700">Nombre de places</label>
                         <input type="number" id="nombre_place" name="nombre_place" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $evenement->nombre_place }}">
                         @error('nombre_place')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
                         <input type="file" id="image" name="image" accept="image/*" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $evenement->image }}">
                         @error('image')
-                            <div class="text-red-600 mt-2">Le champ est obligatoire</div>
+                        <div class="text-red-600 mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
@@ -143,12 +143,12 @@
                         @endforeach
                     </select>
                     @error('categorie_id')
-                        <div class="text-red-600 mt-2">Le champ est obligatoire</div>
+                    <div class="text-red-600 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-row w-full gap-4 flex justify-between mt-4">
                     <div class="w-full">
-                        <button type="button" class="btn-cancel bg-white" onclick="document.getElementById('contactModal').style.display='none'">Annuler</button>
+                        <a href="{{route('association.evenements.index') }}"><button type="button" class="btn-cancel bg-white" onclick="document.getElementById('contactModal').style.display='none'">Annuler</button> </a>
                     </div>
                     <div class="w-full">
                         <button type="submit" class="btn btn-submit">Modifier</button>

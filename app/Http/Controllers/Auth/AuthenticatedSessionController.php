@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->hasRole('association')) {
             return redirect()->intended(route('association.dashboard', [], false));
         } else {
-            return redirect()->intended(route('dashboard', [], false));
+            return redirect()->intended(route('evenements.accueil', [], false));
         }
     }
 

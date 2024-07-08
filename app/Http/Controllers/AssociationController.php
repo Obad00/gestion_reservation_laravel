@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Association;
+use App\Models\Categorie;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -71,68 +72,75 @@ class AssociationController extends Controller
         Auth::login($user);
 
         // Rediriger vers la page d'accueil ou une autre page appropriée
-        return redirect()->route('dashboard');
+        return redirect()->route('association.debloque');
     }
     public function inscription(){
         return view('admins.associations.incription');
     }
-    // public function dashboard(){
-    //     return view('admins.associations.dashboard');
-    // }
+    
     public function dashboard()
-{
-    // Récupérer les derniers utilisateurs et associations
-    $utilisateurs = User::latest()->take(5)->get();
-    $associations = Association::latest()->take(5)->get();
+    {
+        // Récupérer les derniers utilisateurs et associations
+        $utilisateurs = User::latest()->take(5)->get();
+        $associations = Association::latest()->take(5)->get();
+    
+        // Récupérer l'utilisateur connecté et son association
+        $user = auth()->user();
+        $association = $user->association;
+    
+        // Récupérer tous les événements de l'association
+        $evenements = $association->evenements;
+    
+        // count toutes les réservations de mes evenements
+    
+        // Récupérer le nombre de réservations 
+        $reservations = Reservation::where('association_id', $association->id)->get();
+    
+        $evenements = $association->evenements;
 
-    // Récupérer l'utilisateur connecté et son association
-    $user = auth()->user();
-    $association = $user->association;
+        // Récupérer toutes les réservations pour les événements de l'association et compter
+        $countReservations = Reservation::whereIn('evenement_id', $evenements->pluck('id'))->count();
+        
+    
+    
+    
+        // Récupérer les événements passés et en cours
+        $evenementsPasse = $evenements->where('date_evenement', '<=', now());
+        $evenementsEncour = $evenements->where('date_evenement', '>=', now());
+    
+        // Compter les événements en cours et passés
+        $countEvenementsEncour = $evenementsEncour->count();
+        $countEvenementsPasse = $evenementsPasse->count();
+    
+        // Compter toutes les réservations
+    
+        // Compter les réservations en cours (selon un statut, par exemple 'en cours')
+        $countReservationsEncour = $reservations->where('date_evenement', '>=', now())->count();
+    
+        // Récupérer le dernier événement de l'association
+        $dernierEvenement = $evenements->sortByDesc('date_evenement')->first();
+    
+        // Récupérer les réservations du dernier événement
+        $reservationsDernierEvenement = $dernierEvenement ?
+                                        Reservation::where('evenement_id', $dernierEvenement->id)->get() :
+                                        collect();
+                                        $categories = Categorie::all();
 
-    // Récupérer tous les événements de l'association
-    $evenements = $association->evenements;
-
-    // Récupérer toutes les réservations
-    $reservations = Reservation::all();
-
-    // Récupérer les événements passés et en cours
-    $evenementsPasse = $evenements->where('date_evenement', '<=', now());
-    $evenementsEncour = $evenements->where('date_evenement', '>=', now());
-
-    // Compter les événements en cours et passés
-    $countEvenementsEncour = $evenementsEncour->count();
-    $countEvenementsPasse = $evenementsPasse->count();
-
-    // Compter toutes les réservations
-    $countReservations = $reservations->count();
-
-    // Compter les réservations en cours (selon un statut, par exemple 'en cours')
-    $countReservationsEncour = $reservations->where('date_evenement', '>=', now())->count();
-
-    // Récupérer le dernier événement de l'association
-    $dernierEvenement = $evenements->sortByDesc('date_evenement')->first();
-
-    // Récupérer les réservations du dernier événement
-    $reservationsDernierEvenement = $dernierEvenement ?
-                                    Reservation::where('evenement_id', $dernierEvenement->id)->get() :
-                                    collect();
-
-    return view('associations.dashboard', compact(
-        'associations',
-        'evenements',
-        'dernierEvenement',
-        'reservations',
-        'evenementsPasse',
-        'reservationsDernierEvenement',
-        'utilisateurs',
-        'countEvenementsEncour',
-        'countEvenementsPasse',
-        'countReservations',
-        'countReservationsEncour'
-    ));
-}
-
-
+        return view('associations.dashboard', compact(
+            'associations',
+            'evenements',
+            'dernierEvenement',
+            'reservations',
+            'evenementsPasse',
+            'reservationsDernierEvenement',
+            'utilisateurs',
+            'countEvenementsEncour',
+            'countEvenementsPasse',
+            'countReservations',
+            'countReservationsEncour',
+            'categories'
+        ));
+    }
 
 
     public function listereservation(){
