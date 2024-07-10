@@ -6,14 +6,13 @@
         <h1 class="text-3xl -mb-11 font-bold">Réservations pour {{ $event->nom }}</h1>
 
         <a href="#"  onclick="window.open('{{ route('evenement.export', $event->id) }}')">
-            <button class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2" type="submit">
-                Liste des utilisateurs bloqués
+            <button class="text-white bg-orange hover:bg-orange focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2" type="submit">
+                Imprimer les reservations
             </button>
         </a>
     </div>
 
     <!-- Lien pour imprimer les événements -->
-    <a href="#" onclick="window.open('{{ route('evenement.export', $event->id) }}')"  class="btn btn-primary">Imprimer les événements</a>
 
 
     @if (session('success'))

@@ -23,12 +23,6 @@ use Illuminate\Support\Facades\Storage;
 class EvenementController extends Controller
 {
 
-    // public function printEvents()
-    // {
-    //     $reservations = Reservation::all(); // Récupérez vos données
-
-    //     return view('associations.pdf', compact('reservations'));
-    // }
 
     public function printEvents(Evenement $event)
     {
@@ -48,10 +42,6 @@ class EvenementController extends Controller
 
 
 
-//     public function voirNextEvent()
-// {
-//     // Récupérer l'événement le plus proche en fonction de la date
-//     $evenement = Evenement::where('date_evenement', '>=', now())->orderBy('date_evenement', 'asc')->first();
 
 public function tousevenements()
 {
@@ -101,6 +91,9 @@ public function tousevenements()
 
 
     public function affichageevenement(){
+
+        
+
         $user = auth()->user();
         $association = $user->association;
         $categories= Categorie::all();
@@ -156,7 +149,7 @@ dd('test')   ; }
             'date_evenement' => 'required|date|after:today',
             'date_limite_inscription' => 'required|date|after:today',
             'nombre_place' => 'required|integer|min:0',
-            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'categorie_id' => 'required|integer|exists:categories,id',
         ], [
             'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',
@@ -242,7 +235,7 @@ dd('test')   ; }
             'date_evenement' => 'required|date|after:today',
             'date_limite_inscription' => 'required|date|after:today',
             'nombre_place' => '|integer|min:0',
-            'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'file|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'categorie_id' => 'required|integer|exists:categories,id',
         ], [
             'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',

@@ -235,10 +235,27 @@
                 <div class="hidden md:flex space-x-6 text-lg">
                     <a href="/" class="text-white hover:text-green-700">Accueil</a>
                     <a href="#about" class="text-white hover:text-green-700">À Propos</a>
-                    <a href="#events" class="text-white hover:text-green-700">Événements</a>
+                    <a href="{{ route('evenements.index') }}" class="text-white hover:text-green-700">Événements</a>
                     <a href="#contact" class="text-white hover:text-green-700">Contact</a>
                 </div>
+                @if ( !Auth::user())
+                    
                 <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 text-black font-bold transition hover:border-black hover:bg-white">Connexion</a>
+               
+               @else
+
+               <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Deconnexion') }}
+                </x-dropdown-link>
+            </form>
+                @endif
+
+
             </div>
         </nav>
         <section class="relative bg-gradient-to-r from-violet-50 to-orange-50 pt-16">
@@ -291,7 +308,7 @@
                 @foreach($evenements as $evenement)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm">
                         {{-- <img src="{{ $evenement->image_url }}" alt="{{ $evenement->nom }}" class="w-full h-64 object-cover"> --}}
-                        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
+                        <img src="{{ asset('storage/evenements/' .$evenement->image) }}" alt="Mountain" class="w-full h-64 object-cover">
                         <div class="p-8">
                             <div class="flex justify-start items-center space-x-4 mb-2">
                                 <div>

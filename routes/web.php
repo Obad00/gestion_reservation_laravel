@@ -115,12 +115,12 @@ Route::resource('associations', AssociationController::class);
 
 
 Route::get('/inscription' ,  [AssociationController::class,'inscription']);
-Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard'])->name('association.dashboard');
+Route::get('/association/dashboard' ,  [AssociationController::class,'dashboard'])->name('association.dashboard')->middleware('auth','role:association|');
 
 
 Route::prefix('associations')->group(function (){
 
-    Route::controller(EvenementController::class)->group(function (){
+    Route::controller(EvenementController::class)->middleware('auth','role:association|admin|super_admin')->group(function (){
         Route::get('create/Evenement', 'create')->name('association.evenements.create');
         Route::post('create/Evenement/traitement', 'store')->name('association.evenements.save');
         Route::get('index/Evenement', 'affichageevenement')->name('association.evenements.index');

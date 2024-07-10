@@ -13,15 +13,19 @@
                 <a href="#" class="navbar-link">Contact</a>
             </div>
             @guest
-                <div>
-                    <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 navbar-button font-bold transition hover:border-black hover:bg-white">Connexion</a>
-                </div>
-            @endguest
-            @auth
-                <div>
-                    <a href="{{ route('dashboard') }}" class="navbar-link">{{ Auth::user()->prenom }}</a>
-                </div>
-            @endauth
+            <a href="/login" class="rounded-full bg-[#c9fd02] px-4 py-2 navbar-button font-bold transition hover:border-black hover:bg-white">Connexion</a>
+        @endguest
+        @auth
+        <form method="POST"  action="{{ route('logout') }}">
+            @csrf
+    
+            <x-dropdown-link class=" text-white"  :href="route('logout')"
+                onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                {{ __('Deconnexion') }}
+            </x-dropdown-link>
+        </form>
+        @endauth
         </div>
     </div>
 </navbar>

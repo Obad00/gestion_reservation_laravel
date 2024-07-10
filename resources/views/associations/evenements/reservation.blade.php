@@ -85,6 +85,9 @@
                         {{ $reservation->user->email }}
                     </td>
                     <td>
+
+                        @role('association')
+                            
                         <div class="flex">
                             <form action="{{ route('reservations.accept', $reservation->id) }}" method="POST">
                                 @csrf
@@ -101,6 +104,7 @@
                                 </button>
                             </form>
                         </div>
+                        @role
                     </td>
                 </tr>
             @endforeach

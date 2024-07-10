@@ -35,8 +35,8 @@
     }
 </style>
 
-<body class="font-sans container antialiased">
-    <div class="  container bg-gray-100">
+<body class="font-sans   ">
+    <div class="   bg-gray-100">
         <div class="flex  bg-gray-100">
 
             <!-- sidebar -->
@@ -268,8 +268,8 @@
             </div>
 
             <!-- Page Content -->
-            <div class="flex-1  flex flex-col ml-64 container w-96  overflow-hidden">
-                <header class="flex items-center container justify-between h-16 bg-white border-b border-gray-200">
+            <div class="flex-1  flex flex-col ml-64  w-96  overflow-hidden">
+                <header class="flex items-center  justify-between h-16 bg-white border-b border-gray-200">
                     <button class="text-black focus:outline-none" id="toggleSidebar">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -280,7 +280,6 @@
 
                     <input class="mx-4 h-4  w-full border-spacing-0 border-0  px-4 py-5 " type="text"
                         placeholder="Search">
-                    <i class="fs fa-search"></i>
                     <div class="hidden sm:flex sm:items-center pr-8 sm:ms-6">
                         <x-dropdown align="right" width="48">
 
@@ -294,7 +293,7 @@
                                     </div>
                                     <div class="block">
 
-                                        {{-- <div> {{ Auth::user()->prenom }}</div> --}}
+                                        <div> {{ Auth::user()->prenom }}</div>
                                         {{-- <div> {{ Auth::user()->roles }}</div> --}}
                                     </div>
                                     <div class="ms-1">
