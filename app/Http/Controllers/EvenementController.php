@@ -91,6 +91,9 @@ public function tousevenements()
 
 
     public function affichageevenement(){
+
+        
+
         $user = auth()->user();
         $association = $user->association;
         $categories= Categorie::all();
@@ -146,7 +149,7 @@ dd('test')   ; }
             'date_evenement' => 'required|date|after:today',
             'date_limite_inscription' => 'required|date|after:today',
             'nombre_place' => 'required|integer|min:0',
-            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'categorie_id' => 'required|integer|exists:categories,id',
         ], [
             'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',
@@ -232,7 +235,7 @@ dd('test')   ; }
             'date_evenement' => 'required|date|after:today',
             'date_limite_inscription' => 'required|date|after:today',
             'nombre_place' => '|integer|min:0',
-            'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'file|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'categorie_id' => 'required|integer|exists:categories,id',
         ], [
             'date_evenement.after' => 'La date de l\'événement doit être supérieure à la date d\'aujourd\'hui.',

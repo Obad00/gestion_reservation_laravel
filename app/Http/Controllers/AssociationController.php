@@ -80,6 +80,9 @@ class AssociationController extends Controller
     
     public function dashboard()
     {
+        if (!auth()->user()->hasRole('association')) {
+            return redirect()->back()->with('error', 'Vous n\'avez pas l\'autorisation ');
+        }
         // Récupérer les derniers utilisateurs et associations
         $utilisateurs = User::latest()->take(5)->get();
         $associations = Association::latest()->take(5)->get();

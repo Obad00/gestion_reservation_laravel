@@ -18,17 +18,27 @@
                         @foreach($evenements as $evenement)
                         <div class="bg-white rounded-lg shadow-lg p-8">
                             <div class="relative overflow-hidden">
-                                <img class="object-cover w-full h-full" src="https://simplon.sn/wp-content/uploads/2024/01/IMG_6720-scaled.jpg" alt="Product">
+                                <a href="{{ route('events.reservations', $evenement->id) }}">
+
+                                    <img src="{{ asset('storage/evenements/' .$evenement->image) }}"
+                                        alt="{{ $evenement->nom }}" width="50"
+                                        class="object-cover w-full h-56">
+                                    <div class="p-4">
+                                        <h3 class="text-gray-600">{{ $evenement->association->nom }}</h3>
+                                        <div class="flex justify-between items-center">
+    
+                                            <h2 class="text-xl font-semibold">{{ $evenement->nom }}</h2>
+    
+                                            <p>{{ \Carbon\Carbon::parse($evenement->date_evenement)->format('d/m/Y') }}
+                                            </p>
+                                        </div>
+                                        <p class="text-gray-600 mt-2">{{ $evenement->description }}</p>
+                                </a>
                                 {{-- <img class="object-cover w-full h-full" src="{{$evenement->image}}" alt="{{$evenement->nom}}"> --}}
-                                <div class="absolute inset-0 bg-black opacity-40"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
+                               
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="text-gray-900 font-bold text-lg">{{$evenement->nom}}</span>
-                                <button class=" text-gray-600 py-2 px-4 rounded-full font-bold ">{{$evenement->created_at}}</button>
-                            </div>
-                            <p class="text-gray-500 text-sm mt-2">{{$evenement->description}}</p>
+                            
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-gray-900 font-bold text-lg">{{$evenement->nombre_place}}</span>
                             </div>

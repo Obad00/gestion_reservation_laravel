@@ -204,7 +204,7 @@
             @foreach($evenements as $evenement)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm">
                     {{-- <img src="{{ $evenement->image_url }}" alt="{{ $evenement->nom }}" class="w-full h-64 object-cover"> --}}
-                    <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" class="w-full h-64 object-cover">
+                    <img src="{{ asset('storage/evenements/' .$evenement->image) }}" alt="Mountain" class="w-full h-64 object-cover">
                     <div class="p-8">
                         <div class="flex justify-start items-center space-x-4 mb-2">
                             <div>
