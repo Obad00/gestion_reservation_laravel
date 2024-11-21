@@ -19,7 +19,7 @@
             align-items: center;
             justify-content: center;
             text-align: left;
-            background-image: linear-gradient(to bottom, rgba(87, 79, 125, 0.7), rgba(87, 79, 125, 0.7)), url("https://i.ibb.co/dkHwWBG/pexels-ihsan-aditya-1056251.jpg");
+            background-image: linear-gradient(to bottom, rgba(87, 79, 125, 0.7), rgba(87, 79, 125, 0.7)), url("https://img.freepik.com/photos-gratuite/diverses-personnes-dansent-dansent-ensemble-lors-soiree-discotheque-dans-discotheque-jeunes-amis-se-tenant-main-chantant-se-relaxant-piste-danse-bondee-lors-rassemblement-social_482257-67151.jpg?ga=GA1.1.1277564984.1709547824&semt=ais_hybrid");
             background-size: cover;
             background-position: center;
             color: white;

@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 // Route::resource('associations', AssociationController::class);
 
 
-Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
+// Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins')->group(function () {
 
     Route::resource('roles', RoleController::class)->middleware( 'permission:view roles');
     Route::resource('permissions', PermissionController::class)->middleware( 'permission:view permissions');
@@ -86,7 +86,7 @@ Route::middleware(['auth','role:super_admin|admin|association'])->prefix('admins
     Route::post('/users/{id}/assign-role', [RoleController::class, 'assignRole'])->name('users.assign-role');
 
 
-});
+// });
 
 // User Lamda
 Route::prefix('user')->group(function ()

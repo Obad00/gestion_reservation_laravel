@@ -59,7 +59,7 @@
                                     stroke-linejoin="round" />
                             </svg>
 
-                            <span> Dashbord</span>
+                            <span> Dashbord</span>xœ
                         </a>
                         <a href="{{ route('associations.index') }}"
                             class="flex gap-2 items-center px-4 py-5  text-gray-100 hover:bg-gray-700  @if (request()->routeIs('associations.index')) rounded-xl active @endif">
